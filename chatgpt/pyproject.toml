@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bisos.linkedin"
+version = "0.1.0"
+description = "Utilities for converting LinkedIn data exports into structured vCards for contact management."
+readme = "README.org"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+license = { file = "LICENSE" }
+dependencies = [
+    "vobject",
+    "pandas",
+    "selenium"
+]
+requires-python = ">=3.8"
+
+[project.scripts]
+lin2vcards = "bisos.linkedin.cli:main"  # optional CLI entry point

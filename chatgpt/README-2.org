@@ -1,0 +1,28 @@
+# bisos.linkedin Python Package
+
+The `bisos.linkedin` Python package provides a set of utilities for creating a set of vCards for your first-level LinkedIn connections based on the **Basic_LinkedInDataExport**. It uses local data from **Connections.csv**, **Invitations.csv**, and **messages.csv** to create rich representations of your LinkedIn network in vCard (.vcf) format.
+
+## Features
+
+- **Local Augmentation**: Enhances vCards by using the following CSV files:
+  - **Connections.csv**: The basic connection data, including LinkedIn ID, profile URL, name, etc.
+  - **Invitations.csv**: Captures whether you invited the connection or were invited, along with the invitation text.
+  - **messages.csv**: Adds LinkedIn message history between you and your connections, showing the conversation details and direction.
+
+- **Output Format**: Each vCard file represents a LinkedIn connection and includes the relevant data from the **Basic_LinkedInDataExport**. These files are named based on the LinkedIn ID and are saved in the specified directory.
+
+- **CLI Tools**: The package includes command-line tools for the following tasks:
+  - **Create vCards from LinkedIn Data**: Process the CSV files and generate vCard files for all your first-level connections.
+  - **Augment vCards with Invitations**: Add information from **Invitations.csv** to the existing vCards, including who invited whom and the invitation message.
+  - **Augment vCards with Messages**: Add conversation details from **messages.csv**, organizing the messages in chronological order with sender information.
+
+- **Flexible Integration**: All tools can be run independently or combined into a full data augmentation pipeline.
+
+## Installation
+
+To install the package, clone the repository and install the dependencies using pip:
+
+```bash
+git clone https://github.com/your-username/bisos.linkedin.git
+cd bisos.linkedin
+pip install -r requirements.txt

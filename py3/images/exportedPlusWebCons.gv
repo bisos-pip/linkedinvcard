@@ -1,0 +1,101 @@
+digraph {
+	graph [bb="0,0,700,446"];
+	node [label="\N"];
+	subgraph cluster_linkedin {
+		graph [bb="436,363,588,438",
+			color=lightblue,
+			label="www.LinkedIn.com",
+			lheight=0.21,
+			lp="512,426.5",
+			lwidth=1.89
+		];
+		LinkedIn	[fillcolor=lightblue2,
+			height=0.5,
+			pos="512,389",
+			style=filled,
+			width=1.4263];
+	}
+	subgraph cluster_exported {
+		graph [bb="8,81,538,330",
+			color=lightblue,
+			label="LinkedIn Exported Info",
+			lheight=0.21,
+			lp="273,318.5",
+			lwidth=2.31
+		];
+		"Export.zip"	[fillcolor=lightblue,
+			height=0.5,
+			pos="372,281",
+			style=filled,
+			width=1.6429];
+		ExportedData	[fillcolor=lightblue,
+			height=0.5,
+			pos="298,194",
+			style=filled,
+			width=2.0943];
+		"Export.zip" -> ExportedData	[label=unzip,
+			lp="359,237.5",
+			pos="e,312.59,211.76 357.38,263.21 346.54,250.75 331.58,233.57 319.39,219.57"];
+		"Connections.csv"	[fillcolor=lightblue,
+			height=0.5,
+			pos="102,107",
+			style=filled,
+			width=2.3831];
+		ExportedData -> "Connections.csv"	[pos="e,137.57,123.42 263.41,178 231.06,163.97 182.57,142.94 147.18,127.59"];
+		"Invitations.csv"	[fillcolor=lightblue,
+			height=0.5,
+			pos="284,107",
+			style=filled,
+			width=2.1845];
+		ExportedData -> "Invitations.csv"	[pos="e,286.83,125.18 295.17,175.8 293.25,164.16 290.68,148.55 288.49,135.24"];
+		"Messages.csv"	[fillcolor=lightblue,
+			height=0.5,
+			pos="455,107",
+			style=filled,
+			width=2.0762];
+		ExportedData -> "Messages.csv"	[pos="e,425.99,123.7 327.16,177.21 352.5,163.49 389.36,143.54 417,128.57"];
+	}
+	subgraph cluster_web {
+		graph [bb="546,255,692,330",
+			color=lightblue,
+			label="LinkedIn Web Info",
+			lheight=0.21,
+			lp="619,318.5",
+			lwidth=1.81
+		];
+		ContactInfo	[fillcolor=lightskyblue,
+			height=0.5,
+			pos="619,281",
+			style=filled,
+			width=1.8054];
+	}
+	LinkedIn -> "Export.zip"	[color=blue,
+		label=LinkedInExportProcess,
+		lp="491.5,345.5",
+		pos="e,376.53,298.97 466.4,380.69 446.65,375.63 424.35,367.14 408,353 394.58,341.39 385.57,323.57 379.92,308.69"];
+	LinkedIn -> ContactInfo	[color=blue,
+		label=WebAccess,
+		lp="629.5,345.5",
+		pos="e,612.71,299.01 545.47,375.19 557.04,369.62 569.48,362.22 579,353 591.88,340.52 601.81,323 608.56,308.48"];
+	VCard	[fillcolor=gray95,
+		height=0.52778,
+		label="LinkedIn
+VCard",
+		pos="369,19",
+		shape=box,
+		style=filled,
+		width=1.0972];
+	"Connections.csv" -> VCard	[label=generate,
+		lp="277,63.5",
+		pos="e,329.46,30.892 142.79,91.08 171.29,80.818 210.3,67.093 245,56 269.46,48.18 296.86,40.15 319.66,33.664"];
+	"Invitations.csv" -> VCard	[label=augment,
+		lp="359,63.5",
+		pos="e,346.64,38.077 297.34,89.228 305.54,79.245 316.47,66.516 327,56 330.73,52.279 334.79,48.5 338.86,44.858"];
+	"Messages.csv" -> VCard	[label=augment,
+		lp="451,63.5",
+		pos="e,387.02,38.015 438.42,89.418 425.87,76.866 408.41,59.409 394.14,45.142"];
+	ContactInfo -> VCard	[color=darkblue,
+		label=enrich,
+		lp="611,150.5",
+		pos="e,408.61,23.617 616.77,262.77 611.07,225.12 592.61,134.6 542,81 509.79,46.882 457.35,31.831 418.64,25.2"];
+}

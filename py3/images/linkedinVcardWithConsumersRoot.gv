@@ -1,0 +1,69 @@
+digraph {
+	graph [bb="0,0,660,144"];
+	node [label="\N"];
+	subgraph cluster_consumers {
+		graph [bb="8,8,652,83",
+			color=green,
+			fillcolor=lightgreen,
+			label="Address Book Consumers",
+			lheight=0.21,
+			lp="330,71.5",
+			lwidth=2.54,
+			style=filled
+		];
+		Outlook	[fillcolor=palegreen,
+			height=0.5,
+			pos="597,34",
+			style=filled,
+			width=1.2999];
+		GoogleContacts	[fillcolor=palegreen,
+			height=0.5,
+			label="Google Contacts",
+			pos="445,34",
+			style=filled,
+			width=2.4192];
+		AppleContacts	[fillcolor=palegreen,
+			height=0.5,
+			label="Apple Contacts",
+			pos="259,34",
+			style=filled,
+			width=2.2567];
+		ebdb	[fillcolor=palegreen,
+			height=0.5,
+			label="Emacs EBDB",
+			pos="88,34",
+			style=filled,
+			width=2.004];
+	}
+	VCard	[fillcolor=gray95,
+		height=0.52778,
+		label="LinkedIn
+VCard",
+		pos="303,117.5",
+		shape=box,
+		style=filled,
+		width=1.0972];
+	VCard -> Outlook	[pos="e,583.19,51.557 342.59,99.944 352.67,96.382 363.6,93.07 374,91 410.44,83.752 506.47,96.721 541,83 554.15,77.776 566.37,68.123 576.03,\
+58.835"];
+	VCard -> GoogleContacts	[pos="e,416.94,51.105 334.51,98.413 356.3,85.91 385.35,69.233 408.2,56.12"];
+	VCard -> AppleContacts	[pos="e,268.14,51.924 293.23,98.413 287.26,87.351 279.53,73.023 272.92,60.786"];
+	VCard -> ebdb	[pos="e,111.15,51.182 263.34,109.73 236.16,104.33 199.61,95.58 169,83 151.97,76.001 134.25,65.87 119.74,56.718"];
+	VCardPlus	[fillcolor=gray85,
+		height=0.73611,
+		label="Plus
+LinkedIn
+VCard",
+		pos="422,117.5",
+		shape=box,
+		style=filled,
+		width=1.0972];
+	VCardPlus -> Outlook	[color=red,
+		pos="e,581.74,51.335 461.68,109.83 485.63,104.73 516.21,96.27 541,83 552.99,76.579 564.68,67.219 574.24,58.467"];
+	VCardPlus -> GoogleContacts	[color=red,
+		pos="e,440.16,52.135 429.28,90.713 431.86,81.564 434.77,71.248 437.38,62.001"];
+	VCardPlus -> AppleContacts	[color=red,
+		pos="e,287.95,51.009 382.39,98.846 371.51,93.853 359.75,88.325 349,83 331.76,74.455 312.94,64.515 296.98,55.904"];
+	VCardPlus -> ebdb	[color=red,
+		pos="e,108.98,51.375 382.26,99.648 372.52,96.187 362.02,92.995 352,91 312.08,83.052 208.01,94.613 169,83 150.71,77.555 132.25,67.091 \
+117.58,57.319"];
+}

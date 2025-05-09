@@ -1,0 +1,208 @@
+digraph {
+	graph [bb="0,0,1097,590.74"];
+	node [label="\N"];
+	subgraph cluster_linkedin {
+		graph [bb="436,507.74,588,582.74",
+			color=lightblue,
+			label="www.LinkedIn.com",
+			lheight=0.21,
+			lp="512,571.24",
+			lwidth=1.89
+		];
+		LinkedIn	[fillcolor=lightblue2,
+			height=0.5,
+			pos="512,533.74",
+			style=filled,
+			width=1.4263];
+	}
+	subgraph cluster_exported {
+		graph [bb="8,199.5,539,465.87",
+			color=lightblue,
+			label="LinkedIn Exported Info",
+			lheight=0.21,
+			lp="273.5,454.37",
+			lwidth=2.31
+		];
+		"Export.zip"	[fillcolor=lightblue,
+			height=0.5,
+			pos="366,416.87",
+			style=filled,
+			width=1.6429];
+		ExportedData	[fillcolor=lightblue,
+			height=0.5,
+			pos="281,321",
+			style=filled,
+			width=2.0943];
+		"Export.zip" -> ExportedData	[label=unzip,
+			lp="346,364.5",
+			pos="e,296.35,338.95 350.8,399.09 337.59,384.5 318.27,363.16 303.3,346.63"];
+		"Connections.csv"	[fillcolor=lightblue,
+			height=0.5,
+			pos="445,225.5",
+			style=filled,
+			width=2.3831];
+		ExportedData -> "Connections.csv"	[pos="e,416.77,242.6 308.82,304.14 336.07,288.6 377.76,264.83 407.84,247.69"];
+		"Invitations.csv"	[fillcolor=lightblue,
+			height=0.5,
+			pos="95,225.5",
+			style=filled,
+			width=2.1845];
+		ExportedData -> "Invitations.csv"	[pos="e,126.07,242.12 250.29,304.56 218.88,288.77 169.93,264.17 135.4,246.81"];
+		"Messages.csv"	[fillcolor=lightblue,
+			height=0.5,
+			pos="266,225.5",
+			style=filled,
+			width=2.0762];
+		ExportedData -> "Messages.csv"	[pos="e,268.73,243.54 278.25,302.85 276.05,289.14 272.93,269.67 270.38,253.82"];
+	}
+	subgraph cluster_web {
+		graph [bb="547,390.87,693,465.87",
+			color=lightblue,
+			label="LinkedIn Web Info",
+			lheight=0.21,
+			lp="620,454.37",
+			lwidth=1.81
+		];
+		ContactInfo	[fillcolor=lightskyblue,
+			height=0.5,
+			pos="620,416.87",
+			style=filled,
+			width=1.8054];
+	}
+	subgraph cluster_external {
+		graph [bb="701,295,1089,474.74",
+			color=orange,
+			fillcolor=linen,
+			label="External Sources",
+			lheight=0.21,
+			lp="895,463.24",
+			lwidth=1.72,
+			style=filled
+		];
+		External	[fillcolor=mistyrose,
+			height=0.5,
+			label="Web Info",
+			pos="883,416.87",
+			style=filled,
+			width=1.4443];
+		ExternalInfo	[fillcolor=mistyrose,
+			height=0.5,
+			pos="830,321",
+			style=filled,
+			width=1.9137];
+		External -> ExternalInfo	[color=orangered,
+			pos="e,839.57,338.95 873.52,399.09 865.51,384.89 853.89,364.32 844.68,347.99"];
+		ExtAddrBook	[fillcolor=mistyrose,
+			height=0.74639,
+			label="Address
+Book",
+			pos="761,416.87",
+			style=filled,
+			width=1.4535];
+		ExtAddrBook -> ExternalInfo	[color=orangered,
+			pos="e,817.64,338.81 779.13,391.21 789.09,377.66 801.41,360.89 811.44,347.25"];
+		ExtTags	[fillcolor=mistyrose,
+			height=0.74639,
+			label="Tags
+Groupings",
+			pos="1017,416.87",
+			style=filled,
+			width=1.7874];
+		ExtTags -> ExternalInfo	[color=orangered,
+			pos="e,860.51,337.32 976.88,395.73 945.14,379.8 901.05,357.66 869.47,341.81"];
+	}
+	subgraph cluster_consumers {
+		graph [bb="366,8,1010,83",
+			color=green,
+			fillcolor=lightgreen,
+			label="Address Book Consumers",
+			lheight=0.21,
+			lp="688,71.5",
+			lwidth=2.54,
+			style=filled
+		];
+		Outlook	[fillcolor=palegreen,
+			height=0.5,
+			pos="763,34",
+			style=filled,
+			width=1.2999];
+		GoogleContacts	[fillcolor=palegreen,
+			height=0.5,
+			label="Google Contacts",
+			pos="915,34",
+			style=filled,
+			width=2.4192];
+		AppleContacts	[fillcolor=palegreen,
+			height=0.5,
+			label="Apple Contacts",
+			pos="455,34",
+			style=filled,
+			width=2.2567];
+		ebdb	[fillcolor=palegreen,
+			height=0.5,
+			label="Emacs EBDB",
+			pos="626,34",
+			style=filled,
+			width=2.004];
+	}
+	LinkedIn -> "Export.zip"	[color=blue,
+		label=LinkedInExportProcess,
+		lp="490.5,490.24",
+		pos="e,370.56,434.95 466.27,525.55 446.26,520.51 423.62,512 407,497.74 390.78,483.83 380.18,461.91 373.82,444.55"];
+	LinkedIn -> ContactInfo	[color=blue,
+		label=WebAccess,
+		lp="628.5,490.24",
+		pos="e,614.42,435 545.46,519.82 556.77,514.28 568.84,506.93 578,497.74 592.98,482.71 603.86,461.23 610.79,444.33"];
+	VCard	[fillcolor=gray95,
+		height=0.52778,
+		label="LinkedIn
+VCard",
+		pos="565,129",
+		shape=box,
+		style=filled,
+		width=1.0972];
+	"Connections.csv" -> VCard	[label=generate,
+		lp="519,173.5",
+		pos="e,525.42,143.58 453.96,207.55 461.4,194.78 473.02,177.54 487,166 495.63,158.87 505.9,152.83 516.11,147.85"];
+	"Invitations.csv" -> VCard	[label=augment,
+		lp="330,173.5",
+		pos="e,525.34,133.56 141.49,210.8 154.58,206.96 168.84,202.8 182,199 233.5,184.13 245.53,176.94 298,166 373.06,150.35 461.48,139.98 515.37,\
+134.55"];
+	"Messages.csv" -> VCard	[label=augment,
+		lp="437,173.5",
+		pos="e,525.36,136.89 297.97,209.13 325.75,196.24 367.35,178.05 405,166 441.34,154.37 483.47,145.05 515.38,138.81"];
+	VCard -> Outlook	[pos="e,747.65,51.171 604.69,119.95 634.16,112.92 674.68,100.98 707,83 718.89,76.385 730.56,66.992 740.14,58.268"];
+	VCard -> GoogleContacts	[pos="e,887.77,51.275 604.59,124.55 655.31,119.33 745.44,107.33 819,83 839.64,76.172 861.4,65.599 878.98,56.112"];
+	VCard -> AppleContacts	[pos="e,474.57,51.546 543.53,109.85 526.02,95.047 501.19,74.05 482.27,58.06"];
+	VCard -> ebdb	[pos="e,614.8,52.081 577.05,109.63 586.22,95.643 598.96,76.224 609.14,60.701"];
+	ContactInfo -> VCard	[color=darkblue,
+		label=enrich,
+		lp="617,277.5",
+		pos="e,568.47,148.03 616.72,398.84 607.58,351.32 581.71,216.87 570.4,158.09"];
+	VCardPlus	[fillcolor=gray85,
+		height=0.73611,
+		label="Plus
+LinkedIn
+VCard",
+		pos="758,225.5",
+		shape=box,
+		style=filled,
+		width=1.0972];
+	ExternalInfo -> VCardPlus	[color=red,
+		pos="e,777.82,252.24 817.13,303.28 808,291.43 795.43,275.1 784.22,260.55"];
+	VCardPlus -> VCard	[color=darkgreen,
+		dir=both,
+		label="Cross Ref",
+		lp="634,173.5",
+		pos="s,718.4,221.44 e,572.93,148.02 708.36,220.04 674.86,214.97 631.08,204.14 599,181 590.42,174.81 583.37,165.73 577.96,156.94",
+		style=dashed];
+	VCardPlus -> Outlook	[color=red,
+		pos="e,762.55,52.035 758.67,198.94 759.61,163.33 761.31,99.035 762.28,62.44"];
+	VCardPlus -> GoogleContacts	[color=red,
+		pos="e,901.1,51.778 779.17,198.94 809.39,162.47 864.54,95.909 894.42,59.835"];
+	VCardPlus -> AppleContacts	[color=red,
+		pos="e,482.95,50.995 730.86,198.79 703.18,173.61 658.15,135.42 614,110 585.46,93.569 574.91,96.772 545,83 527.25,74.828 508.08,64.783 \
+492.01,55.998"];
+	VCardPlus -> ebdb	[color=red,
+		pos="e,651.85,50.913 750.37,198.94 741.02,170.52 723.13,124.27 697,91 686.74,77.935 672.83,66.103 660.04,56.716"];
+}

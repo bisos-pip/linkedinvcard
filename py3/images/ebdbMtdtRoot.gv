@@ -1,0 +1,108 @@
+digraph {
+	graph [bb="0,0,949,227"];
+	node [label="\N"];
+	subgraph cluster_consumers {
+		graph [bb="297,91,941,166",
+			color=green,
+			fillcolor=lightgreen,
+			label="Address Book Consumers",
+			lheight=0.21,
+			lp="619,154.5",
+			lwidth=2.54,
+			style=filled
+		];
+		Outlook	[fillcolor=palegreen,
+			height=0.5,
+			pos="886,117",
+			style=filled,
+			width=1.2999];
+		GoogleContacts	[fillcolor=palegreen,
+			height=0.5,
+			label="Google Contacts",
+			pos="734,117",
+			style=filled,
+			width=2.4192];
+		AppleContacts	[fillcolor=palegreen,
+			height=0.5,
+			label="Apple Contacts",
+			pos="548,117",
+			style=filled,
+			width=2.2567];
+		ebdb	[fillcolor=palegreen,
+			height=0.5,
+			label="Emacs EBDB",
+			pos="377,117",
+			style=filled,
+			width=2.004];
+	}
+	subgraph cluster_mtdt {
+		graph [bb="8,8,734,83",
+			color=lightgoldenrod1,
+			label="MTDT: Mail Templating Distribution & Tracking",
+			lheight=0.21,
+			lp="371,71.5",
+			lwidth=4.78,
+			style=filled
+		];
+		"mtdt-names"	[fillcolor=yellow,
+			height=0.5,
+			pos="660,34",
+			style=filled,
+			width=1.8415];
+		"mtdt-addressBook"	[fillcolor=yellow,
+			height=0.5,
+			pos="480,34",
+			style=filled,
+			width=2.6539];
+		"mtdt-distribution"	[fillcolor=yellow,
+			height=0.5,
+			pos="275,34",
+			style=filled,
+			width=2.5276];
+		"mtdt-mailings"	[fillcolor=yellow,
+			height=0.5,
+			pos="91,34",
+			style=filled,
+			width=2.0943];
+	}
+	VCard	[fillcolor=gray95,
+		height=0.52778,
+		label="LinkedIn
+VCard",
+		pos="592,200.5",
+		shape=box,
+		style=filled,
+		width=1.0972];
+	VCard -> Outlook	[pos="e,872.19,134.56 631.59,182.94 641.67,179.38 652.6,176.07 663,174 699.44,166.75 795.47,179.72 830,166 843.15,160.78 855.37,151.12 \
+865.03,141.84"];
+	VCard -> GoogleContacts	[pos="e,705.94,134.1 623.51,181.41 645.3,168.91 674.35,152.23 697.2,139.12"];
+	VCard -> AppleContacts	[pos="e,557.14,134.92 582.23,181.41 576.26,170.35 568.53,156.02 561.92,143.79"];
+	VCard -> ebdb	[pos="e,400.15,134.18 552.34,192.73 525.16,187.33 488.61,178.58 458,166 440.97,159 423.25,148.87 408.74,139.72"];
+	VCardPlus	[fillcolor=gray85,
+		height=0.73611,
+		label="Plus
+LinkedIn
+VCard",
+		pos="711,200.5",
+		shape=box,
+		style=filled,
+		width=1.0972];
+	VCardPlus -> Outlook	[color=red,
+		pos="e,870.74,134.34 750.68,192.83 774.63,187.73 805.21,179.27 830,166 841.99,159.58 853.68,150.22 863.24,141.47"];
+	VCardPlus -> GoogleContacts	[color=red,
+		pos="e,729.16,135.13 718.28,173.71 720.86,164.56 723.77,154.25 726.38,145"];
+	VCardPlus -> AppleContacts	[color=red,
+		pos="e,576.95,134.01 671.39,181.85 660.51,176.85 648.75,171.32 638,166 620.76,157.46 601.94,147.52 585.98,138.9"];
+	VCardPlus -> ebdb	[color=red,
+		pos="e,397.98,134.38 671.26,182.65 661.52,179.19 651.02,176 641,174 601.08,166.05 497.01,177.61 458,166 439.71,160.55 421.25,150.09 406.58,\
+140.32"];
+	ebdb -> "mtdt-names"	[color=darkgreen,
+		pos="e,640.74,51.254 416.5,101.76 429.55,97.611 444.25,93.519 458,91 513.63,80.811 531.25,100.58 585,83 601.99,77.441 618.94,67.107 632.42,\
+57.447"];
+	ebdb -> "mtdt-addressBook"	[color=darkgreen,
+		pos="e,458.83,51.645 397.84,99.608 413.1,87.611 434,71.176 450.9,57.884"];
+	ebdb -> "mtdt-distribution"	[color=darkgreen,
+		pos="e,295.96,51.645 356.36,99.608 341.25,87.611 320.55,71.176 303.82,57.884"];
+	ebdb -> "mtdt-mailings"	[color=darkgreen,
+		pos="e,114.16,51.259 308.62,110.95 268.77,106.51 218.04,98.251 175,83 156.74,76.528 137.88,66.142 122.66,56.684"];
+}

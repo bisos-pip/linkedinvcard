@@ -1,6 +1,10 @@
 import csv
 import os
 
+from pathlib import Path
+import zipfile
+
+
 class VCardUtils:
     """
     Utility functions for handling vCards and LinkedIn data files.
@@ -49,3 +53,15 @@ class VCardUtils:
         if os.path.exists(vcard_path):
             return vcard_path
         return None
+
+    
+class LinkedinBaseUtils:
+
+    @staticmethod
+    def unzip_file(zip_path: Path, extract_to: Path) -> None:
+        """Unzips a .zip file to the specified directory using pathlib.
+        Use it like so: unzip_file(Path("LinkedInDataExport.zip"), Path("unzipped"))
+        """
+        extract_to.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_to)

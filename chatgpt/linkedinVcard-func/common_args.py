@@ -14,7 +14,7 @@ def add_common_args(parser):
     )
     parser.add_argument(
         "--linCsv",
-        choices=["Connections.csv", "Invitations.csv", "Messages.csv"],
+        choices=["Connections.csv", "Invitations.csv", "Messages.csv"],w
         required=False,
         help="Specify the LinkedIn CSV file to process from the export."
     )

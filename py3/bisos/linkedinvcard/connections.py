@@ -1,51 +1,58 @@
+from pathlib import Path
+from typing import List, Dict, Optional
 import csv
-import os
 import vobject
 
 class LinkedInConnections:
     """
-    Handles parsing of Connections.csv and creation of base vCards for each connection.
+    Parses LinkedIn Connections CSV and generates vCards.
     """
 
-    def __init__(self, csv_path):
+    def __init__(self, csv_path: Path):
         """
-        Initialize with the path to Connections.csv.
+        Initialize with path to LinkedIn Connections.csv.
         """
-        self.csv_path = csv_path
-        self.connections = []
+        self.csv_path: Path = csv_path
+        self.connections: List[Dict[str, str]] = []
 
-    def load(self):
+    def load(self) -> None:
         """
-        Load connection records from CSV into memory.
+        Load connection records from CSV, skipping header comments.
         """
-        with open(self.csv_path, newline='', encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile)
+        with self.csv_path.open(newline='', encoding='utf-8') as f:
+            for _ in range(3):
+                next(f)
+            reader = csv.DictReader(f)
             self.connections = list(reader)
 
-    def create_vcards(self, output_dir):
+    def create_vcards(self, output_dir: Path) -> None:
         """
-        Create and write vCard files for each connection.
+        Generate vCard files for each connection.
         """
         if not self.connections:
             self.load()
 
-        os.makedirs(output_dir, exist_ok=True)
+        output_dir.mkdir(parents=True, exist_ok=True)
 
         for entry in self.connections:
+            print(entry)
+
             vcard = vobject.vCard()
-            vcard.add('fn').value = entry['First Name'] + ' ' + entry['Last Name']
-            vcard.add('n').value = vobject.vcard.Name(family=entry['Last Name'], given=entry['First Name'])
+            vcard.add('fn').value = f"{entry['First Name']} {entry['Last Name']}"
+            vcard.add('n').value = vobject.vcard.Name(
+                family=entry['Last Name'], given=entry['First Name']
+            )
             vcard.add('note').value = f"Connected On: {entry['Connected On']}"
             vcard.add('org').value = [entry.get('Company', '')]
             vcard.add('title').value = entry.get('Position', '')
 
-            url = entry.get('URL', '')
-            if url:
-                vcard.add('url').value = url
-                uid = url.rstrip('/').split('/')[-1]
-            else:
-                uid = entry['First Name'] + '_' + entry['Last Name']
+            url: Optional[str] = entry.get('URL', '')
+            uid = url.rstrip('/').split('/')[-1] if url else f"{entry['First Name']}_{entry['Last Name']}"
+            filename: Path = output_dir / f"{uid}.vcf"
 
-            filename = os.path.join(output_dir, uid + '.vcf')
-            with open(filename, 'w', encoding='utf-8') as f:
-                f.write(vcard.serialize())
+            print(filename)
+            with filename.open('w', encoding='utf-8') as f:
+                vcf_str = vcard.serialize()
+                print(vcf_str)
+                f.write(vcf_str)
+

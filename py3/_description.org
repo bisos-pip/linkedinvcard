@@ -1,4 +1,4 @@
-#+title: bisos.linkedinVcard:  Adoption and adaptation of linkedinVcard to Python and as Command-Services
+#+title: bisos.linkedinVcard: takes contents of Basic_LinkedInDataExport.zip and converts them to Vcards
 
 
 
@@ -47,9 +47,11 @@ More complete documentation is available at: https://github.com/bisos-pip/capabi
 * Table of Contents     :TOC:
 - [[#overview][Overview]]
 - [[#package-documentation-at-github][Package Documentation At Github]]
-- [[#part-of-bisos-----bystar-internet-services-operating-system][Part of BISOS --- ByStar Internet Services Operating System]]
-- [[#bisoslinkedinvcard-is-a-command-services-pycs-facility][bisos.linkedinVcard is a Command-Services PyCS Facility]]
-- [[#bisoslinkedinvcard-as-a-standalone-piece-of-bisos][bisos.linkedinVcard as a Standalone Piece of BISOS]]
+-  [[#a-standalone-command-services-pycs-facility-of-bisos][A Standalone Command-Services PyCS Facility of BISOS]]
+- [[#diagram-and-softwarediagram-mapping][Diagram and Software–Diagram Mapping]]
+-  [[#key-features][Key Features]]
+-  [[#bisoslinkedin-python-package][bisos.linkedin Python Package]]
+- [[#features][Features]]
 - [[#benefits][Benefits]]
 - [[#installation][Installation]]
   - [[#installation-with-pip][Installation With pip]]
@@ -65,33 +67,40 @@ More complete documentation is available at: https://github.com/bisos-pip/capabi
 - [[#support][Support]]
 - [[#credits][Credits]]
 
-* Part of BISOS --- ByStar Internet Services Operating System
+*  A Standalone Command-Services PyCS Facility of BISOS
 
 Layered on top of Debian, *BISOS*: (By* Internet Services Operating System) is a
 unified and universal framework for developing both internet services and
-software-service continuums that use internet services. See [[https://github.com/bxGenesis/start][Bootstrapping
-ByStar, BISOS and Blee]] for information about getting started with BISOS.\\
-*BISOS* is a foundation for *The Libre-Halaal ByStar Digital Ecosystem* which is
-described as a cure for losses of autonomy and privacy in a book titled: [[https://github.com/bxplpc/120033][Nature
-of Polyexistentials]]
+software-service continuums that use internet services. PyCS (Python
+Command-Services) of BISOS is a framework that converges development of CLI and
+Services. See the  [[https://github.com/bxplpc/120033][Nature of Polyexistentials]] book for additional information.
 
-* bisos.linkedinVcard is a Command-Services PyCS Facility
-
-bisos.linkedinVcard can be used locally on command-line or remotely as a service.
-bisos.linkedinVcard is a PyCS multi-unit command-service.
-PyCS is a framework that converges development of CLI and Services.
-PyCS is an alternative to FastAPI, Typer and Click.
-
-* bisos.linkedinVcard as a Standalone Piece of BISOS
-
-bisos.linkedinVcard is a standalone piece of BISOS. It can be used as a self-contained
-Python package separate from BISOS. Follow the installation and usage
-instructions below for your own use.
+bisos.linkedinVcard is a standalone piece of BISOS. It can be used as a
+self-contained Python package separate from BISOS.
 
 
-## Key Features
+* Diagram and Software–Diagram Mapping
 
-1. **Local Augmentation**:
+
+
+| Diagram Node     | Software Component/Class    | Description                                             |
+|------------------+-----------------------------+---------------------------------------------------------|
+| LinkedIn         | Data Source (LinkedIn)      | Origin of all LinkedIn user data                        |
+| Export.zip       | Raw Input                   | Downloaded export ZIP file from LinkedIn               |
+| ExportedData     | Unzipped Data Directory     | Directory containing CSV and JSON files                |
+| Connections.csv  | LinkedInConnections         | Parses first-level connections                         |
+| Invitations.csv  | LinkedInInvitations         | Parses sent and received invitations                   |
+| Messages.csv     | LinkedInMessages            | Parses message exchanges with connections              |
+| ContactInfo      | Remote Augmentation Logic   | Scraped contact details from LinkedIn website          |
+| External         | User-supplied Sources       | Any third-party or user-maintained source of data      |
+| ExternalInfo     | External Data Processor     | Prepares and aligns external info for enrichment       |
+| VCard            | VCardUtils / Core Output    | Base vCards from LinkedIn data                         |
+| VCardPlus        | VCardAugmentor              | Enriched vCards with remote and external information   |
+
+
+*  Key Features
+
+1. *Local Augmentation**:
    - Augments vCards with data from `Connections.csv`, `Invitations.csv`, and `messages.csv`.
    - For each contact, the invitation status is captured (whether you invited the connection or vice versa) and the invitation message text is added to the vCard.
 
@@ -111,12 +120,12 @@ instructions below for your own use.
      - Augment vCards with additional information.
      - Extract contact details from LinkedIn profiles automatically.
 
-
-## bisos.linkedin Python Package
+*  bisos.linkedin Python Package
 
 The `bisos.linkedin` Python package provides a set of utilities for creating a set of vCards for your first-level LinkedIn connections based on the **Basic_LinkedInDataExport**. It uses local data from **Connections.csv**, **Invitations.csv**, and **messages.csv** to create rich representations of your LinkedIn network in vCard (.vcf) format.
 
-## Features
+
+* Features
 
 - **Local Augmentation**: Enhances vCards by using the following CSV files:
   - **Connections.csv**: The basic connection data, including LinkedIn ID, profile URL, name, etc.
@@ -245,16 +254,10 @@ merge_vcards: Merges and augments existing vCards with external contact data.
 Example Command
 To convert your LinkedIn Connections.csv to vCards:
 
-bash
-Copy
-Edit
 csv2vcard --vcardDir ./vcards --exportedZipFile ./Basic_LinkedInDataExport.zip --linCsv ./Connections.csv
 Example Command for Augmentation
 To augment the vCards with additional information from Invitations and Messages:
 
-bash
-Copy
-Edit
 augment_vcards --vcardDir ./vcards --exportedZipFile ./Basic_LinkedInDataExport.zip --linCsv ./Invitations.csv --linCsv ./messages.csv
 Additional Features
 Integration with LinkedIn Data:

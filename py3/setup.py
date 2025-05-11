@@ -69,8 +69,8 @@ requires = [
 ####+BEGIN: b:py3:pypi:setup/scripts :comment ""
 
 scripts = [
-'bin/linkedinvcard.cs',
-'bin/linkedinweb.cs',
+'bin/myLinkedIn.cs',
+'bin/myLinkedInWeb.cs',
 ]
 ####+END:
 

@@ -29,8 +29,8 @@
 ####+BEGIN: b:prog:file/particulars :authors ("./inserts/authors-mb.org")
 """ #+begin_org
 * *[[elisp:(org-cycle)][| Particulars |]]* :: Authors, version
-** This File: /bisos/git/bxRepos/bisos-pip/myLinkedIn/py3/bin/linkedinvcard.cs
-** File True Name: /bisos/git/auth/bxRepos/bisos-pip/myLinkedIn/py3/bin/linkedinvcard.cs
+** This File: /bisos/git/bxRepos/bisos-pip/myLinkedIn/py3/bin/myLinkedIn.cs
+** File True Name: /bisos/git/auth/bxRepos/bisos-pip/myLinkedIn/py3/bin/myLinkedIn.cs
 ** Authors: Mohsen BANAN, http://mohsen.banan.1.byname.net/contact
 #+end_org """
 ####+END:
@@ -40,10 +40,10 @@
 * *[[elisp:(org-cycle)][| Particulars-csInfo |]]*
 #+end_org """
 import typing
-csInfo: typing.Dict[str, typing.Any] = { 'moduleName': ['linkedinvcard'], }
-csInfo['version'] = '202505101335'
+csInfo: typing.Dict[str, typing.Any] = { 'moduleName': ['myLinkedIn'], }
+csInfo['version'] = '202505115209'
 csInfo['status']  = 'inUse'
-csInfo['panel'] = 'linkedinvcard-Panel.org'
+csInfo['panel'] = 'myLinkedIn-Panel.org'
 csInfo['groupingType'] = 'IcmGroupingType-pkged'
 csInfo['cmndParts'] = 'IcmCmndParts[common] IcmCmndParts[param]'
 ####+END:

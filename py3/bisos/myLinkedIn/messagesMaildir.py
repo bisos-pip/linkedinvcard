@@ -21,7 +21,8 @@ class LinkedInMessagesToMaildir:
 
     def load_messages(self) -> list[dict]:
         self.logger.debug(f"Loading messages from: {self.csv_path}")
-        with self.telemetry.span("load_csv"), self.csv_path.open(encoding="utf-8") as f:
+        # with self.telemetry.span("load_csv"), self.csv_path.open(encoding="utf-8") as f:
+        with self.csv_path.open(encoding="utf-8") as f:
             reader = csv.DictReader(f)
             return list(reader)
 

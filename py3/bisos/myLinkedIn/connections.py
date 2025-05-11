@@ -35,7 +35,6 @@ class LinkedInConnections:
         output_dir.mkdir(parents=True, exist_ok=True)
 
         for entry in self.connections:
-            print(entry)
 
             vcard = vobject.vCard()
             vcard.add('fn').value = f"{entry['First Name']} {entry['Last Name']}"
@@ -50,9 +49,9 @@ class LinkedInConnections:
             uid = url.rstrip('/').split('/')[-1] if url else f"{entry['First Name']}_{entry['Last Name']}"
             filename: Path = output_dir / f"{uid}.vcf"
 
-            print(filename)
+            # print(filename)
             with filename.open('w', encoding='utf-8') as f:
                 vcf_str = vcard.serialize()
-                print(vcf_str)
+                # print(vcf_str)
                 f.write(vcf_str)
 

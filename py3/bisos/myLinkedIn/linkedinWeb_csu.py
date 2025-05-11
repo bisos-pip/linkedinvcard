@@ -104,12 +104,13 @@ import logging
 
 # from telemetry import Telemetry
 
-from bisos.myLinkedIn import utils
-from bisos.myLinkedIn import connections
+# from bisos.myLinkedIn import utils
+# from bisos.myLinkedIn import connections
 from bisos.myLinkedIn import invitations
-from bisos.myLinkedIn import messages
+# from bisos.myLinkedIn import messages
 
-from bisos.myLinkedIn import messages_822
+
+# from bisos.myLinkedIn import messages_822
 
 from bisos.myLinkedIn import linkedinWebInfo
 
@@ -135,7 +136,61 @@ def commonParamsSpecify(
 ####+END:
         csParams: cs.param.CmndParamDict,
 ) -> None:
-    pass
+    csParams.parDictAdd(
+        parName='account',
+        parDescription="Account to be used for logging in.",
+        parDataType=None,
+        parDefault=None,
+        parChoices=[],
+        argparseShortOpt=None,
+        argparseLongOpt='--account',
+    )
+    csParams.parDictAdd(
+        parName='password',
+        parDescription="Password to be used for logging in.",
+        parDataType=None,
+        parDefault=None,
+        parChoices=[],
+        argparseShortOpt=None,
+        argparseLongOpt='--password',
+    )
+    csParams.parDictAdd(
+        parName='browser',
+        parDescription="Browser to be used.",
+        parDataType=None,
+        parDefault=None,
+        parChoices=[],
+        argparseShortOpt=None,
+        argparseLongOpt='--browser',
+    )
+    csParams.parDictAdd(
+        parName='browserProfilePath',
+        parDescription="Profile name within Chrome.",
+        parDataType=None,
+        parDefault="~/.config/google-chrome/Default",
+        parChoices=[],
+        argparseShortOpt=None,
+        argparseLongOpt='--browserProfilePath',
+    )
+    csParams.parDictAdd(
+        parName='minInterval',
+        parDescription="Minimum Interval in Seconds.",
+        parDataType=None,
+        parDefault=40,
+        parChoices=[],
+        argparseShortOpt=None,
+        argparseLongOpt='--minInterval',
+    )
+    csParams.parDictAdd(
+        parName='maxInterval',
+        parDescription="Maximum Interval in Seconds.",
+        parDataType=None,
+        parDefault=90,
+        parChoices=[],
+        argparseShortOpt=None,
+        argparseLongOpt='--maxInterval',
+    )
+
 
 ####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "Direct Command Services" :anchor ""  :extraInfo "Examples and CSs"
 """ #+begin_org
@@ -171,6 +226,8 @@ class examples_csu(cs.Cmnd):
         cmnd = cs.examples.cmndEnter
         literal = cs.examples.execInsert
 
+        oneLinkedinUrl = '''https://www.linkedin.com/in/azad-sokhangoo-71b023365'''
+
         cs.examples.menuChapter('=Direct Interface Commands=')
 
         fileName = "/tmp/facterFile.json"
@@ -183,40 +240,63 @@ class examples_csu(cs.Cmnd):
 
         cs.examples.menuSection('/ContactInfo From Url/')
 
-        cmnd('contactInfo',  args='''https://www.linkedin.com/in/azadsokhangoo''')
+        cmnd('contactInfo',  args=oneLinkedinUrl)
 
-        cmnd('contactInfoToVCards',  args='''https://''')
+        cmnd('contactInfoToVCards',  args=oneLinkedinUrl)
 
         return(cmndOutcome)
 
-####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfo" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "" :argsMin 1 :argsMax 1 :pyInv ""
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfo" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "account password browser minInterval maxInterval" :argsMin 1 :argsMax 1 :pyInv ""
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfo>>  =verify= argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfo>>  =verify= parsOpt=account password browser minInterval maxInterval argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
 #+end_org """
 class contactInfo(cs.Cmnd):
     cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ ]
+    cmndParamsOptional = [ 'account', 'password', 'browser', 'minInterval', 'maxInterval', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
     @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
              rtInv: cs.RtInvoker,
              cmndOutcome: b.op.Outcome,
+             account: typing.Optional[str]=None,  # Cs Optional Param
+             password: typing.Optional[str]=None,  # Cs Optional Param
+             browser: typing.Optional[str]=None,  # Cs Optional Param
+             minInterval: typing.Optional[str]=None,  # Cs Optional Param
+             maxInterval: typing.Optional[str]=None,  # Cs Optional Param
              argsList: typing.Optional[list[str]]=None,  # CsArgs
     ) -> b.op.Outcome:
 
         failed = b_io.eh.badOutcome
-        callParamsDict = {}
+        callParamsDict = {'account': account, 'password': password, 'browser': browser, 'minInterval': minInterval, 'maxInterval': maxInterval, }
         if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
             return failed(cmndOutcome)
         cmndArgsSpecDict = self.cmndArgsSpec()
+        account = csParam.mappedValue('account', account)
+        password = csParam.mappedValue('password', password)
+        browser = csParam.mappedValue('browser', browser)
+        minInterval = csParam.mappedValue('minInterval', minInterval)
+        maxInterval = csParam.mappedValue('maxInterval', maxInterval)
 ####+END:
         self.cmndDocStr(f""" #+begin_org
 ** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns runFacterAndGetJsonOutputBytes.
         #+end_org """)
 
-        linkedinUrl  = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        cmndArgs = self.cmndArgsGet("0&9999", cmndArgsSpecDict, argsList)
 
+        def process(each):
+            print(each)
+
+        def processArgsAndStdin(cmndArgs, process):
+            for each in cmndArgs:
+                process(each)
+            stdinArgs = b_io.stdin.read()
+            for each in stdinArgs:
+                process(each)
+
+        processArgsAndStdin(cmndArgs, process)
+
+        return cmndOutcome.set(opResults="info",)
 
         logging.basicConfig(level=logging.DEBUG)
 
@@ -248,9 +328,9 @@ class contactInfo(cs.Cmnd):
         cmndArgsSpecDict = cs.CmndArgsSpecDict()
 
         cmndArgsSpecDict.argsDictAdd(
-            argPosition="0",
-            argName="linkedinUrl",
-            argDefault='',
+            argPosition="0&9999",
+            argName="cmndArgs",
+            argDefault=None,
             argChoices=[],
             argDescription="Path to the LinkedIn Basic_LinkedInDataExport_DATE.zip file."
         )

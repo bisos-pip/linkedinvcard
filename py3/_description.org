@@ -1,14 +1,14 @@
-#+title: bisos.linkedinVcard: takes contents of Basic_LinkedInDataExport.zip and converts them to Vcards
+#+title: bisos.myLinkedIn: takes contents of Basic_LinkedInDataExport.zip and converts them to Vcards
 
 
 
 
 * Overview
 
-/bisos.linkedinVcard/ takes contents of Basic_LinkedInDataExport.zip and converts
+/bisos.myLinkedIn/ takes contents of Basic_LinkedInDataExport.zip and converts
 them to Vcards for your connections and then augments them.
 
-bisos.linkedinVcard is a python package that uses the  [[https://github.com/bisos-pip/pycs][PyCS-Framework]] for adoption and
+bisos.myLinkedIn is a python package that uses the  [[https://github.com/bisos-pip/pycs][PyCS-Framework]] for adoption and
 adaptation of *linkedinVcard* to python and PyCS-Framework. It is a BISOS-Capability and
 a Standalone-BISOS-Package.
 
@@ -63,7 +63,7 @@ More complete documentation is available at: https://github.com/bisos-pip/capabi
     - [[#performer][Performer]]
     - [[#invoker][Invoker]]
 - [[#documentation-and-blee-panels][Documentation and Blee-Panels]]
-  - [[#bisoslinkedinvcard-blee-panels][bisos.linkedinVcard Blee-Panels]]
+  - [[#bisosmylinkedin-blee-panels][bisos.myLinkedIn Blee-Panels]]
 - [[#support][Support]]
 - [[#credits][Credits]]
 
@@ -75,7 +75,7 @@ software-service continuums that use internet services. PyCS (Python
 Command-Services) of BISOS is a framework that converges development of CLI and
 Services. See the  [[https://github.com/bxplpc/120033][Nature of Polyexistentials]] book for additional information.
 
-bisos.linkedinVcard is a standalone piece of BISOS. It can be used as a
+bisos.myLinkedIn is a standalone piece of BISOS. It can be used as a
 self-contained Python package separate from BISOS.
 
 
@@ -175,28 +175,28 @@ approach unique in the landscape of LinkedIn data tools.
 
 * Installation
 
-The sources for the bisos.linkedinVcard pip package are maintained at:
+The sources for the bisos.myLinkedIn pip package are maintained at:
 https://github.com/bisos-pip/linkedinVcard.
 
-The bisos.linkedinVcard pip package is available at PYPI as
-https://pypi.org/project/bisos.linkedinVcard
+The bisos.myLinkedIn pip package is available at PYPI as
+https://pypi.org/project/bisos.myLinkedIn
 
-You can install bisos.linkedinVcard with pip or pipx.
+You can install bisos.myLinkedIn with pip or pipx.
 
 ** Installation With pip
 
-If you need access to bisos.linkedinVcard as a python module, you can install it with pip:
+If you need access to bisos.myLinkedIn as a python module, you can install it with pip:
 
 #+begin_src bash
-pip install bisos.linkedinVcard
+pip install bisos.myLinkedIn
 #+end_src
 
 ** Installation With pipx
 
-If you only need access to bisos.linkedinVcard on command-line, you can install it with pipx:
+If you only need access to bisos.myLinkedIn on command-line, you can install it with pipx:
 
 #+begin_src bash
-pipx install bisos.linkedinVcard
+pipx install bisos.myLinkedIn
 #+end_src
 
 The following commands are made available:
@@ -267,14 +267,14 @@ Augments vCards with additional information pulled directly from the LinkedIn Co
 
 * Documentation and Blee-Panels
 
-bisos.linkedinVcard is part of ByStar Digital Ecosystem [[http://www.by-star.net]].
+bisos.myLinkedIn is part of ByStar Digital Ecosystem [[http://www.by-star.net]].
 
 This module's primary documentation is in the form of Blee-Panels.
 Additional information is also available in: [[http://www.by-star.net/PLPC/180047]]
 
-** bisos.linkedinVcard Blee-Panels
+** bisos.myLinkedIn Blee-Panels
 
-bisos.linkedinVcard Blee-Panles are in ./panels directory.
+bisos.myLinkedIn Blee-Panles are in ./panels directory.
 From within Blee and BISOS these panles are accessible under the
 Blee "Panels" menu.
 

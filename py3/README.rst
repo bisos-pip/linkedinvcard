@@ -1,6 +1,6 @@
-=======================================================================================================
-bisos.linkedinVcard: takes contents of Basic\ :sub:`LinkedInDataExport`.zip and converts them to Vcards
-=======================================================================================================
+====================================================================================================
+bisos.myLinkedIn: takes contents of Basic\ :sub:`LinkedInDataExport`.zip and converts them to Vcards
+====================================================================================================
 
 .. contents::
    :depth: 3
@@ -9,11 +9,11 @@ bisos.linkedinVcard: takes contents of Basic\ :sub:`LinkedInDataExport`.zip and 
 Overview
 ========
 
-*bisos.linkedinVcard* takes contents of
+*bisos.myLinkedIn* takes contents of
 Basic\ :sub:`LinkedInDataExport`.zip and converts them to Vcards for
 your connections and then augments them.
 
-bisos.linkedinVcard is a python package that uses the
+bisos.myLinkedIn is a python package that uses the
 `PyCS-Framework <https://github.com/bisos-pip/pycs>`__ for adoption and
 adaptation of **linkedinVcard** to python and PyCS-Framework. It is a
 BISOS-Capability and a Standalone-BISOS-Package.
@@ -86,8 +86,7 @@ Table of Contents TOC
 
 -  `Documentation and Blee-Panels <#documentation-and-blee-panels>`__
 
-   -  `bisos.linkedinVcard
-      Blee-Panels <#bisoslinkedinvcard-blee-panels>`__
+   -  `bisos.myLinkedIn Blee-Panels <#bisosmylinkedin-blee-panels>`__
 
 -  `Support <#support>`__
 -  `Credits <#credits>`__
@@ -103,7 +102,7 @@ converges development of CLI and Services. See the `Nature of
 Polyexistentials <https://github.com/bxplpc/120033>`__ book for
 additional information.
 
-bisos.linkedinVcard is a standalone piece of BISOS. It can be used as a
+bisos.myLinkedIn is a standalone piece of BISOS. It can be used as a
 self-contained Python package separate from BISOS.
 
 Diagram and Software–Diagram Mapping
@@ -266,33 +265,33 @@ your approach unique in the landscape of LinkedIn data tools.
 Installation
 ============
 
-The sources for the bisos.linkedinVcard pip package are maintained at:
+The sources for the bisos.myLinkedIn pip package are maintained at:
 https://github.com/bisos-pip/linkedinVcard.
 
-The bisos.linkedinVcard pip package is available at PYPI as
-https://pypi.org/project/bisos.linkedinVcard
+The bisos.myLinkedIn pip package is available at PYPI as
+https://pypi.org/project/bisos.myLinkedIn
 
-You can install bisos.linkedinVcard with pip or pipx.
+You can install bisos.myLinkedIn with pip or pipx.
 
 Installation With pip
 ---------------------
 
-If you need access to bisos.linkedinVcard as a python module, you can
+If you need access to bisos.myLinkedIn as a python module, you can
 install it with pip:
 
 .. code:: bash
 
-   pip install bisos.linkedinVcard
+   pip install bisos.myLinkedIn
 
 Installation With pipx
 ----------------------
 
-If you only need access to bisos.linkedinVcard on command-line, you can
+If you only need access to bisos.myLinkedIn on command-line, you can
 install it with pipx:
 
 .. code:: bash
 
-   pipx install bisos.linkedinVcard
+   pipx install bisos.myLinkedIn
 
 The following commands are made available:
 
@@ -369,18 +368,18 @@ LinkedIn Contact pages.
 Documentation and Blee-Panels
 =============================
 
-bisos.linkedinVcard is part of ByStar Digital Ecosystem
+bisos.myLinkedIn is part of ByStar Digital Ecosystem
 http://www.by-star.net.
 
 This module's primary documentation is in the form of Blee-Panels.
 Additional information is also available in:
 http://www.by-star.net/PLPC/180047
 
-bisos.linkedinVcard Blee-Panels
--------------------------------
+bisos.myLinkedIn Blee-Panels
+----------------------------
 
-bisos.linkedinVcard Blee-Panles are in ./panels directory. From within
-Blee and BISOS these panles are accessible under the Blee "Panels" menu.
+bisos.myLinkedIn Blee-Panles are in ./panels directory. From within Blee
+and BISOS these panles are accessible under the Blee "Panels" menu.
 
 See
 `file:./panels/_nodeBase_/fullUsagePanel-en.org <./panels/_nodeBase_/fullUsagePanel-en.org>`__

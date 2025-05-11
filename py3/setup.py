@@ -50,9 +50,9 @@ def pkgVersion():
 ####+END:
 
 # b:py3:pypi:setup/requires :extras ; :requirements "requirements.txt" (bring here requirements.txt)
-####+BEGIN: b:py3:pypi:setup/requires :extras ("selenium" "vobject" "requests" "beautifulsoup4")
+####+BEGIN: b:py3:pypi:setup/requires :extras ("selenium" "vobject" "requests" "beautifulsoup4" "webdriver_manager")
 
-requires = [ 
+requires = [
 "bisos",
 "bisos.b",
 "bisos.common",
@@ -61,21 +61,23 @@ requires = [
 "vobject",
 "requests",
 "beautifulsoup4",
+"webdriver_manager",
 ]
 ####+END:
 
 # b:py3:pypi:setup/scripts :comment
 ####+BEGIN: b:py3:pypi:setup/scripts :comment ""
 
-scripts = [ 
+scripts = [
 'bin/linkedinvcard.cs',
+'bin/linkedinweb.cs',
 ]
 ####+END:
 
 # b:py3:pypi:setup/dataFiles :comment
 ####+BEGIN: b:py3:pypi:setup/dataFiles :comment "Instead of ./MANIFEST.in or in pyproject.toml"
 
-data_files = [ 
+data_files = [
 (' ',  ['lh-agpl3-LICENSE.txt', '_description.org', 'README.rst']),
 ]
 ####+END:
@@ -84,7 +86,7 @@ data_files = [
 ####+BEGIN: b:py3:pypi:setup/funcArgs :comment "defaults to --auto--"
 
 setuptools.setup(
-    name=pkgName(),  # 'bisos.linkedinvcard'
+    name=pkgName(),  # 'bisos.myLinkedIn'
     version=pkgVersion(),
     packages=setuptools.find_packages(),
     scripts=scripts,

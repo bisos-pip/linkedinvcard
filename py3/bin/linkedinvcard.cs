@@ -29,8 +29,8 @@
 ####+BEGIN: b:prog:file/particulars :authors ("./inserts/authors-mb.org")
 """ #+begin_org
 * *[[elisp:(org-cycle)][| Particulars |]]* :: Authors, version
-** This File: /bisos/git/bxRepos/bisos-pip/linkedinvcard/py3/bin/linkedinvcard.cs
-** File True Name: /bisos/git/auth/bxRepos/bisos-pip/linkedinvcard/py3/bin/linkedinvcard.cs
+** This File: /bisos/git/bxRepos/bisos-pip/myLinkedIn/py3/bin/linkedinvcard.cs
+** File True Name: /bisos/git/auth/bxRepos/bisos-pip/myLinkedIn/py3/bin/linkedinvcard.cs
 ** Authors: Mohsen BANAN, http://mohsen.banan.1.byname.net/contact
 #+end_org """
 ####+END:
@@ -41,7 +41,7 @@
 #+end_org """
 import typing
 csInfo: typing.Dict[str, typing.Any] = { 'moduleName': ['linkedinvcard'], }
-csInfo['version'] = '202505084040'
+csInfo['version'] = '202505101335'
 csInfo['status']  = 'inUse'
 csInfo['panel'] = 'linkedinvcard-Panel.org'
 csInfo['groupingType'] = 'IcmGroupingType-pkged'
@@ -94,11 +94,11 @@ import collections
   (list
    "bisos.b.cs.ro"
    "bisos.csPlayer.bleep"
-   "bisos.linkedinvcard.linkedin_csu"
+   "bisos.myLinkedIn.linkedin_csu"
  ))
 #+END_SRC
 #+RESULTS:
-| bisos.b.cs.ro | bisos.csPlayer.bleep | bisos.linkedinvcard.linkedin_csu |
+| bisos.b.cs.ro | bisos.csPlayer.bleep | bisos.myLinkedIn.linkedin_csu |
 #+end_org """
 
 ####+BEGIN: b:py3:cs:framework/csuListProc :pyImports t :csuImports t :csuParams t :csmuParams nil
@@ -108,10 +108,10 @@ import collections
 
 from bisos.b.cs import ro
 from bisos.csPlayer import bleep
-from bisos.linkedinvcard import linkedin_csu
+from bisos.myLinkedIn import linkedin_csu
 
 
-csuList = [ 'bisos.b.cs.ro', 'bisos.csPlayer.bleep', 'bisos.linkedinvcard.linkedin_csu', ]
+csuList = [ 'bisos.b.cs.ro', 'bisos.csPlayer.bleep', 'bisos.myLinkedIn.linkedin_csu', ]
 
 g_importedCmndsModules = cs.csuList_importedModules(csuList)
 

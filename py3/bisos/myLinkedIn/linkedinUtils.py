@@ -5,7 +5,50 @@ from pathlib import Path
 import zipfile
 
 
-class VCardUtils:
+
+class LinkedinId:
+    """
+    Utility functions for handling LinkedinId
+    """
+
+    @staticmethod
+    def fromUrl(url):
+        """
+        Extract the LinkedIn ID from the profile URL.
+        """
+        return url.split('/')[-2]
+
+    @staticmethod
+    def fromStr(vcard_dir, uid):
+        """
+        Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
+        """
+        vcard_path = os.path.join(vcard_dir, f"{uid}.vcf")
+        if os.path.exists(vcard_path):
+            return vcard_path
+        return None
+
+
+    @staticmethod
+    def fromPath(vcard_dir, uid):
+        """
+        Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
+        """
+        vcard_path = os.path.join(vcard_dir, f"{uid}.vcf")
+        if os.path.exists(vcard_path):
+            return vcard_path
+        return None
+
+
+    @staticmethod
+    def canonical(inStr):
+        """
+        First
+        """
+        pass
+
+
+class VCard:
     """
     Utility functions for handling vCards and LinkedIn data files.
     """
@@ -55,7 +98,7 @@ class VCardUtils:
         return None
 
     
-class LinkedinBaseUtils:
+class Common:
 
     @staticmethod
     def unzip_file(zip_path: Path, extract_to: Path) -> None:

@@ -103,7 +103,7 @@ import re
 
 # from telemetry import Telemetry
 
-from bisos.myLinkedIn import utils
+from bisos.myLinkedIn import linkedinUtils
 from bisos.myLinkedIn import connections
 from bisos.myLinkedIn import invitations
 from bisos.myLinkedIn import messages
@@ -405,7 +405,7 @@ class exportedPrep(cs.Cmnd):
             pass
             # return failed(cmndOutcome)
         else:
-            utils.LinkedinBaseUtils.unzip_file(path_exportedZip, path_dataExportDir)
+            linkedinUtils.Common.unzip_file(path_exportedZip, path_dataExportDir)
 
         # dataExportSelected = path_myLinkedInBase.joinpath(pathlib.Path(f"LinkedInDataExport_selected"))
 

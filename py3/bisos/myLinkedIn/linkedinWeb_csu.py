@@ -104,7 +104,7 @@ import logging
 
 # from telemetry import Telemetry
 
-# from bisos.myLinkedIn import utils
+from bisos.myLinkedIn import linkedinUtils
 # from bisos.myLinkedIn import connections
 from bisos.myLinkedIn import invitations
 # from bisos.myLinkedIn import messages
@@ -127,6 +127,10 @@ cs.invOutcomeReportControl(cmnd=True, ro=True)
 *  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  /Section/    [[elisp:(outline-show-subtree+toggle)][||]] *Common Parameters Specification* based on cs.param.CmndParamDict -- As expected from CSU-s  [[elisp:(org-cycle)][| ]]
 #+end_org """
 ####+END:
+
+def linkedinId_canonical(input: str,) -> str:
+    return input
+
 
 ####+BEGIN: b:py3:cs:func/typing :funcName "commonParamsSpecify" :comment "~CSU Specification~" :funcType "ParSpc" :deco ""
 """ #+begin_org
@@ -224,25 +228,24 @@ class examples_csu(cs.Cmnd):
 
         od = collections.OrderedDict
         cmnd = cs.examples.cmndEnter
-        literal = cs.examples.execInsert
+        # literal = cs.examples.execInsert
+
+        # fromFilePars = od([('fromFile', fileName), ('cache', 'True')])
 
         oneLinkedinUrl = '''https://www.linkedin.com/in/azad-sokhangoo-71b023365'''
+        oneLinkedinId = linkedinUtils.VCard.get_linkedin_id(oneLinkedinUrl)
+        oneVCardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"
 
-        cs.examples.menuChapter('=Direct Interface Commands=')
+        cs.examples.menuChapter('=LinkedIn Web Info=')
 
-        fileName = "/tmp/facterFile.json"
-
-        perfNamePars = od([('perfName', "HSS-1012"),])
-        fromFilePars = od([('fromFile', fileName), ('cache', 'True')])
-        fromFilePlusPerfNamePars = od(list(perfNamePars.items()) + list(fromFilePars.items()))
-
-        # cmnd('facterJsonOutputBytesToFile', pars=od([('perfName', "HSS-1012"), ('fromFile', fileName)]),)
 
         cs.examples.menuSection('/ContactInfo From Url/')
 
         cmnd('contactInfo',  args=oneLinkedinUrl)
 
-        cmnd('contactInfoToVCards',  args=oneLinkedinUrl)
+        cmnd('contactInfoToVCard',
+             pars=od([('vcardsDir', oneVCardsDir),]),
+             args=oneLinkedinUrl)
 
         return(cmndOutcome)
 
@@ -313,8 +316,6 @@ class contactInfo(cs.Cmnd):
 
         return cmndOutcome.set(opResults=info,)
 
-
-
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
     """ #+begin_org
 **  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  Mtd-T-anyOrNone [[elisp:(outline-show-subtree+toggle)][||]] /cmndArgsSpec/ deco=default  deco=default  [[elisp:(org-cycle)][| ]]
@@ -338,11 +339,11 @@ class contactInfo(cs.Cmnd):
         return cmndArgsSpecDict
 
 
-####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfoToVCards" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "myLinkedInBase vcardsDir" :argsMin 1 :argsMax 1 :pyInv ""
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfoToVCard" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "myLinkedInBase vcardsDir" :argsMin 1 :argsMax 1 :pyInv ""
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfoToVCards>>  =verify= parsOpt=myLinkedInBase vcardsDir argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfoToVCard>>  =verify= parsOpt=myLinkedInBase vcardsDir argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
 #+end_org """
-class contactInfoToVCards(cs.Cmnd):
+class contactInfoToVCard(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'myLinkedInBase', 'vcardsDir', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
@@ -369,24 +370,25 @@ class contactInfoToVCards(cs.Cmnd):
         #+end_org """)
 
 
-        inFile = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        cmndArgs = self.cmndArgsGet("0&9999", cmndArgsSpecDict, argsList)
 
-        path_inFile = pathlib.Path(inFile).expanduser().resolve(strict=True)
-        print(path_inFile)
+        def process(each):
+            linkedinId = linkedinUtils.VCard.get_linkedin_id(each)
+            print(each)
+            print(f"{vcardsDir}/{linkedinId}.vcf")
+            print(linkedinId)
+            print(each)
 
-        if vcardsDir is not None:
-            path_vcardsDir = pathlib.Path(vcardsDir).expanduser().resolve(strict=True)
+        def processArgsAndStdin(cmndArgs, process):
+            for each in cmndArgs:
+                process(each)
+            stdinArgs = b_io.stdin.read()
+            for each in stdinArgs:
+                process(each)
 
-        print(path_vcardsDir)
+        processArgsAndStdin(cmndArgs, process)
 
-        augmentation = invitations.LinkedInInvitations(path_inFile)
-
-        augmentation.load()
-
-        augmentation.augment_vcards(path_vcardsDir)
-
-        return cmndOutcome.set(opResults=path_vcardsDir,)
-
+        return cmndOutcome.set(opResults="info",)
 
 
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
@@ -402,15 +404,14 @@ class contactInfoToVCards(cs.Cmnd):
         cmndArgsSpecDict = cs.CmndArgsSpecDict()
 
         cmndArgsSpecDict.argsDictAdd(
-            argPosition="0",
-            argName="linkedinUrl",
-            argDefault='',
+            argPosition="0&9999",
+            argName="cmndArgs",
+            argDefault=None,
             argChoices=[],
-            argDescription="Path to the Exported LinkedIn connections file."
+            argDescription="Path to the LinkedIn Basic_LinkedInDataExport_DATE.zip file."
         )
 
         return cmndArgsSpecDict
-
 
 
 

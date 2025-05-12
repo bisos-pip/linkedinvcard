@@ -2,6 +2,7 @@ import csv
 import logging
 from pathlib import Path
 import zipfile
+import vobject
 from typing import Optional, List, Dict
 
 

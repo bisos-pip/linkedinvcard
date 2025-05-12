@@ -1,10 +1,12 @@
 import csv
-import os
-
+import logging
 from pathlib import Path
 import zipfile
+from typing import Optional, List, Dict
 
 
+
+logger = logging.getLogger(__name__)
 
 class LinkedinId:
     """
@@ -12,36 +14,36 @@ class LinkedinId:
     """
 
     @staticmethod
-    def fromUrl(url):
+    def fromUrl(url: str) -> str:
         """
         Extract the LinkedIn ID from the profile URL.
         """
         return url.split('/')[-2]
 
     @staticmethod
-    def fromStr(vcard_dir, uid):
+    def fromStr(vcard_dir: Path, uid: str) -> Optional[Path]:
         """
         Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
         """
-        vcard_path = os.path.join(vcard_dir, f"{uid}.vcf")
-        if os.path.exists(vcard_path):
+        vcard_path = vcard_dir / f"{uid}.vcf"
+        if vcard_path.exists():
             return vcard_path
         return None
 
 
     @staticmethod
-    def fromPath(vcard_dir, uid):
+    def fromPath(vcard_dir: Path, uid: str) -> Optional[Path]:
         """
         Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
         """
-        vcard_path = os.path.join(vcard_dir, f"{uid}.vcf")
-        if os.path.exists(vcard_path):
+        vcard_path = vcard_dir / f"{uid}.vcf"
+        if vcard_path.exists():
             return vcard_path
         return None
 
 
     @staticmethod
-    def canonical(inStr):
+    def canonical(inStr: str) -> str:
         """
         First
         """
@@ -54,46 +56,46 @@ class VCard:
     """
 
     @staticmethod
-    def get_linkedin_id(url):
+    def get_linkedin_id(url: str) -> str:
         """
         Extract the LinkedIn ID from the profile URL.
         """
         return url.split('/')[-2]
 
     @staticmethod
-    def read_csv(file_path):
+    def read_csv(file_path: Path) -> List[Dict[str, str]]:
         """
         Read a CSV file and return the rows as a list of dictionaries.
         """
-        if not os.path.exists(file_path):
+        if not file_path.exists():
             raise FileNotFoundError(f"{file_path} does not exist.")
 
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with file_path.open('r', encoding='utf-8') as f:
             return list(csv.DictReader(f))
 
     @staticmethod
-    def write_vcard(vcard, vcard_path):
+    def write_vcard(vcard, vcard_path: Path) -> None:
         """
         Write the vCard object to a file.
         """
-        with open(vcard_path, 'w', encoding='utf-8') as vcard_file:
+        with vcard_path.open('w', encoding='utf-8') as vcard_file:
             vcard_file.write(vcard.serialize())
 
     @staticmethod
-    def read_vcard(vcard_path):
+    def read_vcard(vcard_path: Path):
         """
         Read a vCard from a file and return the vCard object.
         """
-        with open(vcard_path, 'r', encoding='utf-8') as vcard_file:
+        with vcard_path.open('r', encoding='utf-8') as vcard_file:
             return vobject.readOne(vcard_file.read())
 
     @staticmethod
-    def find_vcard(vcard_dir, uid):
+    def find_vcard(vcard_dir: Path, uid: str) -> Optional[Path]:
         """
         Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
         """
-        vcard_path = os.path.join(vcard_dir, f"{uid}.vcf")
-        if os.path.exists(vcard_path):
+        vcard_path = vcard_dir / f"{uid}.vcf"
+        if vcard_path.exists():
             return vcard_path
         return None
 
@@ -105,6 +107,7 @@ class Common:
         """Unzips a .zip file to the specified directory using pathlib.
         Use it like so: unzip_file(Path("LinkedInDataExport.zip"), Path("unzipped"))
         """
+        logger.info(f"Unzipping {zip_path} to {extract_to}")
         extract_to.mkdir(parents=True, exist_ok=True)
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_to)

@@ -19,7 +19,8 @@ class LinkedinId:
         """
         Extract the LinkedIn ID from the profile URL.
         """
-        return url.split('/')[-2]
+        parts = url.rstrip('/').split('/')
+        return parts[-1]
 
     @staticmethod
     def fromStr(vcard_dir: Path, uid: str) -> Optional[Path]:
@@ -46,9 +47,38 @@ class LinkedinId:
     @staticmethod
     def canonical(inStr: str) -> str:
         """
-        First
+        Determine the canonical form of a LinkedIn identifier.
+
+        This method checks the input string to determine if it is a URL, a file path,
+        or a LinkedIn ID. It returns the LinkedIn ID in a canonical form based on the input type.
+
+        - If the input is a URL, it extracts the LinkedIn ID using the fromUrl method.
+        - If the input is a file path ending with '.vcf', it returns the file name without the extension.
+        - If the input is a plain string, it assumes it is a LinkedIn ID and returns it as is.
+
+        Args:
+            inStr (str): The input string to be canonicalized.
+
+        Returns:
+            str: The canonical LinkedIn ID.
         """
-        pass
+        from urllib.parse import urlparse
+
+        # Check if the input is a URL
+        try:
+            result = urlparse(inStr)
+            if all([result.scheme, result.netloc]):
+                return LinkedinId.fromUrl(inStr)
+        except Exception:
+            pass
+
+        # Check if the input is a file path
+        path = Path(inStr)
+        if path.suffix == '.vcf':
+            return path.stem
+
+        # Otherwise, assume it's a LinkedIn ID
+        return inStr
 
 
 class VCard:

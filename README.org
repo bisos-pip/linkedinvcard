@@ -73,9 +73,11 @@ Scrapping.
 * Table of Contents     :TOC:
 - [[#overview][Overview]]
 -  [[#a-standalone-command-services-pycs-facility-of-bisos][A Standalone Command-Services PyCS Facility of BISOS]]
--  [[#layer-1----mylinkedincs----diagram-and-softwarediagram-mapping][/Layer 1/ -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
--  [[#layer-2----mylinkedinwebcs----diagram-and-softwarediagram-mapping][/Layer 2/ -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
--  [[#common-usages----diagram][**Common Usages** -- Diagram]]
+-  [[#layer-1----mylinkedincs----diagram-and-softwarediagram-mapping][Layer-1 -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
+  -  [[#key-features-of-layer-1----mylinkedincs][Key Features of Layer-1 -- myLinkedIn.cs]]
+-  [[#layer-2----mylinkedinwebcs----diagram-and-softwarediagram-mapping][Layer-2 -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
+  -  [[#key-features-of-layer-2----mylinkedinwebcs][Key Features of Layer-2 -- myLinkedInWeb.cs]]
+-  [[#common-usages----diagram][*Common Usages* -- Diagram]]
 -  [[#key-features][Key Features]]
 -  [[#bisoslinkedin-python-package][bisos.linkedin Python Package]]
 - [[#features][Features]]
@@ -106,73 +108,92 @@ bisos.myLinkedIn is a standalone piece of BISOS. It can be used as a
 self-contained Python package separate from BISOS.
 
 
-*  /Layer 1/ -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
+*  Layer-1 -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/exportedFileInfo
 #+ATTR_HTML: :width 1100px
 [[./py3/images/exportedFileInfo.png]]
 
+The figure above, provides an overview of Layer-1.
 
-| Diagram Node     | Software Component/Class    | Description                                             |
-|------------------+-----------------------------+---------------------------------------------------------|
-| LinkedIn         | Data Source (LinkedIn)      | Origin of all LinkedIn user data                        |
-| Export.zip       | Raw Input                   | Downloaded export ZIP file from LinkedIn               |
-| ExportedData     | Unzipped Data Directory     | Directory containing CSV and JSON files                |
-| Connections.csv  | LinkedInConnections         | Parses first-level connections                         |
-| Invitations.csv  | LinkedInInvitations         | Parses sent and received invitations                   |
-| Messages.csv     | LinkedInMessages            | Parses message exchanges with connections              |
-| ContactInfo      | Remote Augmentation Logic   | Scraped contact details from LinkedIn website          |
-| External         | User-supplied Sources       | Any third-party or user-maintained source of data      |
-| ExternalInfo     | External Data Processor     | Prepares and aligns external info for enrichment       |
-| VCard            | VCardUtils / Core Output    | Base vCards from LinkedIn data                         |
-| VCardPlus        | VCardAugmentor              | Enriched vCards with remote and external information   |
+A brief descriptions of the nodes is provided below.
+
+| Diagram Node    | Software Component/Class | Description                                          |
+|-----------------+--------------------------+------------------------------------------------------|
+| LinkedIn        | Data Source (LinkedIn)   | Origin of all LinkedIn user data                     |
+| Export.zip      | Raw Input                | Downloaded export ZIP file from LinkedIn             |
+| ExportedData    | Unzipped Data Directory  | Directory containing CSV and JSON files              |
+|-----------------+--------------------------+------------------------------------------------------|
+| Connections.csv | LinkedInConnections      | Parses first-level connections                       |
+| Invitations.csv | LinkedInInvitations      | Parses sent and received invitations                 |
+| VCard           | VCardUtils / Core Output | Base vCards from LinkedIn data                       |
+|-----------------+--------------------------+------------------------------------------------------|
+| Messages.csv    | LinkedInMessages         | Parses message exchanges with connections            |
+| Maildir         | messages                 | Enriched vCards with remote and external information |
 
 
-*  /Layer 2/ -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping
+**  Key Features of Layer-1 -- myLinkedIn.cs
+
+- VCard Creation:
+
+   Based on  data from `Connections.csv` a VCard is created for each contact. This VCard will then be augmented and enriched.
+
+- VCard Local Augmentation:
+
+Augments vCards with data from `Invitations.csv`.
+For each contact, the invitation status is captured (whether you invited the connection or vice versa) and the invitation message text is added to the vCard.
+
+- Maildir Conversion:
+   - With data from `messages.csv`, maildirs are created.
+
+
+*  Layer-2 -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/exportedPlusWebCons
 #+ATTR_HTML: :width 1100px
 [[./py3/images/exportedPlusWebCons.png]]
 
+The figure above, provides an overview of Layer-2.
+Layer-2 builds on Layer-1 by entriching the VCards with the information
+obtained from the /Contact Info/ for each VCard.
+
+A brief descriptions of the relevant nodes is provided below.
+
 
 | Diagram Node     | Software Component/Class    | Description                                             |
 |------------------+-----------------------------+---------------------------------------------------------|
-| LinkedIn         | Data Source (LinkedIn)      | Origin of all LinkedIn user data                        |
-| Export.zip       | Raw Input                   | Downloaded export ZIP file from LinkedIn               |
-| ExportedData     | Unzipped Data Directory     | Directory containing CSV and JSON files                |
-| Connections.csv  | LinkedInConnections         | Parses first-level connections                         |
-| Invitations.csv  | LinkedInInvitations         | Parses sent and received invitations                   |
-| Messages.csv     | LinkedInMessages            | Parses message exchanges with connections              |
 | ContactInfo      | Remote Augmentation Logic   | Scraped contact details from LinkedIn website          |
-| External         | User-supplied Sources       | Any third-party or user-maintained source of data      |
-| ExternalInfo     | External Data Processor     | Prepares and aligns external info for enrichment       |
 | VCard            | VCardUtils / Core Output    | Base vCards from LinkedIn data                         |
-| VCardPlus        | VCardAugmentor              | Enriched vCards with remote and external information   |
 
 
-*  **Common Usages** -- Diagram
+**  Key Features of Layer-2 -- myLinkedInWeb.cs
+
+- Web Contact Info Retreival:
+
+- Addition of Contact Info to Local VCard:
+
+
+*  *Common Usages* -- Diagram
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/ebdbMtdt
 #+ATTR_HTML: :width 1100px
 [[./py3/images/ebdbMtdt.png]]
 
+The figure above, provides an overview of how MyLinkedIn (Layers-1 and Layer-2) are commonly used.
 
-| Diagram Node     | Software Component/Class    | Description                                             |
-|------------------+-----------------------------+---------------------------------------------------------|
-| LinkedIn         | Data Source (LinkedIn)      | Origin of all LinkedIn user data                        |
-| Export.zip       | Raw Input                   | Downloaded export ZIP file from LinkedIn               |
-| ExportedData     | Unzipped Data Directory     | Directory containing CSV and JSON files                |
-| Connections.csv  | LinkedInConnections         | Parses first-level connections                         |
-| Invitations.csv  | LinkedInInvitations         | Parses sent and received invitations                   |
-| Messages.csv     | LinkedInMessages            | Parses message exchanges with connections              |
-| ContactInfo      | Remote Augmentation Logic   | Scraped contact details from LinkedIn website          |
-| External         | User-supplied Sources       | Any third-party or user-maintained source of data      |
-| ExternalInfo     | External Data Processor     | Prepares and aligns external info for enrichment       |
-| VCard            | VCardUtils / Core Output    | Base vCards from LinkedIn data                         |
-| VCardPlus        | VCardAugmentor              | Enriched vCards with remote and external information   |
+A brief descriptions of the relevant nodes is provided below.
+
+
+
+| Diagram Node | Software Component/Class | Description                                          |
+|--------------+--------------------------+------------------------------------------------------|
+| External     | User-supplied Sources    | Any third-party or user-maintained source of data    |
+| ExternalInfo | External Data Processor  | Prepares and aligns external info for enrichment     |
+| VCard        | VCardUtils / Core Output | Base vCards from LinkedIn data                       |
+| VCardPlus    | VCardAugmentor           | Enriched vCards with remote and external information |
 
 
 

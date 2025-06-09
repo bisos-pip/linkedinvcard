@@ -10,6 +10,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+import vobject
 
 
 import urllib.parse
@@ -17,6 +18,7 @@ import urllib.parse
 
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class LinkedInRemoteAugmentor:
     """
@@ -202,7 +204,7 @@ class LinkedInRemoteAugmentor:
 
         return contact_info
 
-    def augment_vcard_from_linkedin(self, linkedin_url: str, vcard_dir: Path) -> None:
+    def augment_vcard_from_linkedinObsoleted(self, linkedin_url: str, vcard_dir: Path) -> None:
         """
         Extracts contact info from LinkedIn and augments the corresponding vCard file.
 
@@ -222,51 +224,6 @@ class LinkedInRemoteAugmentor:
         vcard_path = vcard_dir / f"{linkedin_id}.vcf"
 
         self.augment_vcard_with_contact_info(vcard_path, contact_info)
-
-    def augment_vcard_with_contact_info(self, vcard_path: Path, contact_info: Dict[str, Optional[str]]) -> None:
-        """
-        Augments an existing vCard file with extracted LinkedIn contact info.
-        """
-        logger.info(f"Augmenting vCard at: {vcard_path}")
-
-        if not vcard_path.exists():
-            logger.error(f"vCard not found: {vcard_path}")
-            return
-
-        vcard_text = vcard_path.read_text(encoding="utf-8").strip()
-
-        def add_or_replace_line(vcf: str, field: str, value: str) -> str:
-            lines = vcf.splitlines()
-            updated = []
-            found = False
-            for line in lines:
-                if line.startswith(field):
-                    updated.append(f"{field}:{value}")
-                    found = True
-                else:
-                    updated.append(line)
-            if not found:
-                updated.insert(-1, f"{field}:{value}")  # Before END:VCARD
-            return "\n".join(updated)
-
-        field_mapping = {
-            "email": "EMAIL",
-            "phone": "TEL",
-            "website": "URL",
-            "twitter": "X-TWITTER",
-            "address": "ADR",
-            "birthday": "BDAY",
-            "profile_url": "X-LINKEDIN",
-        }
-
-        for key, field in field_mapping.items():
-            value = contact_info.get(key)
-            if value:
-                vcard_text = add_or_replace_line(vcard_text, field, value)
-                logger.debug(f"Updated {field} with: {value}")
-
-        vcard_path.write_text(vcard_text + "\n", encoding="utf-8")
-        logger.info("vCard updated.")
 
 
 

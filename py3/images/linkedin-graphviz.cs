@@ -59,6 +59,10 @@ def nodeVCard(dot: graphviz.Digraph) -> None:
 def nodeVCardPlus(dot: graphviz.Digraph) -> None:
     dot.node('VCardPlus', "Plus\nLinkedIn\nVCard", shape='box', style='filled', fillcolor='gray85')
 
+def nodeMaildir(dot: graphviz.Digraph) -> None:
+    dot.node('Maildir', "LinkedIn\nMessages\nMaildir",  shape='box', style='filled', fillcolor='gray75')
+
+
 
 ####+BEGIN: b:py3:cs:func/typing :funcName "exportedFileInfo" :funcType "Typed" :deco "track"
 """ #+begin_org
@@ -104,10 +108,12 @@ def exportedFileInfo(
     # dot.node('VCard', "LinkedIn\nVCard",  shape='box', style='filled', fillcolor='gray95')
     nodeVCard(dot)
 
+    nodeMaildir(dot)
+
     # Data flow to VCard
     dot.edge('Connections.csv', 'VCard', label='generate')
     dot.edge('Invitations.csv', 'VCard', label='augment')
-    dot.edge('Messages.csv', 'VCard', label='augment')
+    dot.edge('Messages.csv', 'Maildir', label='convert')
 
     return dot
 

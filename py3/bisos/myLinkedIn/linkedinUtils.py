@@ -4,15 +4,24 @@ from pathlib import Path
 import zipfile
 import vobject
 from typing import Optional, List, Dict
-
+from urllib.parse import urlparse
 
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class LinkedinId:
     """
     Utility functions for handling LinkedinId
     """
+
+    @staticmethod
+    def get_linkedin_idOBSOLETE(url: str) -> str:
+        """
+        Extract the LinkedIn ID from the profile URL.
+        """
+        return url.split('/')[-2]
+
 
     @staticmethod
     def fromUrl(url: str) -> str:
@@ -62,7 +71,6 @@ class LinkedinId:
         Returns:
             str: The canonical LinkedIn ID.
         """
-        from urllib.parse import urlparse
 
         # Check if the input is a URL
         try:
@@ -80,18 +88,20 @@ class LinkedinId:
         # Otherwise, assume it's a LinkedIn ID
         return inStr
 
+    @staticmethod
+    def toUrl(id: str) -> str:
+        """
+        Convert linkedinId to linkedin Url.
+        """
+        return f"https://www.linkedin.com/in/{id}"
+
+
 
 class VCard:
     """
     Utility functions for handling vCards and LinkedIn data files.
     """
 
-    @staticmethod
-    def get_linkedin_id(url: str) -> str:
-        """
-        Extract the LinkedIn ID from the profile URL.
-        """
-        return url.split('/')[-2]
 
     @staticmethod
     def read_csv(file_path: Path) -> List[Dict[str, str]]:
@@ -129,6 +139,48 @@ class VCard:
         if vcard_path.exists():
             return vcard_path
         return None
+
+    @staticmethod
+    def augment_vcard_with_contact_info(vcard_path: Path, contact_info: Dict[str, Optional[str]]) -> None:
+        """
+        Augments an existing vCard file with extracted LinkedIn contact info.
+        """
+        logger.info(f"Augmenting vCard at: {vcard_path}")
+
+        if not vcard_path.exists():
+            logger.error(f"vCard not found: {vcard_path}")
+            return
+
+
+        vcard_str = vcard_path.read_text(encoding="utf-8").strip()
+        vcard = vobject.readOne(vcard_str)
+
+        field_mapping = {
+            "email": ("email", "INTERNET"),
+            "phone": ("tel", "CELL"),
+            "website": ("url", None),
+            "twitter": ("x-twitter", None),
+            "address": ("adr", None),
+            "birthday": ("bday", None),
+            "profile_url": ("x-linkedin", None),
+        }
+
+        for key, (field, type_param) in field_mapping.items():
+            value = contact_info.get(key)
+            if value:
+                if hasattr(vcard, field):
+                    vcard.contents[field][0].value = value
+                else:
+                    new_field = vcard.add(field)
+                    new_field.value = value
+                    if type_param:
+                        new_field.type_param = type_param
+                logger.debug(f"Updated {field} with: {value}")
+
+        vcard_path.write_text(vcard.serialize(), encoding="utf-8")
+        logger.info("vCard updated.")
+
+
 
     
 class Common:

@@ -16,17 +16,42 @@
 * Overview
 
 /bisos.myLinkedIn/ takes contents of Basic_LinkedInDataExport.zip and converts
-them to Vcards for your connections and then augments them.
+them to Vcards for your connections and then augments them with the /Contact info/
+of your first level connections. The purpose of /bisos.myLinkedIn/ is to facilitate
+convenient communication with your first level connections *outside of* LinkedIn.
+/bisos.myLinkedIn/ is structured as two layers.
 
-bisos.myLinkedIn is a python package that uses the  [[https://github.com/bisos-pip/pycs][PyCS-Framework]] for adoption and
+- /Layer 1/ -- *myLinkedIn.cs* -- Operates purely on the content of
+  Basic_LinkedInDataExport.zip. Connections.csv is used to create VCards for
+  each of your connections. Invitations.csv is then used to augment the VCards.
+  Messages.csv are converted to maildir format for reading using your own MUA
+  (Mail User Agent). The email address (and other contect info) of only about
+  one fourth of your first level connections is in Connections.csv. Uses of
+  Layer 1 do not violate LinkedIn policies in anyway.
+
+- /Layer 2/ -- *myLinkedinWeb.cs* -- Uses /layer 1/ and enriches it with the /Contact
+  info/ for each the VCards. The email address (and other contect info) of most
+  of your first level connections is not available in /layer 1/. *myLinkedinWeb.cs*
+  goes to your first level connections home page. Clicks on the /Contact info/,
+  obtains email and other contect info from the web and adds it to the VCards.
+  Some may say that uses of Layer 2 do violate LinkedIn policies. I don't think
+  so. In my view, what *myLinkedinWeb.cs* does falls in the category of common and
+  reasonable use. I have been on LinkedIn for more than 20 years and I expect to
+  have convenient access to the /Contact info/ of my connections. If LinkedIn
+  considers this use not acceptable, then it should include the /Contact info/ of
+  *ALL* of connections in Basic_LinkedInDataExport.zip. Does LinkedIn really
+  expects me to keep current my VCards manually?
+
+
+/bisos.myLinkedIn/ is a python package that uses the  [[https://github.com/bisos-pip/pycs][PyCS-Framework]] for adoption and
 adaptation of *linkedinVcard* to python and PyCS-Framework. It is a BISOS-Capability and
 a Standalone-BISOS-Package.
 
-The `bisos.linkedin` package automates the process of transforming LinkedIn
+The /bisos.linkedin/ package automates the process of transforming LinkedIn
 export data into enriched vCards, specifically focusing on the first-level
 connections present in your LinkedIn data. LinkedIn’s export includes valuable
 information about your connections—such as names, job titles, company details,
-invitations, and messages—that naturally fits into a contact management system
+and invitations — that naturally fits into a contact management system
 like vCards. By leveraging this package, you can convert, enrich, and augment
 these details into vCards that are readily importable into your preferred usage
 environment (e.g., Emacs bbdb, MS Outlook, or any other vCard-compatible
@@ -34,16 +59,9 @@ system). This process is repeatable and scalable, making it easier to maintain
 an up-to-date contact database, effectively integrating LinkedIn connection data
 into your daily workflow.
 
-The `bisos.linkedin` Python package is a set of utilities designed to transform
-and enrich LinkedIn export data into vCards for your first-level connections.
-The package automates the process of creating and augmenting vCards from the
-exported LinkedIn data (such as Connections.csv, Invitations.csv, and
-messages.csv) by adding local, remote, and external information.
-
-This package enables the creation of rich vCards that contain contact details
-like names, emails, job titles, and invitation history, based on your LinkedIn
-export. The tool can also enhance the vCards by extracting additional
-information from LinkedIn contact pages and external contact enrichment sources.
+Other than adding the /Contact info/ information of your first level connections
+to the VCards, the /bisos.linkedin/ package does not support any form of Web
+Scrapping.
 
 
 #+BEGIN: b:org:pypi:readme/pkgDocumentation :pkgName "capability-cs" :comment "basic"
@@ -55,7 +73,7 @@ information from LinkedIn contact pages and external contact enrichment sources.
 * Table of Contents     :TOC:
 - [[#overview][Overview]]
 -  [[#a-standalone-command-services-pycs-facility-of-bisos][A Standalone Command-Services PyCS Facility of BISOS]]
-- [[#diagram-and-softwarediagram-mapping][Diagram and Software–Diagram Mapping]]
+-  [[#layer-1----mylinkedincs----diagram-and-softwarediagram-mapping][/Layer 1/ -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
 -  [[#key-features][Key Features]]
 -  [[#bisoslinkedin-python-package][bisos.linkedin Python Package]]
 - [[#features][Features]]
@@ -86,7 +104,7 @@ bisos.myLinkedIn is a standalone piece of BISOS. It can be used as a
 self-contained Python package separate from BISOS.
 
 
-* Diagram and Software–Diagram Mapping
+*  /Layer 1/ -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/exportedPlusWebConsPlusExternal

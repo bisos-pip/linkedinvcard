@@ -74,6 +74,8 @@ Scrapping.
 - [[#overview][Overview]]
 -  [[#a-standalone-command-services-pycs-facility-of-bisos][A Standalone Command-Services PyCS Facility of BISOS]]
 -  [[#layer-1----mylinkedincs----diagram-and-softwarediagram-mapping][/Layer 1/ -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
+-  [[#layer-2----mylinkedinwebcs----diagram-and-softwarediagram-mapping][/Layer 2/ -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
+-  [[#common-usages----diagram][**Common Usages** -- Diagram]]
 -  [[#key-features][Key Features]]
 -  [[#bisoslinkedin-python-package][bisos.linkedin Python Package]]
 - [[#features][Features]]
@@ -107,7 +109,30 @@ self-contained Python package separate from BISOS.
 *  /Layer 1/ -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
-#+NAME:   fig:py3/images/exportedPlusWebConsPlusExternal
+#+NAME:   fig:py3/images/exportedFileInfo
+#+ATTR_HTML: :width 1100px
+[[./py3/images/exportedFileInfo.png]]
+
+
+| Diagram Node     | Software Component/Class    | Description                                             |
+|------------------+-----------------------------+---------------------------------------------------------|
+| LinkedIn         | Data Source (LinkedIn)      | Origin of all LinkedIn user data                        |
+| Export.zip       | Raw Input                   | Downloaded export ZIP file from LinkedIn               |
+| ExportedData     | Unzipped Data Directory     | Directory containing CSV and JSON files                |
+| Connections.csv  | LinkedInConnections         | Parses first-level connections                         |
+| Invitations.csv  | LinkedInInvitations         | Parses sent and received invitations                   |
+| Messages.csv     | LinkedInMessages            | Parses message exchanges with connections              |
+| ContactInfo      | Remote Augmentation Logic   | Scraped contact details from LinkedIn website          |
+| External         | User-supplied Sources       | Any third-party or user-maintained source of data      |
+| ExternalInfo     | External Data Processor     | Prepares and aligns external info for enrichment       |
+| VCard            | VCardUtils / Core Output    | Base vCards from LinkedIn data                         |
+| VCardPlus        | VCardAugmentor              | Enriched vCards with remote and external information   |
+
+
+*  /Layer 2/ -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping
+
+#+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
+#+NAME:   fig:py3/images/exportedPlusWebCons
 #+ATTR_HTML: :width 1100px
 [[./py3/images/exportedPlusWebCons.png]]
 
@@ -125,6 +150,31 @@ self-contained Python package separate from BISOS.
 | ExternalInfo     | External Data Processor     | Prepares and aligns external info for enrichment       |
 | VCard            | VCardUtils / Core Output    | Base vCards from LinkedIn data                         |
 | VCardPlus        | VCardAugmentor              | Enriched vCards with remote and external information   |
+
+
+*  **Common Usages** -- Diagram
+
+#+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
+#+NAME:   fig:py3/images/ebdbMtdt
+#+ATTR_HTML: :width 1100px
+[[./py3/images/ebdbMtdt.png]]
+
+
+| Diagram Node     | Software Component/Class    | Description                                             |
+|------------------+-----------------------------+---------------------------------------------------------|
+| LinkedIn         | Data Source (LinkedIn)      | Origin of all LinkedIn user data                        |
+| Export.zip       | Raw Input                   | Downloaded export ZIP file from LinkedIn               |
+| ExportedData     | Unzipped Data Directory     | Directory containing CSV and JSON files                |
+| Connections.csv  | LinkedInConnections         | Parses first-level connections                         |
+| Invitations.csv  | LinkedInInvitations         | Parses sent and received invitations                   |
+| Messages.csv     | LinkedInMessages            | Parses message exchanges with connections              |
+| ContactInfo      | Remote Augmentation Logic   | Scraped contact details from LinkedIn website          |
+| External         | User-supplied Sources       | Any third-party or user-maintained source of data      |
+| ExternalInfo     | External Data Processor     | Prepares and aligns external info for enrichment       |
+| VCard            | VCardUtils / Core Output    | Base vCards from LinkedIn data                         |
+| VCardPlus        | VCardAugmentor              | Enriched vCards with remote and external information   |
+
+
 
 
 *  Key Features

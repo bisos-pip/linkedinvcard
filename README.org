@@ -91,6 +91,11 @@ Scraping.
   - [[#installation-with-pip][Installation With pip]]
 - [[#layer-1-usage][Layer-1 Usage]]
   - [[#obtaining-your-basic_linkedindataexportzip][Obtaining Your Basic_LinkedInDataExport.zip]]
+  - [[#move-basic_linkedindataexportzip-next-to-vcards-base][Move Basic_LinkedInDataExport.zip next to VCards Base]]
+  - [[#prepare-the-vcards-base][Prepare the VCards Base]]
+  - [[#generate-initial-vcards][Generate Initial VCards]]
+  - [[#augment-vcards-with-invitation][Augment VCards With Invitation]]
+  - [[#create-maildir-from-messagescsv][Create Maildir from messages.csv]]
 - [[#layer-2-usage][Layer-2 Usage]]
 - [[#documentation-and-blee-panels][Documentation and Blee-Panels]]
   - [[#bisosmylinkedin-blee-panels][bisos.myLinkedIn Blee-Panels]]
@@ -313,9 +318,51 @@ connections data by following these steps:
 - For a complete backup, choose "Download larger data archive...".
 - To select specific data categories, click "Want something in particular?" and choose the files you want.
 - After making your selection, click "Request archive".
+
 5) Download the Archive: LinkedIn will send an email to your primary email address when the data is ready for download.
 - You'll have a limited time to download the file (typically 72 hours).
 - Click the download link in the email or return to the "Download your data" section in your Settings & Privacy to download the .zip file. ￼
+
+** Move Basic_LinkedInDataExport.zip next to VCards Base
+
+In BISOS, it is typically at: *~/bpos/usageEnvs/selected/myLinkedIn/selected*. You can choose any
+location for the base.
+
+** Prepare the VCards Base
+
+Run:
+
+#+begin_src bash
+myLinkedIn.cs  -i exportedPrep ~/bpos/usageEnvs/selected/myLinkedIn/selected/Basic_LinkedInDataExport.zip
+#+end_src
+
+** Generate Initial VCards
+
+Run:
+
+#+begin_src bash
+myLinkedIn.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"  -i vcardsGenerate ~/bpos/usageEnvs/selected/myLinkedIn/selected/LinkedInDataExport/Connections.csv
+#+end_src
+
+** Augment VCards With Invitation
+
+Run:
+
+#+begin_src bash
+myLinkedIn.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"  -i vcardsInvitations ~/bpos/usageEnvs/selected/myLinkedIn/selected/LinkedInDataExport/Invitations.csv
+#+end_src
+
+** Create Maildir from messages.csv
+
+Run:
+
+#+begin_src bash
+myLinkedIn.cs --maildir="~/bpos/usageEnvs/selected/myLinkedIn/selected/maildir"  -i maildirMessages ~/bpos/usageEnvs/selected/myLinkedIn/selected/LinkedInDataExport/messages.csv
+#+end_src
+
+
+
+
 
 * Layer-2 Usage
 

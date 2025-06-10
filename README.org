@@ -84,13 +84,13 @@ Scraping.
   -  [[#key-features-of-layer-1----mylinkedincs][Key Features of Layer-1 -- myLinkedIn.cs]]
 -  [[#layer-2----mylinkedinwebcs----diagram-and-softwarediagram-mapping][Layer-2 -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
   -  [[#key-features-of-layer-2----mylinkedinwebcs][Key Features of Layer-2 -- myLinkedInWeb.cs]]
--  [[#common-usages----diagram][Common Usages -- Diagram]]
--  [[#common-usages][Common Usages]]
+-  [[#broader-common-uses----overview-and-diagram][Broader Common Uses -- Overview and Diagram]]
 - [[#benefits----distinct-and-different][Benefits -- Distinct and Different]]
 - [[#installation][Installation]]
   - [[#installation-with-pipx][Installation With pipx]]
   - [[#installation-with-pip][Installation With pip]]
 - [[#layer-1-usage][Layer-1 Usage]]
+  - [[#obtaining-your-basic_linkedindataexportzip][Obtaining Your Basic_LinkedInDataExport.zip]]
 - [[#layer-2-usage][Layer-2 Usage]]
 - [[#documentation-and-blee-panels][Documentation and Blee-Panels]]
   - [[#bisosmylinkedin-blee-panels][bisos.myLinkedIn Blee-Panels]]
@@ -216,7 +216,7 @@ Extracts additional details from LinkedIn's Contact Info page via automated scra
 - Addition of Contact Info to Local VCard:
 
 
-*  Common Usages -- Diagram
+*  Broader Common Uses -- Overview and Diagram
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/ebdbMtdt
@@ -234,8 +234,6 @@ A brief description of the relevant nodes is provided below.
 | VCard        | VCardUtils / Core Output | Base vCards from LinkedIn data                       |
 | VCardPlus    | VCardAugmentor           | Enriched vCards with remote and external information |
 
-
-*  Common Usages
 
 - Seamless Repeatable VCard Generation and Re-Generation:
 
@@ -297,6 +295,27 @@ pip install bisos.myLinkedIn
 #+begin_src bash
 bin/myLinkedIn.cs
 #+end_src
+
+** Obtaining Your Basic_LinkedInDataExport.zip
+
+As of, 2025-06-10 Tue 11:35, you can obtain a snap shot of your current
+connections data by following these steps:
+
+1) Access Settings & Privacy: Click the "Me" icon (usually your profile picture)
+   at the top of the LinkedIn homepage, then select "Settings & Privacy" from
+   the dropdown menu.
+
+2) Go to Data Privacy: On the left side of the Settings & Privacy page, click "Data privacy".
+
+3) Initiate Data Download: Under the "How LinkedIn uses your data" section, click "Get a copy of your data".
+
+4) Select Data & Request Archive: You'll be presented with options to download specific data or a larger data archive.
+- For a complete backup, choose "Download larger data archive...".
+- To select specific data categories, click "Want something in particular?" and choose the files you want.
+- After making your selection, click "Request archive".
+5) Download the Archive: LinkedIn will send an email to your primary email address when the data is ready for download.
+- You'll have a limited time to download the file (typically 72 hours).
+- Click the download link in the email or return to the "Download your data" section in your Settings & Privacy to download the .zip file. ￼
 
 * Layer-2 Usage
 

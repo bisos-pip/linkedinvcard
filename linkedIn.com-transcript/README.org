@@ -4,6 +4,7 @@
 #+OPTIONS: toc:4
 
 
+I, Mohsen Banan, joined LinkedIn on January 19, 2006. Almost 20 years ago.
 
 * Table of Contents     :TOC:
 - [[#june-8-2025----run-of-mylinkedinwebcs-on--400-connections][June 8, 2025 -- Run of myLinkedInWeb.cs on  400 Connections]]

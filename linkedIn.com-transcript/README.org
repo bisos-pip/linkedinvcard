@@ -1,0 +1,153 @@
+#+title: linkedin.com -- Transcript of Communication Records
+#+DATE: <2024-02-19 Mon 16:27>
+#+AUTHOR: Mohsen BANAN
+#+OPTIONS: toc:4
+
+
+
+* Table of Contents     :TOC:
+- [[#june-8-2025----run-of-mylinkedinwebcs-on--400-connections][June 8, 2025 -- Run of myLinkedInWeb.cs on  400 Connections]]
+- [[#june-9-2025----run-of-mylinkedinwebcs-on--the-remaining-190-connections][June 9, 2025 -- Run of myLinkedInWeb.cs on  the Remaining 190 Connections]]
+- [[#restriction-periods][Restriction Periods]]
+- [[#my-first-reply][My First Reply]]
+- [[#restriction-continued----june-11-2025-707-pm-pdt][Restriction Continued -- June 11, 2025 7:07 PM PDT]]
+- [[#my-second-response][My Second Response]]
+- [[#revised-restriction----june-09-2025-834-pm-pdt][Revised Restriction -- June 09, 2025 8:34 PM PDT]]
+- [[#restrictions-removed----around-june-09-2025-1015-pm-pdt][Restrictions Removed -- Around June 09, 2025 10:15 PM PDT]]
+
+* June 8, 2025 -- Run of myLinkedInWeb.cs on  400 Connections
+
+Ran these in batches of 50, 100, and 200 on the evening of June 8th.
+No problems. Ran as expected.
+
+* June 9, 2025 -- Run of myLinkedInWeb.cs on  the Remaining 190 Connections
+
+Ran the remaining 190 or so connections in a single batch at around 8:00 am on June 9th.
+70 of them worked fine. Then my account was restricted.
+
+* Restriction Periods
+
+First I was restricted till about 10:00 am.
+
+Next I received a notice saying:
+
+#+begin_src text
+Your account is temporarily restricted
+
+We’ve restricted your account until June 09, 2025 6:50 PM PDT because we
+detected the use of software that automates activity. To protect our members’
+privacy and help foster authentic interactions on LinkedIn, our User Agreement
+prohibits the use of these tools.
+
+Please review any tools you’re using to access LinkedIn and remove any automated
+software. If you’d like to provide us with more details about your account so we
+can further assist you, contact us.
+#+end_src
+
+I then used the "contact us" link.
+
+* My First Reply
+
+
+#+begin_src text
+
+Contact LinkedIn support
+Help with a Restriction
+Email
+
+LinkedIn doesn’t allow the use of third party software or browser extensions
+that automate activities on LinkedIn. If you think your account is restricted by
+mistake, let us know why:
+
+---
+
+I am not using any third party software or browser extensions. I have been using
+LinkedIn for more the 20 (twenty) years to stay connected to my colleagues. I
+want to have current information (email/phone-nu) for ALL of my connections.
+Last night and this morning, I went through the "Contact Info"of my own first
+level connections to update my address book (vCards). I used my own software
+(not third part) to obtain this information. I believe such use falls in the
+fair and reasonable category. If LinkedIn considers this use not acceptable,
+then it should include the Contact info of ALL of my connections in
+Basic_LinkedInDataExport.zip. Does LinkedIn really expect me to keep my vCards
+current manually? If you consider what I have done unreasonable, please
+unrestrict my account and let me know. Knowing these details, if you ask me to
+not use my own tools any more, I will comply and not use them anymore.
+
+---
+
+To improve your LinkedIn experience, please list the third-party programs,
+services or plug-ins you currently use to automate activity on LinkedIn.
+
+
+---
+
+I am not using any third party software. I am using my own software. My own
+software is called "MyLinkedIn". At github it is at:
+https://github.com/bisos-pip/myLinkedIn At PYPI it is at:
+https://pypi.org/project/bisos.myLinkedIn/. You can install it with: pipx
+install bisos.myLinkedIn. The software is well documented. Layer-1
+(myLinkedIn.cs) uses do not violate LinkedIn policies in any way. Layer-2, does
+web scrape contact info of my first level connections and adds them to vCards of
+Layer-1. In my view such usage for my own connections is fair and reasonable. If
+you say that I should not have ALL of my own first level contact info
+conveniently, then I shall comply and stop using my own software. I know that
+some contact info is in Basic_LinkedInDataExport.zip, but I don't consider that
+sufficient. Please Un Restrict my account and in specific to my usage and this
+software clarify LinkedIn policy and standing. Again, if you requite that I
+should not use this software, I shall comply.
+
+---
+
+We may temporarily remove the restriction on your account as we review your activity and responses.
+#+end_src
+
+* Restriction Continued -- June 11, 2025 7:07 PM PDT
+
+After my reply, I got another you have been restricted note.
+
+#+begin_src text
+
+
+ We’ve restricted your account until June 11, 2025 7:07 PM PDT because we
+ detected the use of software that automates activity. To protect our members’
+ privacy and help foster authentic interactions on LinkedIn, our User Agreement
+ prohibits the use of these tools.
+
+#+end_src
+
+To which I replied.
+
+* My Second Response
+
+#+begin_src text
+
+A few minutes ago, I provided complete details for this incident. I asked that
+you remove the restriction on my account. instead you prolonged it to June 11,
+2025 7:07 PM PDT. Please read my explanation. I am not doing any automated
+activities. Please remove the restriction on my account. If you have any
+questions or concerns please contact me at xxx. Thanks and regards. Mohsen
+Banan.
+
+#+end_src
+
+* Revised Restriction -- June 09, 2025 8:34 PM PDT
+
+I then got a revised restriction saying:
+
+#+begin_src text
+
+Your account is temporarily restricted
+We’ve restricted your account until June 09, 2025 8:34 PM PDT ...
+#+end_src
+
+* Restrictions Removed -- Around June 09, 2025 10:15 PM PDT
+
+
+At around 10:15 pm I logged in and there were no restrictions.
+
+There were no responces to any of my questions.
+
+# Local Variables:
+# eval: (setq-local toc-org-max-depth 4)
+# End:

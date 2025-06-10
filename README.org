@@ -1,4 +1,4 @@
-#+title: bisos.myLinkedIn: takes contents of Basic_LinkedInDataExport.zip and converts them to Vcards
+#+title: bisos.myLinkedIn: Your Connections as vCards for Outside of LinkedIn
 #+DATE: <2024-02-19 Mon 16:27>
 #+AUTHOR: Mohsen BANAN
 #+OPTIONS: toc:4

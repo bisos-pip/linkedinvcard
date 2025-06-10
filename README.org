@@ -94,9 +94,14 @@ Scraping.
   - [[#move-basic_linkedindataexportzip-next-to-vcards-base][Move Basic_LinkedInDataExport.zip next to VCards Base]]
   - [[#prepare-the-vcards-base][Prepare the VCards Base]]
   - [[#generate-initial-vcards][Generate Initial VCards]]
-  - [[#augment-vcards-with-invitation][Augment VCards With Invitation]]
+  - [[#augment-vcards-with-invitation][Augment vCards With Invitation]]
   - [[#create-maildir-from-messagescsv][Create Maildir from messages.csv]]
 - [[#layer-2-usage][Layer-2 Usage]]
+  -  [[#short-comings-of-layer-1][Short Comings of Layer-1]]
+  - [[#warnings-about-use-of-layer-2-software][Warnings About Use of Layer-2 Software]]
+  - [[#running-layer-2-mylinkedinwebcs-on-a-handfull-of-connections-linkedinids][Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds]]
+  - [[#running-layer-2-mylinkedinwebcs-on-a-handfull-of-connections-linkedinids-1][Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds]]
+  - [[#running-layer-2-mylinkedinwebcs-on-many-or-all-of-your-connections-linkedinids][Running Layer-2 (myLinkedInWeb.cs) on Many or All of Your Connections LinkedInIds]]
 - [[#documentation-and-blee-panels][Documentation and Blee-Panels]]
   - [[#bisosmylinkedin-blee-panels][bisos.myLinkedIn Blee-Panels]]
 - [[#support][Support]]
@@ -344,7 +349,7 @@ Run:
 myLinkedIn.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"  -i vcardsGenerate ~/bpos/usageEnvs/selected/myLinkedIn/selected/LinkedInDataExport/Connections.csv
 #+end_src
 
-** Augment VCards With Invitation
+** Augment vCards With Invitation
 
 Run:
 
@@ -361,13 +366,101 @@ myLinkedIn.cs --maildir="~/bpos/usageEnvs/selected/myLinkedIn/selected/maildir" 
 #+end_src
 
 
-
-
-
 * Layer-2 Usage
 
 #+begin_src bash
 bin/myLinkedInWeb.cs
+#+end_src
+
+**  Short Comings of Layer-1
+
+Most of the vCards generated in Layer-1 do not include contact information of
+your connections. You can go to the home page of each of your connections, click
+on their /Contact info/ botton and see their email address and their other contact info.
+
+So, this information (contact info of ALL of your connections is available to you),
+But Microsoft-LinkedIn has chosen not to supply that information to you.
+
+Furthermore, Microsoft-LinkedIn prohibits use of automated tools to extract your
+own connection's non-linkedin related contact info. Microsoft-LinkedIn says: "To
+protect our members’ privacy and help foster authentic interactions on LinkedIn,
+our User Agreement prohibits the use of these tools." But look, my connection's
+contact info includes his/her email address which is for outside of LinkedIn
+interactions. My connection's contact info includes his/her phone number which
+is for outside of LinkedIn interactions. Accessing this complete information in
+no way shape or form impacts "authentic interactions on LinkedIn". So, the
+Microsoft-LinkedIn policy of not allowing me to automate access to my own
+connections' contact info is bogus. Microsoft-LinkedIn wants to lock me inside
+of LinkedIn and use Microsoft-LinkedIn's messaging service instead of email
+outside of LinkedIn.
+
+I consider using automated tools to obtain ALL of my own connections contact
+info as fair and reasonable use. It is the Microsoft-LinkedIn User Agreement
+that is unreasonable.
+
+Layer-2 over comes this short comming of Layer-1. It automates addition of
+ALL of your connections contact info to theirs vCards of Layer-1.
+
+After being temporarily restricted for having used Layer-2, I presented the
+above logic to Microsoft-LinkedIn and requested clarification. They have not
+responded to me. But, they removed the temporary restriction. I have almost ALL
+of my connections contact info and I am back on LinkedIn. A complete record of
+all my communications with Microsoft-LinkedIn with regard to Layer-2 usage is in
+[[file:./linkedIn.com-transcript/README.org]]
+
+** Warnings About Use of Layer-2 Software
+
+myLinkedIn package's Layer-2 software is a web automation tool (a web scraper)
+limited to a very narrow scope of information gathering. Yet, Microsoft-LinkedIn
+may consider such use as in violation of their User Agreement, and your access
+to LinkedIn may be restricted.
+
+myLinkedIn package's Layer-2 software comes AS IS with no warranties of any
+sort. If you use it, you are on your own. If you get banned, it is not my fault
+or the software's fault.
+
+** Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds
+
+*myLinkedInWeb.cs -i contactInfoToVCard* takes its input as a list of inputs as
+arguments or on stdin. The inputs can be LinkInIds or path to a LinkedIn vCard.
+
+At this time, only Chrome is supported. Make sure that Chrome is not running
+when you run *myLinkedInWeb.cs -i contactInfoToVCard*.
+
+To run contactInfoToVCard on just a couple of LinkedInIds, try:
+
+#+begin_src bash
+ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | head -2 | sed 's/\.[^.]*$//' | myLinkedInWeb.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards" --account="someUser" --password="somePasswd"  -i contactInfoToVCard
+#+end_src
+
+The account and password are your linkedin credentials. If you are already
+logged-in at LinkedIn, account and password are not needed and are not used.
+
+** Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds
+
+*myLinkedInWeb.cs -i contactInfoToVCard* takes its input as a list of inputs as
+arguments or on stdin. The inputs can be LinkInIds or path to a LinkedIn vCard.
+
+At this time, only Chrome is supported. Make sure that Chrome is not running
+when you run *myLinkedInWeb.cs -i contactInfoToVCard*.
+
+To run contactInfoToVCard on just a couple of LinkedInIds, try:
+
+#+begin_src bash
+ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | head -2 | sed 's/\.[^.]*$//' | myLinkedInWeb.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards" --account="someUser" --password="somePasswd"  -i contactInfoToVCard
+#+end_src
+
+The account and password are your linkedin credentials. If you are already
+logged-in at LinkedIn, account and password are not needed and are not used.
+
+** Running Layer-2 (myLinkedInWeb.cs) on Many or All of Your Connections LinkedInIds
+
+Once you have successfuly run it on a handfull, run it batches of say 50, or all at once.
+
+To run contactInfoToVCard on all of the LinkedInIds, try:
+
+#+begin_src bash
+ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | sed 's/\.[^.]*$//' | myLinkedInWeb.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards" --account="someUser" --password="somePasswd"  -i contactInfoToVCard
 #+end_src
 
 

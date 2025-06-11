@@ -311,22 +311,22 @@ bin/myLinkedIn.cs
 As of, 2025-06-10 Tue 11:35, you can obtain a snap shot of your current
 connections data by following these steps:
 
-1) Access Settings & Privacy: Click the "Me" icon (usually your profile picture)
+- 1) Access Settings & Privacy: Click the "Me" icon (usually your profile picture)
    at the top of the LinkedIn homepage, then select "Settings & Privacy" from
    the dropdown menu.
 
-2) Go to Data Privacy: On the left side of the Settings & Privacy page, click "Data privacy".
+- 2) Go to Data Privacy: On the left side of the Settings & Privacy page, click "Data privacy".
 
-3) Initiate Data Download: Under the "How LinkedIn uses your data" section, click "Get a copy of your data".
+- 3) Initiate Data Download: Under the "How LinkedIn uses your data" section, click "Get a copy of your data".
 
-4) Select Data & Request Archive: You'll be presented with options to download specific data or a larger data archive.
-- For a complete backup, choose "Download larger data archive...".
-- To select specific data categories, click "Want something in particular?" and choose the files you want.
-- After making your selection, click "Request archive".
+- 4) Select Data & Request Archive: You'll be presented with options to download specific data or a larger data archive.
++ For a complete backup, choose "Download larger data archive...".
++ To select specific data categories, click "Want something in particular?" and choose the files you want.
++ After making your selection, click "Request archive".
 
 5) Download the Archive: LinkedIn will send an email to your primary email address when the data is ready for download.
-- You'll have a limited time to download the file (typically 72 hours).
-- Click the download link in the email or return to the "Download your data" section in your Settings & Privacy to download the .zip file. ￼
++ You'll have a limited time to download the file (typically 72 hours).
++ Click the download link in the email or return to the "Download your data" section in your Settings & Privacy to download the .zip file. ￼
 
 ** Move Basic_LinkedInDataExport.zip next to VCards Base
 

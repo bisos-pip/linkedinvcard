@@ -43,15 +43,17 @@
 * [[elisp:(show-all)][(>]]  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_  _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_       [[elisp:(outline-show-subtree+toggle)][| *Design and Evolution:* |]]  TODOs and Ideas  [[elisp:(org-shifttab)][<)]] E|
 ####+END
 ** +
-** TODO [#B] Add results of scraping in Vcards
+** WAITING [#B] Add results of scraping in Vcards
 ** DONE Revisit Graphviz -- Add maildir
+** TODO make input to contactInfoToVCard be either of linkedinId or path VCard
+** TODO Build a video based on readme.org
 ** TODO unconnectedVCard Creation from ContactInfo
 ** TODO Absorb all fields during scraping
 ** TODO Test and complete maildir Creation
 ** TODO DateTag Entries at the time of augmentation
 ** TODO Add forcemode for existing records augment
 ** TODO Add comments to Menus about not running chrome browser
-** TODO Revisit/Improve README.org and Panel
+** WAITING Revisit/Improve README.org and Panel
 ** TODO Convert prints to logs
 ** TODO Test with pipx on fresh debian
 ** TODO Announce availability of MyLinkedIn

@@ -100,8 +100,8 @@ Scraping.
   -  [[#short-comings-of-layer-1][Short Comings of Layer-1]]
   - [[#warnings-about-use-of-layer-2-software][Warnings About Use of Layer-2 Software]]
   - [[#running-layer-2-mylinkedinwebcs-on-a-handfull-of-connections-linkedinids][Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds]]
-  - [[#running-layer-2-mylinkedinwebcs-on-a-handfull-of-connections-linkedinids-1][Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds]]
   - [[#running-layer-2-mylinkedinwebcs-on-many-or-all-of-your-connections-linkedinids][Running Layer-2 (myLinkedInWeb.cs) on Many or All of Your Connections LinkedInIds]]
+  - [[#our-connections-contact-info-are-for-us][Our Connections Contact Info Are For Us]]
 - [[#documentation-and-blee-panels][Documentation and Blee-Panels]]
   - [[#bisosmylinkedin-blee-panels][bisos.myLinkedIn Blee-Panels]]
 - [[#support][Support]]
@@ -436,23 +436,6 @@ ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | hea
 The account and password are your linkedin credentials. If you are already
 logged-in at LinkedIn, account and password are not needed and are not used.
 
-** Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds
-
-*myLinkedInWeb.cs -i contactInfoToVCard* takes its input as a list of inputs as
-arguments or on stdin. The inputs can be LinkInIds or path to a LinkedIn vCard.
-
-At this time, only Chrome is supported. Make sure that Chrome is not running
-when you run *myLinkedInWeb.cs -i contactInfoToVCard*.
-
-To run contactInfoToVCard on just a couple of LinkedInIds, try:
-
-#+begin_src bash
-ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | head -2 | sed 's/\.[^.]*$//' | myLinkedInWeb.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards" --account="someUser" --password="somePasswd"  -i contactInfoToVCard
-#+end_src
-
-The account and password are your linkedin credentials. If you are already
-logged-in at LinkedIn, account and password are not needed and are not used.
-
 ** Running Layer-2 (myLinkedInWeb.cs) on Many or All of Your Connections LinkedInIds
 
 Once you have successfuly run it on a handfull, run it batches of say 50, or all at once.
@@ -463,6 +446,13 @@ To run contactInfoToVCard on all of the LinkedInIds, try:
 ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | sed 's/\.[^.]*$//' | myLinkedInWeb.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards" --account="someUser" --password="somePasswd"  -i contactInfoToVCard
 #+end_src
 
+** Our Connections Contact Info Are For Us
+
+I added my contact info to my profile, so that my connections can contact me. My
+connections have done the same for me. It is not for Microsoft-LinkedIn to say
+that I cannot conveniently access all of that information.
+
+# NOTYET, expand on this. debunk two types one that goes in.
 
 * Documentation and Blee-Panels
 

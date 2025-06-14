@@ -149,7 +149,7 @@ class LinkedInRemoteAugmentor:
 
         return contact_info
 
-    def fetch_contact_infoEmail(self, linkedin_url: str) -> Dict[str, Optional[str]]:
+    def fetch_contact_infoEmailObsoleted(self, linkedin_url: str) -> Dict[str, Optional[str]]:
         """
         Extract contact info (email and profile URL) from a LinkedIn profile's contact-info overlay.
         """
@@ -200,28 +200,6 @@ class LinkedInRemoteAugmentor:
             logger.info("Profile URL not found.")
 
         return contact_info
-
-    def augment_vcard_from_linkedinObsoleted(self, linkedin_url: str, vcard_dir: Path) -> None:
-        """
-        Extracts contact info from LinkedIn and augments the corresponding vCard file.
-
-        The vCard file is assumed to be named <linkedinId>.vcf inside vcard_dir.
-        """
-        logger.info(f"Augmenting vCard from LinkedIn URL: {linkedin_url}")
-        contact_info = self.fetch_contact_info(linkedin_url)
-
-        parsed_url = urllib.parse.urlparse(linkedin_url)
-        path_parts = parsed_url.path.strip("/").split("/")
-
-        if len(path_parts) < 2 or path_parts[0] != "in":
-            logger.error(f"Unexpected LinkedIn URL format: {linkedin_url}")
-            return
-
-        linkedin_id = path_parts[1]
-        vcard_path = vcard_dir / f"{linkedin_id}.vcf"
-
-        self.augment_vcard_with_contact_info(vcard_path, contact_info)
-
 
 
     def stop_driver(self) -> None:

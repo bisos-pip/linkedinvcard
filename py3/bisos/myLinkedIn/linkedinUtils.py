@@ -27,17 +27,24 @@ class LinkedinId:
         """
         Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
         """
+
         assert vcard_dir
         vcard_path = vcard_dir / f"{uid}.vcf"
         if vcard_path.exists():
             return vcard_path
-        return None
+        else:
+            # vcard_path = vcard_dir / f"EXTRA_{uid}.vcf"
+            return None
 
     @staticmethod
     def toUrl(id: str) -> str:
         """
         Convert linkedinId to linkedin Url.
         """
+        prefix = "EXTRA_"
+        if id.startswith(prefix):
+            id =  id[len(prefix):]
+
         return f"https://www.linkedin.com/in/{id}"
 
 
@@ -66,15 +73,30 @@ class LinkedinQualifier:
     def toVCardPath(qualifier: str, vcardsDir: str) -> Optional[Path]:
         """
         """
+        assert qualifier
+        assert vcardsDir
 
         vcardsDirPath = Path(vcardsDir)
+        # if not vcardsDirPath.exists():
+        # raise b.exception.badUsage()
+
+        vcardPath = None
 
         # LinkedInUrl -- Check if the input is a URL
         try:
             result = urlparse(qualifier)
             if all([result.scheme, result.netloc]):
                 id = LinkedinId.fromUrl(qualifier)
-                return LinkedinId.toPath(id, vcardsDirPath)
+                vcardPath = LinkedinId.toPath(id, vcardsDirPath)
+                if vcardPath is not None:
+                    return vcardPath
+                vcardPath = VCard.create_extra_vcard(vcardsDirPath, id)
+                if vcardPath is not None:
+                    return vcardPath
+                else:
+                    logger.error(f"VCard.create_extra_vcard failed for {id}")
+                    return None
+
         except Exception:
             pass
 
@@ -83,7 +105,17 @@ class LinkedinQualifier:
 
         # LinkedInVCardAbsPath
         if qualifierPath.is_absolute():
-            return qualifierPath
+            if qualifierPath.exists():
+                return qualifierPath
+            else:
+                logger.info(f"Missing {qualifierPath}")
+                id =  LinkedinQualifier.asLinkedInId(qualifierPath)
+                vcardPath = VCard.create_extra_vcard(vcardsDirPath, id)
+                if vcardPath is not None:
+                    return vcardPath
+                else:
+                    logger.error(f"VCard.create_extra_vcard failed for {id}")
+                    return None
 
         # LinkedInVCardBasename
         if qualifierPath.suffix == '.vcf':
@@ -92,16 +124,32 @@ class LinkedinQualifier:
                 return vcardPath
             else:
                 logger.info(f"Missing {vcardPath}")
-                return None
+                id =  LinkedinQualifier.asLinkedInId(qualifierPath)
+                vcardPath = VCard.create_extra_vcard(vcardsDirPath, id)
+                if vcardPath is not None:
+                    return vcardPath
+                else:
+                    logger.error(f"VCard.create_extra_vcard failed for {id}")
+                    return None
 
         # LinkedInId
-        return LinkedinId.toPath(id, vcardsDirPath)
+        vcardPath = LinkedinId.toPath(qualifier, vcardsDirPath)
+        if vcardPath is not None:
+            return vcardPath
+        vcardPath = VCard.create_extra_vcard(vcardsDirPath, qualifier)
+        if vcardPath is not None:
+            return vcardPath
+        else:
+            logger.error(f"VCard.create_extra_vcard failed for {qualifier}")
+            return None
+
 
     @staticmethod
     def asLinkedInId(vcardPath: Path) -> str:
         """
         """
-        return vcardPath.stem
+        stem = vcardPath.stem
+        return stem
 
 
 class VCard:
@@ -135,6 +183,43 @@ class VCard:
         """
         with vcard_path.open('r', encoding='utf-8') as vcard_file:
             return vobject.readOne(vcard_file.read())
+
+    @staticmethod
+    def create_extra_vcard(vcard_dir: Path, uid: str) -> Optional[Path]:
+        """
+        Create a new vCard file corresponding to the LinkedIn ID (UID) in the directory.
+        Assume that the LinkedinId is in the form of first-last-uniqId
+        Create a blank vcard using vobject.
+        Add to it:
+            - firstname (from uid)
+            - lastname (from uid)
+            - linkinedUrl (based on uid)
+        Write the created vcard using vobject.
+        Return Path to created vcard.
+        """
+        vcard_path = vcard_dir / f"EXTRA_{uid}.vcf"
+        if vcard_path.exists():
+            return vcard_path
+        # Split the UID to extract first and last names
+        parts = uid.split('-')
+        if len(parts) < 2:
+            logger.error(f"Invalid UID format: {uid}")
+            return None
+
+        first_name, last_name = parts[0], parts[1]
+
+        # Create a new vCard
+        vcard = vobject.vCard()
+        vcard.add('fn').value = f"{first_name} {last_name}"
+        vcard.add('n').value = vobject.vcard.Name(family=last_name, given=first_name)
+        vcard.add('url').value = LinkedinId.toUrl(uid)
+
+        # Write the vCard to a file
+        VCard.write_vcard(vcard, vcard_path)
+        logger.info(f"Created extra vCard at: {vcard_path}")
+
+        return vcard_path
+
 
     @staticmethod
     def find_vcard(vcard_dir: Path, uid: str) -> Optional[Path]:

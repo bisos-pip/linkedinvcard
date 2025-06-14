@@ -408,6 +408,7 @@ class contactInfoToVCard(cs.Cmnd):
         cmndArgsProcessed = 0
         stdinArgsProcessed = 0
         webAccessCount = 0
+        alreadyProcessedCount = 0
 
         def processArgsAndStdin(cmndArgs, process):
             nonlocal cmndArgsProcessed, stdinArgsProcessed, stdinArgsTotal
@@ -431,28 +432,36 @@ class contactInfoToVCard(cs.Cmnd):
         augmentor.start_driver(account, password)
 
         def process(linkedinQualifier):
-            nonlocal webAccessCount
+            nonlocal webAccessCount, alreadyProcessedCount
 
             vcardPath = linkedinUtils.LinkedinQualifier.toVCardPath(linkedinQualifier, path_vcardsDir)
+            # NOTYET print
             print(vcardPath)
             if vcardPath is None:
+                # NOTYET Report error logger.error
                 return
 
             linkedinId = linkedinUtils.LinkedinQualifier.asLinkedInId(vcardPath)
             waitBeforeNext = augmentVcardFromLinkedin(augmentor, linkedinId, vcardsDir)
             if waitBeforeNext == False:
+                alreadyProcessedCount += 1
                 return
 
             webAccessCount += 1
             waitInterval = random.randint(minInterval, maxInterval)
-            logger.info(f"Waiting for waitInterval={waitInterval} Seconds -- webAccessCount={webAccessCount} -- stdinArgsProcessed={stdinArgsProcessed} of {stdinArgsTotal} -- cmndArgsProcessed={cmndArgsProcessed} of {cmndArgsTotal}")
+            logger.info(f"Waiting for waitInterval={waitInterval} Seconds -- webRetrieved={webAccessCount} alreadyProcessed={alreadyProcessedCount} -- stdinArgsProcessed={stdinArgsProcessed} of {stdinArgsTotal} -- cmndArgsProcessed={cmndArgsProcessed} of {cmndArgsTotal}")
+            if (cmndArgsProcessed + stdinArgsProcessed) == (stdinArgsTotal + cmndArgsTotal):
+                logger.info(f"Final Count Reached::  stdinArgsProcessed={stdinArgsProcessed} of {stdinArgsTotal} -- cmndArgsProcessed={cmndArgsProcessed} of {cmndArgsTotal}")
+                return
             time.sleep(waitInterval)
 
         processArgsAndStdin(cmndArgs, process)
 
         augmentor.stop_driver()
 
-        return cmndOutcome.set(opResults="DONE",)
+        resultsSummary = f"webRetrieved={webAccessCount} alreadyProcessed={alreadyProcessedCount} -- stdinArgs={stdinArgsProcessed} of {stdinArgsTotal} -- cmndArgs={cmndArgsProcessed} of {cmndArgsTotal}"
+
+        return cmndOutcome.set(opResults=resultsSummary,)
 
 
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
@@ -519,11 +528,18 @@ The vCard file is assumed to be named <linkedinId>.vcf inside vcard_dir.
     if hasattr(vcard, field):
         value = vcard.contents[field][0].value
         logger.info(f"linkedinId={linkedinId} -- email = {value} -- Skipped")
-        waitBeforeNext = False
-        return waitBeforeNext
+        # NOTYET -- Commented Out
+        # waitBeforeNext = False
+        # return waitBeforeNext
 
     logger.info(f"Augmenting vCard from LinkedIn URL: {linkedinUrl}")
     contact_info = augmentor.fetch_contact_info(linkedinUrl)
+
+    print("AAAAAAAAAAAA")
+
+    print(contact_info)
+
+    print("BBBBBBBBBBB")
 
     linkedinUtils.VCard.augment_vcard_with_contact_info(vcardPath, contact_info)
     waitBeforeNext = True

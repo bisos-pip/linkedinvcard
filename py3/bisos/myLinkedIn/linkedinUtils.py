@@ -6,22 +6,13 @@ import vobject
 from typing import Optional, List, Dict
 from urllib.parse import urlparse
 
-
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+# logger.setLevel(logging.INFO)
 
 class LinkedinId:
     """
     Utility functions for handling LinkedinId
     """
-
-    @staticmethod
-    def get_linkedin_idOBSOLETE(url: str) -> str:
-        """
-        Extract the LinkedIn ID from the profile URL.
-        """
-        return url.split('/')[-2]
-
 
     @staticmethod
     def fromUrl(url: str) -> str:
@@ -32,61 +23,15 @@ class LinkedinId:
         return parts[-1]
 
     @staticmethod
-    def fromStr(vcard_dir: Path, uid: str) -> Optional[Path]:
+    def toPath( uid: str, vcard_dir: Path,) -> Optional[Path]:
         """
         Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
         """
+        assert vcard_dir
         vcard_path = vcard_dir / f"{uid}.vcf"
         if vcard_path.exists():
             return vcard_path
         return None
-
-
-    @staticmethod
-    def fromPath(vcard_dir: Path, uid: str) -> Optional[Path]:
-        """
-        Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
-        """
-        vcard_path = vcard_dir / f"{uid}.vcf"
-        if vcard_path.exists():
-            return vcard_path
-        return None
-
-
-    @staticmethod
-    def canonical(inStr: str) -> str:
-        """
-        Determine the canonical form of a LinkedIn identifier.
-
-        This method checks the input string to determine if it is a URL, a file path,
-        or a LinkedIn ID. It returns the LinkedIn ID in a canonical form based on the input type.
-
-        - If the input is a URL, it extracts the LinkedIn ID using the fromUrl method.
-        - If the input is a file path ending with '.vcf', it returns the file name without the extension.
-        - If the input is a plain string, it assumes it is a LinkedIn ID and returns it as is.
-
-        Args:
-            inStr (str): The input string to be canonicalized.
-
-        Returns:
-            str: The canonical LinkedIn ID.
-        """
-
-        # Check if the input is a URL
-        try:
-            result = urlparse(inStr)
-            if all([result.scheme, result.netloc]):
-                return LinkedinId.fromUrl(inStr)
-        except Exception:
-            pass
-
-        # Check if the input is a file path
-        path = Path(inStr)
-        if path.suffix == '.vcf':
-            return path.stem
-
-        # Otherwise, assume it's a LinkedIn ID
-        return inStr
 
     @staticmethod
     def toUrl(id: str) -> str:
@@ -96,12 +41,73 @@ class LinkedinId:
         return f"https://www.linkedin.com/in/{id}"
 
 
+class LinkedinQualifier:
+    """
+    A LinkedInQualifer is one of:
+
+        - LinkedInVCardAbsPath   : starts with / ends with /LinkedInVCardBasename
+        - LinkedInVCardBasename  : non-directory part of file path formed as id.vcf
+        - LinkedInId             : The id part of https://www.linkedin.com/in/{id}
+        - LinkedInUrl            : The URL in the form of
+
+   LinkedInQualifer is then combined with:
+        - vcardsDir              : dirname in which  LinkedInVCardBasename resides
+                                 : vcardsDir = LinkedInVCardAbsPath -  LinkedInVCardBasename
+
+    LinkedInVCardPath is a pathlib.Path object that is used for conversions and processing
+
+    Usage is like this:
+           LinkedInVCardPath = LinkedinQualifier.toVCardPath(qualifier, vcardsDir)
+    And then
+           linkedInId = LinkedinQualifier.asLinkedInId(vcardPath)
+    """
+
+    @staticmethod
+    def toVCardPath(qualifier: str, vcardsDir: str) -> Optional[Path]:
+        """
+        """
+
+        vcardsDirPath = Path(vcardsDir)
+
+        # LinkedInUrl -- Check if the input is a URL
+        try:
+            result = urlparse(qualifier)
+            if all([result.scheme, result.netloc]):
+                id = LinkedinId.fromUrl(qualifier)
+                return LinkedinId.toPath(id, vcardsDirPath)
+        except Exception:
+            pass
+
+        # Check if the input is a file path
+        qualifierPath = Path(qualifier)
+
+        # LinkedInVCardAbsPath
+        if qualifierPath.is_absolute():
+            return qualifierPath
+
+        # LinkedInVCardBasename
+        if qualifierPath.suffix == '.vcf':
+            vcardPath = vcardsDir  / qualifierPath
+            if vcardPath.exists():
+                return vcardPath
+            else:
+                logger.info(f"Missing {vcardPath}")
+                return None
+
+        # LinkedInId
+        return LinkedinId.toPath(id, vcardsDirPath)
+
+    @staticmethod
+    def asLinkedInId(vcardPath: Path) -> str:
+        """
+        """
+        return vcardPath.stem
+
 
 class VCard:
     """
     Utility functions for handling vCards and LinkedIn data files.
     """
-
 
     @staticmethod
     def read_csv(file_path: Path) -> List[Dict[str, str]]:
@@ -151,7 +157,6 @@ class VCard:
             logger.error(f"vCard not found: {vcard_path}")
             return
 
-
         vcard_str = vcard_path.read_text(encoding="utf-8").strip()
         vcard = vobject.readOne(vcard_str)
 
@@ -181,8 +186,6 @@ class VCard:
         logger.info("vCard updated.")
 
 
-
-    
 class Common:
 
     @staticmethod

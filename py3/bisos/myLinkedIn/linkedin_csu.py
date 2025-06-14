@@ -110,6 +110,12 @@ from bisos.myLinkedIn import messages
 
 from bisos.myLinkedIn import messagesMaildir
 
+import logging
+logger = logging.getLogger(__name__)
+#logger.setLevel(logging.INFO)
+
+
+
 ####+BEGIN: b:py3:cs:orgItem/basic :type "=Executes=  "  :title "CSU-Lib Executions" :comment "-- cs.invOutcomeReportControl"
 """ #+begin_org
 *  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  =Executes=   [[elisp:(outline-show-subtree+toggle)][||]] CSU-Lib Executions -- cs.invOutcomeReportControl  [[elisp:(org-cycle)][| ]]
@@ -140,6 +146,15 @@ def commonParamsSpecify(
         parChoices=[],
         argparseShortOpt=None,
         argparseLongOpt='--myLinkedInBase',
+    )
+    csParams.parDictAdd(
+        parName='dataExportDir',
+        parDescription="Path to the directory where Basic_LinkedInDataExport.zip is unzipped in.",
+        parDataType=None,
+        parDefault="~/bpos/usageEnvs/selected/myLinkedIn/selected/LinkedInDataExport",
+        parChoices=[],
+        argparseShortOpt=None,
+        argparseLongOpt='--dataExportDir',
     )
     csParams.parDictAdd(
         parName='vcardsDir',
@@ -202,48 +217,62 @@ class examples_csu(cs.Cmnd):
 
         od = collections.OrderedDict
         cmnd = cs.examples.cmndEnter
-        # literal = cs.examples.execInsert
+        literal = cs.examples.execInsert
 
         cs.examples.menuChapter('=Direct Interface Commands=')
 
         # fromFilePars = od([('fromFile', fileName), ('cache', 'True')])
 
-        oneLinkedInBase="~/bpos/usageEnvs/selected/myLinkedIn/selected/LinkedInDataExport"
         oneExportZipFile="~/bpos/usageEnvs/selected/myLinkedIn/selected/Basic_LinkedInDataExport.zip"
+        oneLinkedInBase="~/bpos/usageEnvs/selected/myLinkedIn/selected"
+        oneDataExportDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/LinkedInDataExport"
         oneVCardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"
         oneMaildir="~/bpos/usageEnvs/selected/myLinkedIn/selected/maildir"
 
-        cs.examples.menuSection('/Digest The Exported /Basic_LinkedInDataExport.zip File (Creates VCards and maildir)/')
+        downloadedExportZipFile="~/Downloads/Basic_LinkedInDataExport.zip"
+        downloadedLinkedinBase="~/Downloads"
 
-        cmnd('exportedDigest',  args=oneExportZipFile)
+        cs.examples.menuSection('/Show Selected as target of symlink/')
+        literal(f"readlink -f {oneVCardsDir}")
+        literal(f"ls -l {oneVCardsDir}")
+        literal(f"ls -l {oneExportZipFile}")
 
-        cs.examples.menuSection('/Export Base /')
+        cs.examples.menuSection('/fullUpdate:: Using Exported Basic_LinkedInDataExport.zip File (Creates VCards and maildir)/')
 
-        cmnd('exportedPrep',  args=oneExportZipFile)
+        cmnd('fullUpdate',
+             args=oneExportZipFile)
 
+        cmnd('fullUpdate',
+             pars=od([('myLinkedInBase', downloadedLinkedinBase),]),
+             args=downloadedExportZipFile)
+        
+        cs.examples.menuSection('/exportedPrep:: Prepare the LinkedInDataExport Base -- Unzips arg0 in dataExportDir/')
 
-        cs.examples.menuSection('/Generate Initial VCards/')
+        cmnd('exportedPrep',
+             pars=od([('dataExportDir', oneDataExportDir),]),
+             args=oneExportZipFile)
+
+        cs.examples.menuSection('/vcardsGenerate:: -- Generate Initial VCards/')
 
         cmnd('vcardsGenerate',
              pars=od([('vcardsDir', oneVCardsDir),]),
              args=f"{oneLinkedInBase}/Connections.csv")
 
-        cs.examples.menuSection('/Augment VCards/')
+        cs.examples.menuSection('/vcardsInvitations:: -- Augment VCards/')
 
         cmnd('vcardsInvitations',
              pars=od([('vcardsDir', oneVCardsDir),]),
              args=f"{oneLinkedInBase}/Invitations.csv")
 
+        cs.examples.menuSection('/maildirMessage:: vcardsMessages:: -- Create maildir from messages.csv/')
+
         cmnd('vcardsMessages',
              pars=od([('vcardsDir', oneVCardsDir),]),
              args=f"{oneLinkedInBase}/messages.csv")
 
-        cs.examples.menuSection('/Create maildir from messages.csv/')
-
         cmnd('maildirMessages',
              pars=od([('maildir', oneMaildir),]),
              args=f"{oneLinkedInBase}/messages.csv")
-
 
         return(cmndOutcome)
 
@@ -270,13 +299,13 @@ def refresh_symlink_dir(symlink_path: pathlib.Path, target_dir: pathlib.Path) ->
         symlink_path.unlink()
 
     symlink_path.symlink_to(target_dir, target_is_directory=True)
-    print(f"Symlink refreshed: {symlink_path} → {target_dir}")
+    logger.info(f"Symlink refreshed: {symlink_path} → {target_dir}")
 
-####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "exportedDigest" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "extent myLinkedInBase" :argsMin 1 :argsMax 1 :pyInv ""
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "fullUpdate" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "extent myLinkedInBase" :argsMin 1 :argsMax 1 :pyInv ""
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<exportedDigest>>  =verify= parsOpt=extent myLinkedInBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<fullUpdate>>  =verify= parsOpt=extent myLinkedInBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
 #+end_org """
-class exportedDigest(cs.Cmnd):
+class fullUpdate(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'extent', 'myLinkedInBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
@@ -302,37 +331,60 @@ class exportedDigest(cs.Cmnd):
 ** [[elisp:(org-cycle)][| *CmndDesc:* | ]]
         #+end_org """)
 
-        exportedPrep().pyCmnd(
-            myLinkedInBase=myLinkedInBase,
-            argsList=argsList,
-        )
+        fileToExportedZip = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        path_exportedZip = pathlib.Path(fileToExportedZip).expanduser().resolve(strict=True)
 
-        vcardsGenerate().pyCmnd(
+        assert  path_exportedZip.exists(), f"Missing {path_exportedZip}"
+
+        path_myLinkedInBase = pathlib.Path(myLinkedInBase).expanduser().resolve(strict=True)
+
+        g_parDict = cs.globalContext.get().icmParamDictGet().parDictGet()
+
+        # if myLinkedInBase was not specified on the command line
+        # and the default does not exist, use the parent of ExportedZip file.
+        try:
+            g_parDict['myLinkedInBase']
+        except  KeyError:
+            # An optional param was not specified.
+            if not path_myLinkedInBase.exists():
+                path_myLinkedInBase = path_exportedZip.parent
+
+        # assert  path_myLinkedInBase.exists(), f"Missing {path_myLinkedInBase}"
+        if not path_myLinkedInBase.exists(): return failed(cmndOutcome, f"Missing {path_myLinkedInBase}")
+
+        myLinkedInBase = str(path_myLinkedInBase)
+
+        logger.info(f"cmnd={fullUpdate} -- optPar:: myLinkedInBase={myLinkedInBase}  arg0:: exportedZip={path_exportedZip}")
+
+        if exportedPrep().pyCmnd(
+            dataExportDir=f"{myLinkedInBase}/LinkedInDataExport",
+            argsList=argsList,
+        ).isProblematic(): return(b_io.eh.badOutcome(cmndOutcome))
+
+        if vcardsGenerate().pyCmnd(
             myLinkedInBase=myLinkedInBase,
             vcardsDir=f"{myLinkedInBase}/VCards",
             argsList=[f"{myLinkedInBase}/LinkedInDataExport/Connections.csv"],
-        )
+        ).isProblematic(): return(b_io.eh.badOutcome(cmndOutcome))
 
-        vcardsInvitations().pyCmnd(
+        if vcardsInvitations().pyCmnd(
             myLinkedInBase=myLinkedInBase,
             vcardsDir=f"{myLinkedInBase}/VCards",
             argsList=[f"{myLinkedInBase}/LinkedInDataExport/Invitations.csv"],
-        )
+        ).isProblematic(): return(b_io.eh.badOutcome(cmndOutcome))
 
         if extent == "full":
-            vcardsMessages().pyCmnd(
+            if vcardsMessages().pyCmnd(
                 myLinkedInBase=myLinkedInBase,
                 vcardsDir=f"{myLinkedInBase}/VCards",
                 argsList=[f"{myLinkedInBase}/LinkedInDataExport/messages.csv"],
-            )
+            ).isProblematic(): return(b_io.eh.badOutcome(cmndOutcome))
 
-        maildirMessages().pyCmnd(
+        if maildirMessages().pyCmnd(
             myLinkedInBase=myLinkedInBase,
             maildir=f"{myLinkedInBase}/maildir",
             argsList=[f"{myLinkedInBase}/LinkedInDataExport/messages.csv"],
-        )
-
-
+        ).isProblematic(): return(b_io.eh.badOutcome(cmndOutcome))
 
         return cmndOutcome.set(opResults=None,)
 
@@ -358,69 +410,48 @@ class exportedDigest(cs.Cmnd):
 
         return cmndArgsSpecDict
 
-
-
-####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "exportedPrep" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "myLinkedInBase" :argsMin 1 :argsMax 1 :pyInv ""
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "exportedPrep" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "dataExportDir" :argsMin 1 :argsMax 1 :pyInv ""
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<exportedPrep>>  =verify= parsOpt=myLinkedInBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<exportedPrep>>  =verify= parsOpt=dataExportDir argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
 #+end_org """
 class exportedPrep(cs.Cmnd):
     cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ 'myLinkedInBase', ]
+    cmndParamsOptional = [ 'dataExportDir', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
     @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
              rtInv: cs.RtInvoker,
              cmndOutcome: b.op.Outcome,
-             myLinkedInBase: typing.Optional[str]=None,  # Cs Optional Param
+             dataExportDir: typing.Optional[str]=None,  # Cs Optional Param
              argsList: typing.Optional[list[str]]=None,  # CsArgs
     ) -> b.op.Outcome:
 
         failed = b_io.eh.badOutcome
-        callParamsDict = {'myLinkedInBase': myLinkedInBase, }
+        callParamsDict = {'dataExportDir': dataExportDir, }
         if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
             return failed(cmndOutcome)
         cmndArgsSpecDict = self.cmndArgsSpec()
-        myLinkedInBase = csParam.mappedValue('myLinkedInBase', myLinkedInBase)
+        dataExportDir = csParam.mappedValue('dataExportDir', dataExportDir)
 ####+END:
         self.cmndDocStr(f""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns runFacterAndGetJsonOutputBytes.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Unzips arg0 in dataExportDir, if myLinkedInBase does not exist.
         #+end_org """)
 
-
         fileToExportedZip = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        path_exportedZip = pathlib.Path(fileToExportedZip).expanduser().resolve()
+        if not path_exportedZip.exists(): return failed(cmndOutcome, f"Missing {path_exportedZip}")
 
-        path_exportedZip = pathlib.Path(fileToExportedZip).expanduser().resolve(strict=True)
-        print(myLinkedInBase)
-        path_myLinkedInBase = pathlib.Path(myLinkedInBase).expanduser().resolve(strict=True)
+        path_dataExportDir = pathlib.Path(dataExportDir).expanduser().resolve()
 
-        # dateStr = extract_date_from_filename(path_exportedZip)
-
-        # dataExportDir = pathlib.Path(f"LinkedInDataExport_{dateStr}")
-
-        path_dataExportDir = path_myLinkedInBase.joinpath("LinkedInDataExport")
+        logger.info(f"cmnd={exportedPrep} -- optPar:: dataExportDir={path_dataExportDir}  arg0:: exportedZip={path_exportedZip}")
 
         if path_dataExportDir.is_dir():
-            pass
-            # return failed(cmndOutcome)
+            logger.info(f"dataExportDir={path_dataExportDir} exists, creation skipped")
         else:
             linkedinUtils.Common.unzip_file(path_exportedZip, path_dataExportDir)
 
-        # dataExportSelected = path_myLinkedInBase.joinpath(pathlib.Path(f"LinkedInDataExport_selected"))
-
-        # refresh_symlink(dataExportSelected, path_dataExportDir)
-
-        # vcardsDir = pathlib.Path(f"LinkedInVCards")
-        # path_vcardsDir = path_myLinkedInBase.joinpath(vcardsDir)
-
-        # print(dateStr)
-        print(path_myLinkedInBase)
-        print(path_dataExportDir)
-        #  print(path_vcardsDir)
-
-        return cmndOutcome.set(opResults=path_exportedZip,)
-
+        return cmndOutcome.set(opResults=f"dataExportDir={path_dataExportDir}",)
 
 
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
@@ -444,7 +475,6 @@ class exportedPrep(cs.Cmnd):
         )
 
         return cmndArgsSpecDict
-
 
 
 ####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "vcardsGenerate" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "myLinkedInBase vcardsDir" :argsMin 1 :argsMax 1 :pyInv ""
@@ -474,29 +504,25 @@ class vcardsGenerate(cs.Cmnd):
         vcardsDir = csParam.mappedValue('vcardsDir', vcardsDir)
 ####+END:
         self.cmndDocStr(f""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns runFacterAndGetJsonOutputBytes.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Takes in Connections.csv, creates vcards, returns count
         #+end_org """)
 
 
         inFile = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
-
-        path_inFile = pathlib.Path(inFile).expanduser().resolve(strict=True)
-        print(path_inFile)
+        path_inFile = pathlib.Path(inFile).expanduser().resolve()
+        if not path_inFile.exists(): return failed(cmndOutcome, f"Missing {path_inFile}")
 
         if vcardsDir is not None:
             path_vcardsDir = pathlib.Path(vcardsDir).expanduser().resolve(strict=False)
             path_vcardsDir.mkdir(exist_ok=True)
 
-        print(path_vcardsDir)
+        logger.info(f"cmnd={vcardsGenerate} -- optPar:: vcardsDir={vcardsDir}  arg0:: Connections.csv={path_inFile}")
 
         generation = connections.LinkedInConnections(path_inFile)
-
         generation.load()
+        count = generation.create_vcards(path_vcardsDir)
 
-        generation.create_vcards(path_vcardsDir)
-
-        return cmndOutcome.set(opResults=path_vcardsDir,)
-
+        return cmndOutcome.set(opResults=f"vcardsDir={path_vcardsDir} count={count}",)
 
 
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
@@ -550,28 +576,23 @@ class vcardsInvitations(cs.Cmnd):
         vcardsDir = csParam.mappedValue('vcardsDir', vcardsDir)
 ####+END:
         self.cmndDocStr(f""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns runFacterAndGetJsonOutputBytes.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Takes in Invitations.csv, augments vcards, returns count
         #+end_org """)
 
-
         inFile = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
-
-        path_inFile = pathlib.Path(inFile).expanduser().resolve(strict=True)
-        print(path_inFile)
+        path_inFile = pathlib.Path(inFile).expanduser().resolve()
+        if not path_inFile.exists(): return failed(cmndOutcome, f"Missing {path_inFile}")
 
         if vcardsDir is not None:
             path_vcardsDir = pathlib.Path(vcardsDir).expanduser().resolve(strict=True)
 
-        print(path_vcardsDir)
+        logger.info(f"cmnd={vcardsInvitations} -- optPar:: vcardsDir={vcardsDir}  arg0:: Invitations.csv={path_inFile}")
 
         augmentation = invitations.LinkedInInvitations(path_inFile)
-
         augmentation.load()
+        count = augmentation.augment_vcards(path_vcardsDir)
 
-        augmentation.augment_vcards(path_vcardsDir)
-
-        return cmndOutcome.set(opResults=path_vcardsDir,)
-
+        return cmndOutcome.set(opResults=f"vcardsDir={path_vcardsDir} count={count}",)
 
 
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
@@ -591,7 +612,7 @@ class vcardsInvitations(cs.Cmnd):
             argName="inFile",
             argDefault='',
             argChoices=[],
-            argDescription="Path to the Exported LinkedIn connections file."
+            argDescription="Path to the Exported LinkedIn invitations file."
         )
 
         return cmndArgsSpecDict
@@ -624,24 +645,20 @@ class vcardsMessages(cs.Cmnd):
         vcardsDir = csParam.mappedValue('vcardsDir', vcardsDir)
 ####+END:
         self.cmndDocStr(f""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns runFacterAndGetJsonOutputBytes.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Takes in messages.csv, augments vcards, returns count
         #+end_org """)
 
-
         inFile = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
-
-        path_inFile = pathlib.Path(inFile).expanduser().resolve(strict=True)
-        print(path_inFile)
+        path_inFile = pathlib.Path(inFile).expanduser().resolve()
+        if not path_inFile.exists(): return failed(cmndOutcome, f"Missing {path_inFile}")
 
         if vcardsDir is not None:
             path_vcardsDir = pathlib.Path(vcardsDir).expanduser().resolve(strict=True)
 
-        print(path_vcardsDir)
+        logger.info(f"cmnd={vcardsMessages} -- optPar:: vcardsDir={vcardsDir}  arg0:: Connections.csv={path_inFile}")
 
         augmentation = messages.LinkedInMessages(path_inFile)
-
         augmentation.load()
-
         augmentation.augment_vcards(path_vcardsDir)
 
         return cmndOutcome.set(opResults=path_vcardsDir,)
@@ -665,7 +682,7 @@ class vcardsMessages(cs.Cmnd):
             argName="inFile",
             argDefault='',
             argChoices=[],
-            argDescription="Path to the Exported LinkedIn connections file."
+            argDescription="Path to the Exported LinkedIn messages.csv file."
         )
 
         return cmndArgsSpecDict
@@ -703,14 +720,19 @@ class maildirMessages(cs.Cmnd):
 
 
         inFile = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
-
         csv_path = pathlib.Path(inFile)
+        if not csv_path.exists(): return failed(cmndOutcome, f"Missing {csv_path}")
+
+        assert  csv_path.exists(), f"Missing {csv_path}"
+
         maildir_path = pathlib.Path(maildir)
 
         # telemetry = Telemetry("LinkedInMessages822")
         # converter = messages822.LinkedInMessagesToMaildir(csv_path, maildir_path, telemetry)
         converter = messagesMaildir.LinkedInMessagesToMaildir(csv_path, maildir_path)
         converter.run()
+
+        return cmndOutcome.set(opResults=maildir_path,)
 
 
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
@@ -734,10 +756,6 @@ class maildirMessages(cs.Cmnd):
         )
 
         return cmndArgsSpecDict
-
-
-
-
 
 
 ####+BEGIN: b:py3:cs:framework/endOfFile :basedOn "classification"

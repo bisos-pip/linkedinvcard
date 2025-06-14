@@ -99,7 +99,6 @@ import collections
 
 import pathlib
 import re
-import logging
 
 import vobject
 import random
@@ -117,6 +116,7 @@ from bisos.myLinkedIn import invitations
 
 from bisos.myLinkedIn import linkedinWebInfo
 
+import logging
 logger = logging.getLogger(__name__)
 
 ####+BEGIN: b:py3:cs:orgItem/basic :type "=Executes=  "  :title "CSU-Lib Executions" :comment "-- cs.invOutcomeReportControl"
@@ -233,7 +233,7 @@ class examples_csu(cs.Cmnd):
 
         od = collections.OrderedDict
         cmnd = cs.examples.cmndEnter
-        # literal = cs.examples.execInsert
+        literal = cs.examples.execInsert
 
         credsPars = od([('account', "someUser"), ('password', "somePasswd")])
 
@@ -241,11 +241,17 @@ class examples_csu(cs.Cmnd):
         oneLinkedinId =  linkedinUtils.LinkedinId.fromUrl(oneLinkedinUrl)
         oneVCardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"
 
-        cs.examples.menuChapter('=LinkedIn Web Info=')
+        cs.examples.menuChapter('=LinkedIn Web Info --- Exit All Chrome Windows=')
+
+        cs.examples.menuSection('/Show Selected as target of symlink/')
+        literal(f"readlink -f {oneVCardsDir}")
+        literal(f"ls -l {oneVCardsDir}")
 
         cs.examples.menuSection('/ContactInfo From Url --- Exit All Chrome Windows/')
 
         cmnd('contactInfo', pars=credsPars,  args=oneLinkedinUrl)
+
+        cs.examples.menuSection('/ContactInfo From Url --- /')
 
         cmnd('contactInfoToVCard',
              pars=od([('vcardsDir', oneVCardsDir),]),
@@ -254,6 +260,11 @@ class examples_csu(cs.Cmnd):
         cmnd('contactInfoToVCard',
              pars=od([('vcardsDir', oneVCardsDir), ('account', "someUser"), ('password', "somePasswd")]),
              wrapper=f"ls -1 {oneVCardsDir} | egrep '.vcf$' | head -2 | sed 's/\.[^.]*$//' | ",
+            )
+
+        cmnd('contactInfoToVCard',
+             pars=od([('vcardsDir', oneVCardsDir), ('account', "someUser"), ('password', "somePasswd")]),
+             wrapper=f"ls {oneVCardsDir} | head -2 | echo ",
             )
 
 
@@ -316,7 +327,7 @@ class contactInfo(cs.Cmnd):
 
         def process(each):
             info = augmentor.fetch_contact_info(each)
-            print(info)
+            logger.info(info)
 
         processArgsAndStdin(cmndArgs, process)
 
@@ -349,20 +360,19 @@ class contactInfo(cs.Cmnd):
         return cmndArgsSpecDict
 
 
-####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfoToVCard" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "myLinkedInBase vcardsDir account password browser minInterval maxInterval" :argsMin 0 :argsMax 9999 :pyInv ""
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfoToVCard" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "vcardsDir account password browser minInterval maxInterval" :argsMin 0 :argsMax 9999 :pyInv ""
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfoToVCard>>  =verify= parsOpt=myLinkedInBase vcardsDir account password browser minInterval maxInterval argsMax=9999 ro=cli   [[elisp:(org-cycle)][| ]]
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfoToVCard>>  =verify= parsOpt=vcardsDir account password browser minInterval maxInterval argsMax=9999 ro=cli   [[elisp:(org-cycle)][| ]]
 #+end_org """
 class contactInfoToVCard(cs.Cmnd):
     cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ 'myLinkedInBase', 'vcardsDir', 'account', 'password', 'browser', 'minInterval', 'maxInterval', ]
+    cmndParamsOptional = [ 'vcardsDir', 'account', 'password', 'browser', 'minInterval', 'maxInterval', ]
     cmndArgsLen = {'Min': 0, 'Max': 9999,}
 
     @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
              rtInv: cs.RtInvoker,
              cmndOutcome: b.op.Outcome,
-             myLinkedInBase: typing.Optional[str]=None,  # Cs Optional Param
              vcardsDir: typing.Optional[str]=None,  # Cs Optional Param
              account: typing.Optional[str]=None,  # Cs Optional Param
              password: typing.Optional[str]=None,  # Cs Optional Param
@@ -373,11 +383,10 @@ class contactInfoToVCard(cs.Cmnd):
     ) -> b.op.Outcome:
 
         failed = b_io.eh.badOutcome
-        callParamsDict = {'myLinkedInBase': myLinkedInBase, 'vcardsDir': vcardsDir, 'account': account, 'password': password, 'browser': browser, 'minInterval': minInterval, 'maxInterval': maxInterval, }
+        callParamsDict = {'vcardsDir': vcardsDir, 'account': account, 'password': password, 'browser': browser, 'minInterval': minInterval, 'maxInterval': maxInterval, }
         if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
             return failed(cmndOutcome)
         cmndArgsSpecDict = self.cmndArgsSpec()
-        myLinkedInBase = csParam.mappedValue('myLinkedInBase', myLinkedInBase)
         vcardsDir = csParam.mappedValue('vcardsDir', vcardsDir)
         account = csParam.mappedValue('account', account)
         password = csParam.mappedValue('password', password)
@@ -391,17 +400,28 @@ class contactInfoToVCard(cs.Cmnd):
 
         cmndArgs = self.cmndArgsGet("0&9999", cmndArgsSpecDict, argsList)
 
+        if vcardsDir is not None:
+            path_vcardsDir = pathlib.Path(vcardsDir).expanduser().resolve(strict=False)
+
+        cmndArgsTotal = len(cmndArgs)
+        stdinArgsTotal = 0
+        cmndArgsProcessed = 0
+        stdinArgsProcessed = 0
+        webAccessCount = 0
+
         def processArgsAndStdin(cmndArgs, process):
+            nonlocal cmndArgsProcessed, stdinArgsProcessed, stdinArgsTotal
+
             for each in cmndArgs:
+                cmndArgsProcessed += 1
                 process(each)
             stdinArgs = b_io.stdin.readAsList()
+            stdinArgsTotal = len(stdinArgs)
             # if the list was sorted, we shuffle it
             random.shuffle(stdinArgs)
             for each in stdinArgs:
+                stdinArgsProcessed += 1
                 process(each)
-
-        # logging.basicConfig(level=logging.DEBUG)
-        logging.basicConfig(level=logging.INFO)
 
         augmentor = linkedinWebInfo.LinkedInRemoteAugmentor(
             chrome_user_data_dir=pathlib.Path("~/.config/google-chrome").expanduser(),
@@ -410,12 +430,22 @@ class contactInfoToVCard(cs.Cmnd):
 
         augmentor.start_driver(account, password)
 
-        def process(linkedinId):
+        def process(linkedinQualifier):
+            nonlocal webAccessCount
+
+            vcardPath = linkedinUtils.LinkedinQualifier.toVCardPath(linkedinQualifier, path_vcardsDir)
+            print(vcardPath)
+            if vcardPath is None:
+                return
+
+            linkedinId = linkedinUtils.LinkedinQualifier.asLinkedInId(vcardPath)
             waitBeforeNext = augmentVcardFromLinkedin(augmentor, linkedinId, vcardsDir)
             if waitBeforeNext == False:
                 return
+
+            webAccessCount += 1
             waitInterval = random.randint(minInterval, maxInterval)
-            print(f"Waiting for waitInterval={waitInterval} Seconds")
+            logger.info(f"Waiting for waitInterval={waitInterval} Seconds -- webAccessCount={webAccessCount} -- stdinArgsProcessed={stdinArgsProcessed} of {stdinArgsTotal} -- cmndArgsProcessed={cmndArgsProcessed} of {cmndArgsTotal}")
             time.sleep(waitInterval)
 
         processArgsAndStdin(cmndArgs, process)
@@ -478,7 +508,7 @@ The vCard file is assumed to be named <linkedinId>.vcf inside vcard_dir.
     vcardPath = linkedinUtils.VCard.find_vcard(vcardsdDirPath, linkedinId)
 
     if vcardPath ==  None:
-        print(f"Missing {linkedinId} VCard Skipped")
+        logger.info(f"Missing {linkedinId} VCard Skipped")
         waitBeforeNext = False
         return waitBeforeNext
 
@@ -488,7 +518,7 @@ The vCard file is assumed to be named <linkedinId>.vcf inside vcard_dir.
     field = "email"
     if hasattr(vcard, field):
         value = vcard.contents[field][0].value
-        print(f"linkedinId={linkedinId} -- email = {value} -- Skipped")
+        logger.info(f"linkedinId={linkedinId} -- email = {value} -- Skipped")
         waitBeforeNext = False
         return waitBeforeNext
 

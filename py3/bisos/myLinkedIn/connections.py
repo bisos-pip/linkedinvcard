@@ -3,6 +3,11 @@ from typing import List, Dict, Optional
 import csv
 import vobject
 
+
+import logging
+logger = logging.getLogger(__name__)
+
+
 class LinkedInConnections:
     """
     Parses LinkedIn Connections CSV and generates vCards.
@@ -25,7 +30,7 @@ class LinkedInConnections:
             reader = csv.DictReader(f)
             self.connections = list(reader)
 
-    def create_vcards(self, output_dir: Path) -> None:
+    def create_vcards(self, output_dir: Path) -> int:
         """
         Generate vCard files for each connection.
         """
@@ -34,7 +39,11 @@ class LinkedInConnections:
 
         output_dir.mkdir(parents=True, exist_ok=True)
 
+        counter = 0
+
         for entry in self.connections:
+
+            counter += 1
 
             vcard = vobject.vCard()
             vcard.add('fn').value = f"{entry['First Name']} {entry['Last Name']}"
@@ -49,9 +58,10 @@ class LinkedInConnections:
             uid = url.rstrip('/').split('/')[-1] if url else f"{entry['First Name']}_{entry['Last Name']}"
             filename: Path = output_dir / f"{uid}.vcf"
 
-            # print(filename)
+            logger.debug(filename)
             with filename.open('w', encoding='utf-8') as f:
                 vcf_str = vcard.serialize()
-                # print(vcf_str)
+                logger.debug(vcf_str)
                 f.write(vcf_str)
 
+        return counter

@@ -12,13 +12,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import vobject
 
-
 import urllib.parse
 
-
-
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+# logger.setLevel(logging.INFO)
 
 class LinkedInRemoteAugmentor:
     """

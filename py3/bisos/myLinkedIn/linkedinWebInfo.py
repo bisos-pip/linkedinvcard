@@ -106,6 +106,13 @@ class LinkedInRemoteAugmentor:
             )
             contact_info_button.click()
             logger.debug("Clicked on contact info button.")
+
+            #     DEBUGGING ---  Kept for Evolution
+            # logger.debug("Capture the HTML after clicking")
+            # html = self.driver.page_source
+            # with open("/tmp/linkedin_modal_debug.html", "w") as f:
+            #      f.write(html)
+            
             time.sleep(2)
         except Exception as e:
             logger.warning(f"Could not click contact info button: {e}")
@@ -122,6 +129,11 @@ class LinkedInRemoteAugmentor:
                 href = link.get_attribute("href") or ""
                 text = link.text.strip()
 
+                #
+                # NOTYET
+                # June 14, 2025 Only email extraction works for now.
+                #
+                
                 if href.startswith("mailto:"):
                     contact_info["email"] = text
                 elif href.startswith("tel:"):
@@ -148,59 +160,6 @@ class LinkedInRemoteAugmentor:
             logger.warning(f"Error extracting contact info details: {e}")
 
         return contact_info
-
-    def fetch_contact_infoEmailObsoleted(self, linkedin_url: str) -> Dict[str, Optional[str]]:
-        """
-        Extract contact info (email and profile URL) from a LinkedIn profile's contact-info overlay.
-        """
-        if not self.driver:
-            raise RuntimeError("WebDriver is not started. Call start_driver() first.")
-
-        logger.info(f"Visiting LinkedIn profile: {linkedin_url}")
-        self.driver.get(linkedin_url)
-        time.sleep(3)
-
-        contact_info = {"email": None, "profile_url": None}
-
-        try:
-            contact_info_button = WebDriverWait(self.driver, 5).until(
-                EC.element_to_be_clickable((By.ID, "top-card-text-details-contact-info"))
-            )
-            contact_info_button.click()
-            logger.debug("Clicked on contact info button.")
-
-            #     DEBUGGING ---  Kept for Evolution
-            # logger.debug("Capture the HTML after clicking")
-            # html = self.driver.page_source
-            # with open("/tmp/linkedin_modal_debug.html", "w") as f:
-            #     f.write(html)
-
-            time.sleep(2)  # give modal time to load
-        except Exception as e:
-            logger.warning(f"Could not click contact info button: {e}")
-            return contact_info
-
-        # Use visible text to locate email and profile URL
-        try:
-            email_elem = WebDriverWait(self.driver, 5).until(
-                EC.presence_of_element_located((By.XPATH, "//a[starts-with(@href, 'mailto:')]"))
-            )
-            contact_info['email'] = email_elem.text.strip()
-            logger.debug(f"Found email: {contact_info['email']}")
-        except Exception:
-            logger.info("Email not found.")
-
-        try:
-            profile_elem = self.driver.find_element(
-                By.XPATH, "//a[contains(@href, 'linkedin.com/in/')]"
-            )
-            contact_info['profile_url'] = profile_elem.get_attribute("href")
-            logger.debug(f"Found profile URL: {contact_info['profile_url']}")
-        except Exception:
-            logger.info("Profile URL not found.")
-
-        return contact_info
-
 
     def stop_driver(self) -> None:
         """

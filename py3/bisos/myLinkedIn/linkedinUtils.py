@@ -6,6 +6,8 @@ import vobject
 from typing import Optional, List, Dict
 from urllib.parse import urlparse
 
+from datetime import datetime
+
 logger = logging.getLogger(__name__)
 # logger.setLevel(logging.INFO)
 
@@ -232,6 +234,43 @@ class VCard:
         return None
 
     @staticmethod
+    def needs_update(vcardPath: Path) -> bool:
+        """
+        Find the vCard file corresponding to the LinkedIn ID (UID) in the directory.
+        """
+
+        vcardStr  = vcardPath.read_text(encoding="utf-8").strip()
+        vcard = vobject.readOne(vcardStr)
+
+        field = "x-date"
+        if hasattr(vcard, field):
+            value = vcard.contents[field][0].value
+            logger.info(f"vcardPath={vcardPath} -- {field} = {value} -- Skipped")
+            return False
+        
+        field = "email"
+        if hasattr(vcard, field):
+            value = vcard.contents[field][0].value
+            logger.info(f"vcardPath={vcardPath} -- {field} = {value} -- Skipped")
+            return False
+
+        return True
+
+    @staticmethod
+    def update_or_add_custom_field(card, field_name, value):
+        # Check if the field exists
+        existing_field = next((comp for comp in card.contents.get(field_name, [])), None)
+
+        if existing_field:
+            # If the field exists, replace its value
+            existing_field.value = value
+        else:
+            # If the field does not exist, add it
+            custom_field = card.add(field_name)
+            custom_field.value = value
+
+
+    @staticmethod
     def augment_vcard_with_contact_info(vcard_path: Path, contact_info: Dict[str, Optional[str]]) -> None:
         """
         Augments an existing vCard file with extracted LinkedIn contact info.
@@ -267,6 +306,9 @@ class VCard:
                         new_field.type_param = type_param
                 logger.debug(f"Updated {field} with: {value}")
 
+        VCard.update_or_add_custom_field(vcard, 'x-date', datetime.now().strftime("%Y%m%d%H%M%S"))
+        # vcard.add('x-date').value = datetime.now().strftime("%Y%m%d%H%M%S")
+                
         vcard_path.write_text(vcard.serialize(), encoding="utf-8")
         logger.info("vCard updated.")
 

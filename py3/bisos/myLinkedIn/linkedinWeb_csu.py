@@ -145,24 +145,7 @@ def commonParamsSpecify(
 ####+END:
         csParams: cs.param.CmndParamDict,
 ) -> None:
-    csParams.parDictAdd(
-        parName='account',
-        parDescription="Account to be used for logging in.",
-        parDataType=None,
-        parDefault=None,
-        parChoices=[],
-        argparseShortOpt=None,
-        argparseLongOpt='--account',
-    )
-    csParams.parDictAdd(
-        parName='password',
-        parDescription="Password to be used for logging in.",
-        parDataType=None,
-        parDefault=None,
-        parChoices=[],
-        argparseShortOpt=None,
-        argparseLongOpt='--password',
-    )
+    # account, password and force come from commonCsParams
     csParams.parDictAdd(
         parName='browser',
         parDescription="Browser to be used.",
@@ -185,7 +168,7 @@ def commonParamsSpecify(
         parName='minInterval',
         parDescription="Minimum Interval in Seconds.",
         parDataType=None,
-        parDefault=15,
+        parDefault=10,
         parChoices=[],
         argparseShortOpt=None,
         argparseLongOpt='--minInterval',
@@ -194,7 +177,7 @@ def commonParamsSpecify(
         parName='maxInterval',
         parDescription="Maximum Interval in Seconds.",
         parDataType=None,
-        parDefault=35,
+        parDefault=22,
         parChoices=[],
         argparseShortOpt=None,
         argparseLongOpt='--maxInterval',
@@ -231,27 +214,41 @@ class examples_csu(cs.Cmnd):
 ** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Basic example command.
         #+end_org """)
 
+        myName = cs.G.icmMyName()
+
         od = collections.OrderedDict
         cmnd = cs.examples.cmndEnter
         literal = cs.examples.execInsert
 
         credsPars = od([('account', "someUser"), ('password', "somePasswd")])
 
-        oneLinkedinUrl = '''https://www.linkedin.com/in/azad-sokhangoo-71b023365'''
+        oneLinkedinUrl = '''https://www.linkedin.com/in/first-last-1234'''
         oneLinkedinId =  linkedinUtils.LinkedinId.fromUrl(oneLinkedinUrl)
-        oneVCardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"
+        oneVCardsDir = "~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards"
 
         cs.examples.menuChapter('=LinkedIn Web Info --- Exit All Chrome Windows=')
 
         cs.examples.menuSection('/Show Selected as target of symlink/')
+
         literal(f"readlink -f {oneVCardsDir}")
         literal(f"ls -l {oneVCardsDir}")
 
-        cs.examples.menuSection('/ContactInfo From Url --- Exit All Chrome Windows/')
+        cs.examples.menuSection('/vcardNeedsUpdate:: Filters stdin to stdout -- All output Needs Update/')
 
-        cmnd('contactInfo', pars=credsPars,  args=oneLinkedinUrl)
+        literal(f"ls {oneVCardsDir}/* | {myName} -i vcardNeedsUpdate | wc ")
 
-        cs.examples.menuSection('/ContactInfo From Url --- /')
+        cmnd('vcardNeedsUpdate',
+             wrapper=f"ls {oneVCardsDir}/* | ",
+            )
+
+        cmnd('vcardNeedsUpdate',
+             pars=od([('verbosity', '20'),]),
+             wrapper=f"ls {oneVCardsDir}/* | head -10 | ",
+            )
+
+        cs.examples.menuSection('/contactInfoToVCard::  From Qualifier, absPath, basename, id or URL/')
+
+        cs.examples.menuSubSection('/contactInfoToVCard::  From LinkedinId -- Close All Chrome Frames/')
 
         cmnd('contactInfoToVCard',
              pars=od([('vcardsDir', oneVCardsDir),]),
@@ -262,79 +259,84 @@ class examples_csu(cs.Cmnd):
              wrapper=f"ls -1 {oneVCardsDir} | egrep '.vcf$' | head -2 | sed 's/\.[^.]*$//' | ",
             )
 
+        cs.examples.menuSubSection('/contactInfoToVCard::  From absPath -- Close All Chrome Frames/')
+
         cmnd('contactInfoToVCard',
              pars=od([('vcardsDir', oneVCardsDir), ('account', "someUser"), ('password', "somePasswd")]),
-             wrapper=f"ls {oneVCardsDir} | head -2 | echo ",
+             wrapper=f"ls {oneVCardsDir} | head -2 ",
             )
 
+        cs.examples.menuSubSection('/contactInfoToVCard::  From absPath with vcardNeedsUpdate -- Close All Chrome Frames/')
+
+        cmnd('contactInfoToVCard',
+             pars=od([('account', "someUser"), ('password', "somePasswd")]),
+             wrapper=f"ls {oneVCardsDir}/* | {myName} -i vcardNeedsUpdate | head -4 | ",
+            )
+
+        cmnd('contactInfoToVCard',
+             pars=od([('verbosity', '20'), ('account', "someUser"), ('password', "somePasswd")]),
+             wrapper=f"ls {oneVCardsDir}/* | {myName} -i vcardNeedsUpdate | head -2 | ",
+            )
 
         return(cmndOutcome)
 
 
-####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfo" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "account password browser minInterval maxInterval" :argsMin 0 :argsMax 9999 :pyInv ""
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "vcardNeedsUpdate" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "vcardsDir" :argsMin 0 :argsMax 9999 :pyInv ""
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfo>>  =verify= parsOpt=account password browser minInterval maxInterval argsMax=9999 ro=cli   [[elisp:(org-cycle)][| ]]
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<vcardNeedsUpdate>>  =verify= parsOpt=vcardsDir argsMax=9999 ro=cli   [[elisp:(org-cycle)][| ]]
 #+end_org """
-class contactInfo(cs.Cmnd):
+class vcardNeedsUpdate(cs.Cmnd):
     cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ 'account', 'password', 'browser', 'minInterval', 'maxInterval', ]
+    cmndParamsOptional = [ 'vcardsDir', ]
     cmndArgsLen = {'Min': 0, 'Max': 9999,}
 
     @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
              rtInv: cs.RtInvoker,
              cmndOutcome: b.op.Outcome,
-             account: typing.Optional[str]=None,  # Cs Optional Param
-             password: typing.Optional[str]=None,  # Cs Optional Param
-             browser: typing.Optional[str]=None,  # Cs Optional Param
-             minInterval: typing.Optional[str]=None,  # Cs Optional Param
-             maxInterval: typing.Optional[str]=None,  # Cs Optional Param
+             vcardsDir: typing.Optional[str]=None,  # Cs Optional Param
              argsList: typing.Optional[list[str]]=None,  # CsArgs
     ) -> b.op.Outcome:
 
         failed = b_io.eh.badOutcome
-        callParamsDict = {'account': account, 'password': password, 'browser': browser, 'minInterval': minInterval, 'maxInterval': maxInterval, }
+        callParamsDict = {'vcardsDir': vcardsDir, }
         if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
             return failed(cmndOutcome)
         cmndArgsSpecDict = self.cmndArgsSpec()
-        account = csParam.mappedValue('account', account)
-        password = csParam.mappedValue('password', password)
-        browser = csParam.mappedValue('browser', browser)
-        minInterval = csParam.mappedValue('minInterval', minInterval)
-        maxInterval = csParam.mappedValue('maxInterval', maxInterval)
+        vcardsDir = csParam.mappedValue('vcardsDir', vcardsDir)
 ####+END:
         self.cmndDocStr(f""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns runFacterAndGetJsonOutputBytes.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Takes input from stdin or args, for each vcard updates email if needed.
         #+end_org """)
 
         cmndArgs = self.cmndArgsGet("0&9999", cmndArgsSpecDict, argsList)
 
+        if vcardsDir is not None:
+            path_vcardsDir = pathlib.Path(vcardsDir).expanduser().resolve(strict=False)
+
         def processArgsAndStdin(cmndArgs, process):
+
             for each in cmndArgs:
                 process(each)
             stdinArgs = b_io.stdin.readAsList()
             for each in stdinArgs:
                 process(each)
 
-        # logging.basicConfig(level=logging.INFO)
+        def process(linkedinQualifier):
 
-        augmentor = linkedinWebInfo.LinkedInRemoteAugmentor(
-            chrome_user_data_dir=pathlib.Path("~/.config/google-chrome").expanduser(),
-            chrome_profile="Default"
-        )
+            vcardPath = linkedinUtils.LinkedinQualifier.toVCardPath(linkedinQualifier, path_vcardsDir)
+            if vcardPath is None:
+                logger.error(f"Bad Input -- linkedinQualifier={linkedinQualifier}")
+                return
 
-        augmentor.start_driver(account, password)
-
-        def process(each):
-            info = augmentor.fetch_contact_info(each)
-            logger.info(info)
+            if linkedinUtils.VCard.needs_update(vcardPath) == False:
+                logger.info(f"Does not need updating -- skipped: {vcardPath}")
+            else:
+                print(vcardPath)
 
         processArgsAndStdin(cmndArgs, process)
 
-        augmentor.stop_driver()
-
-        return cmndOutcome.set(opResults="DONE",)
-
+        return cmndOutcome.set(opResults=None,)
 
 
 ####+BEGIN: b:py3:cs:method/args :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "self"
@@ -360,13 +362,14 @@ class contactInfo(cs.Cmnd):
         return cmndArgsSpecDict
 
 
-####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfoToVCard" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "vcardsDir account password browser minInterval maxInterval" :argsMin 0 :argsMax 9999 :pyInv ""
+
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "contactInfoToVCard" :comment "" :extent "verify" :ro "cli" :parsMand "" :parsOpt "vcardsDir account password browser minInterval maxInterval force" :argsMin 0 :argsMax 9999 :pyInv ""
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfoToVCard>>  =verify= parsOpt=vcardsDir account password browser minInterval maxInterval argsMax=9999 ro=cli   [[elisp:(org-cycle)][| ]]
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<contactInfoToVCard>>  =verify= parsOpt=vcardsDir account password browser minInterval maxInterval force argsMax=9999 ro=cli   [[elisp:(org-cycle)][| ]]
 #+end_org """
 class contactInfoToVCard(cs.Cmnd):
     cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ 'vcardsDir', 'account', 'password', 'browser', 'minInterval', 'maxInterval', ]
+    cmndParamsOptional = [ 'vcardsDir', 'account', 'password', 'browser', 'minInterval', 'maxInterval', 'force', ]
     cmndArgsLen = {'Min': 0, 'Max': 9999,}
 
     @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
@@ -379,11 +382,12 @@ class contactInfoToVCard(cs.Cmnd):
              browser: typing.Optional[str]=None,  # Cs Optional Param
              minInterval: typing.Optional[str]=None,  # Cs Optional Param
              maxInterval: typing.Optional[str]=None,  # Cs Optional Param
+             force: typing.Optional[str]=None,  # Cs Optional Param
              argsList: typing.Optional[list[str]]=None,  # CsArgs
     ) -> b.op.Outcome:
 
         failed = b_io.eh.badOutcome
-        callParamsDict = {'vcardsDir': vcardsDir, 'account': account, 'password': password, 'browser': browser, 'minInterval': minInterval, 'maxInterval': maxInterval, }
+        callParamsDict = {'vcardsDir': vcardsDir, 'account': account, 'password': password, 'browser': browser, 'minInterval': minInterval, 'maxInterval': maxInterval, 'force': force, }
         if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
             return failed(cmndOutcome)
         cmndArgsSpecDict = self.cmndArgsSpec()
@@ -393,12 +397,16 @@ class contactInfoToVCard(cs.Cmnd):
         browser = csParam.mappedValue('browser', browser)
         minInterval = csParam.mappedValue('minInterval', minInterval)
         maxInterval = csParam.mappedValue('maxInterval', maxInterval)
+        force = csParam.mappedValue('force', force)
 ####+END:
         self.cmndDocStr(f""" #+begin_org
 ** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Takes input from stdin or args, for each vcard updates email if needed.
         #+end_org """)
 
         cmndArgs = self.cmndArgsGet("0&9999", cmndArgsSpecDict, argsList)
+
+        if force is not False:
+            force = True
 
         if vcardsDir is not None:
             path_vcardsDir = pathlib.Path(vcardsDir).expanduser().resolve(strict=False)
@@ -435,14 +443,12 @@ class contactInfoToVCard(cs.Cmnd):
             nonlocal webAccessCount, alreadyProcessedCount
 
             vcardPath = linkedinUtils.LinkedinQualifier.toVCardPath(linkedinQualifier, path_vcardsDir)
-            # NOTYET print
-            print(vcardPath)
             if vcardPath is None:
-                # NOTYET Report error logger.error
+                logger.error(f"Bad Input -- linkedinQualifier={linkedinQualifier}")
                 return
 
             linkedinId = linkedinUtils.LinkedinQualifier.asLinkedInId(vcardPath)
-            waitBeforeNext = augmentVcardFromLinkedin(augmentor, linkedinId, vcardsDir)
+            waitBeforeNext = augmentVcardFromLinkedin(augmentor, linkedinId, vcardsDir, force=force)
             if waitBeforeNext == False:
                 alreadyProcessedCount += 1
                 return
@@ -503,6 +509,7 @@ def augmentVcardFromLinkedin(
         augmentor: linkedinWebInfo.LinkedInRemoteAugmentor,
         linkedinId: str,
         vcardsDir: pathlib.Path,
+        force: bool=False
     ) -> bool:
     """ #+begin_org
 ** [[elisp:(org-cycle)][| *DocStr | ] Extracts contact info from LinkedIn and augments the corresponding vCard file.
@@ -521,25 +528,14 @@ The vCard file is assumed to be named <linkedinId>.vcf inside vcard_dir.
         waitBeforeNext = False
         return waitBeforeNext
 
-    vcardStr  = vcardPath.read_text(encoding="utf-8").strip()
-    vcard = vobject.readOne(vcardStr)
-
-    field = "email"
-    if hasattr(vcard, field):
-        value = vcard.contents[field][0].value
-        logger.info(f"linkedinId={linkedinId} -- email = {value} -- Skipped")
-        # NOTYET -- Commented Out
-        # waitBeforeNext = False
-        # return waitBeforeNext
+    if force == False:
+        if linkedinUtils.VCard.needs_update(vcardPath) == False:
+            logger.info(f"Does not need updating -- skipped: {vcardPath}")
+            waitBeforeNext = False
+            return waitBeforeNext
 
     logger.info(f"Augmenting vCard from LinkedIn URL: {linkedinUrl}")
     contact_info = augmentor.fetch_contact_info(linkedinUrl)
-
-    print("AAAAAAAAAAAA")
-
-    print(contact_info)
-
-    print("BBBBBBBBBBB")
 
     linkedinUtils.VCard.augment_vcard_with_contact_info(vcardPath, contact_info)
     waitBeforeNext = True

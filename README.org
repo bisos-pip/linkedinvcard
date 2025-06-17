@@ -55,7 +55,7 @@ system like vCards. However, contact info (email, phone, etc.) of most
 connections is not included in the Basic_LinkedInDataExport.zip file. By
 leveraging this package, you can convert, enrich, and augment these details into
 vCards that are readily importable into your preferred usage environment (e.g.,
-Emacs ebdb, MS Outlook, or any other vCard-compatible system). This process is
+Emacs ebdb, MS Outlook Contacts, Google Contacts, or any other vCard-compatible system). This process is
 repeatable and scalable, making it easier to maintain an up-to-date contact
 database, effectively integrating LinkedIn connection data into your daily
 workflow.
@@ -75,14 +75,14 @@ Scraping.
 - [[#overview][Overview]]
 -  [[#a-standalone-command-services-pycs-facility-of-bisos][A Standalone Command-Services PyCS Facility of BISOS]]
 - [[#inputs][Inputs]]
-  - [[#layer-1----basic_linkedindataexportzip][Layer-1 -- Basic_LinkedInDataExport.zip]]
-  - [[#layer-2----web-connect-info][Layer-2 -- Web Connect Info]]
+  - [[#layer-1----mylinkedin-basic----basic_linkedindataexportzip][Layer-1 -- myLinkedin-Basic -- Basic_LinkedInDataExport.zip]]
+  - [[#layer-2----mylinkedin-plus----web-connect-info][Layer-2 -- myLinkedin-Plus -- Web Connect Info]]
 - [[#outpts][Outpts]]
   - [[#vcards][VCards]]
   - [[#maildirs][Maildirs]]
--  [[#layer-1----mylinkedincs----diagram-and-softwarediagram-mapping][Layer-1 -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
+-  [[#layer-1----basic----mylinkedincs----diagram-and-softwarediagram-mapping][Layer-1 -- Basic -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
   -  [[#key-features-of-layer-1----mylinkedincs][Key Features of Layer-1 -- myLinkedIn.cs]]
--  [[#layer-2----mylinkedinwebcs----diagram-and-softwarediagram-mapping][Layer-2 -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
+-  [[#layer-2----plus----mylinkedinwebcs----diagram-and-softwarediagram-mapping][Layer-2 -- Plus -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
   -  [[#key-features-of-layer-2----mylinkedinwebcs][Key Features of Layer-2 -- myLinkedInWeb.cs]]
 -  [[#broader-common-uses----overview-and-diagram][Broader Common Uses -- Overview and Diagram]]
 - [[#benefits----distinct-and-different][Benefits -- Distinct and Different]]
@@ -121,13 +121,13 @@ self-contained Python package separate from BISOS.
 
 * Inputs
 
-** Layer-1 -- Basic_LinkedInDataExport.zip
+** Layer-1 -- myLinkedin-Basic -- Basic_LinkedInDataExport.zip
 
   - *Connections.csv*: The basic connection data, including LinkedIn ID, profile URL, name, etc.
   - *Invitations.csv*: Captures whether you invited the connection or were invited, along with the invitation text.
   - *Messages.csv*: Adds LinkedIn message history between you and your connections, showing the conversation details and direction.
 
-** Layer-2 -- Web Connect Info
+** Layer-2 -- myLinkedin-Plus -- Web Connect Info
 
 - email
 - websites
@@ -144,7 +144,7 @@ VCards (.vcf) -- one for each connection.
 
 *Messages.csv* is converted into maildir format.
 
-*  Layer-1 -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
+*  Layer-1 -- Basic -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/exportedFileInfo
@@ -193,9 +193,7 @@ network in vCard (.vcf) format.
    added from *Messages.csv*, organizing the messages in chronological order with
    sender information.
 
-
-
-*  Layer-2 -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping
+*  Layer-2 -- Plus -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/exportedPlusWebCons
@@ -217,13 +215,13 @@ A brief description of the relevant nodes is provided below.
 
 **  Key Features of Layer-2 -- myLinkedInWeb.cs
 
-Layer-2 is about Remote enrichment of Layer-1 VCard.
+Layer-2 (myLinkedIn-Plus) is about Remote enrichment of Layer-1 (myLinkedIn-Basic) vCard.
 
 
 - Web Contact Info Retrieval:
 Extracts additional details from LinkedIn's Contact Info page via automated scraping, such as email addresses, phone numbers, and other publicly available contact information.
 
-- Addition of Contact Info to Local VCard:
+- Addition of Contact Info to Local vCard:
 
 
 *  Broader Common Uses -- Overview and Diagram

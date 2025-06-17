@@ -1,0 +1,54 @@
+About the myLinkedIn-Basic Package --- vCards for ALL of Your LinkedIn Connections
+
+June, 16, 2025 --- Mohsen Banan --- linkedin@mohsen.1.banan.byname.net
+
+Dear Fellow LinkedIn Member,
+
+I have put together a python package called "myLinkedIn". It converts your
+LinkedIn data into a collection of vCards. One for each of your connections.
+These vCards can then be optionally augmented by the Contact-Info of your
+connections. You can then import these vCards to your usage environemnt (e.g.,
+Emacs ebdb, MS Outlook Contacts, Google Contacts). You can then privately
+tag/categorize your connections.
+
+You can obtain a snap shot of your current connections data at LinkedIn.
+Click the “Me” icon, then select “Settings & Privacy” from the dropdown menu.
+Then Go to Data Privacy and click “Data privacy” and then "Get a copy of your data".
+
+There it says: "Your LinkedIn data belongs to you, and you can download an
+archive any time ..." and that is kind of true.
+
+LinkedIn provides you a bounch of .csv (comma-separated values) files. These
+.csv files are realy not all that useful. The primary abstraction of LinkedIn
+are "Connections" in a "Business Cards Exchange" model. So, the myLinkedIn
+package combines the information that LinkedIn provides in .csv files.
+
+But unfortunately that information is not complete.
+One of the files that LinkedIn provides is Connections.csv top of that file
+
+"When exporting your connection data, you may notice that some of the email
+addresses are missing. You will only see email addresses for connections who
+have allowed their connections to see or download their email address using this
+setting https://www.linkedin.com/psettings/privacy/email. You can learn more
+here https://www.linkedin.com/help/linkedin/answer/261"
+
+In my case less than one-third of them included an email. We address this
+short-coming with myLinkedIn-Plus -- which involves some web scraping.
+
+The complete sources and instructions for using the myLinkedIn package are at:
+https://github.com/bisos-pip/myLinkedIn. Here, I include a summary for the
+instructions for the impatient:
+
+- Install the myLinkedIn package --- pipx install bisos.myLinkedIn
+- Obtain the Basic_LinkedInDataExport.zip file from LinkedIn --- See above
+- Run:  myLinkedIn.cs to see a menu of what is supported.
+- Run: myLinkedIn.cs --myLinkedInBase="~/Downloads"  -i fullUpdate ~/Downloads/Basic_LinkedInDataExport.zip
+- In your ~/Downloads, you will see the following additional dirs: LinkedInDataExport VCards maildir
+- Import the vCards in ~/Downloads/VCards to your usage environment (outlook, google contacts)
+
+This post is part of a series. The others are:
+
+
+If you consider this useful, please distribute this as widely as possible.
+
+At your services,

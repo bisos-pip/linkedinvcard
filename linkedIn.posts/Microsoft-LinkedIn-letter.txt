@@ -9,72 +9,35 @@ Here is the text of an open letter to Micorsoft-LinkedIn requesting inclusion of
 -------
 
 I, Mohsen Banan, joined LinkedIn on January 19, 2006. My view and use of
-LinkedIn at that time was that of a "Business Cards Exchange" with colleagues,
-friends and family. I would access my Connection's Contact-Info (email-address,
-phone number) and then interact with them *outside* of LinkedIn. Let's call that
-"LinkingOut". This LinkingOut end-to-end model of interactions is
-quite important for many of us (LinkedIn members).
+LinkedIn at that time was that of a model of "Business Cards Exchange" -- with
+colleagues, friends and family. I would access my connection's Contact-Info
+(email-address, phone number) and then interact with them *outside* of LinkedIn.
+Let's call that "LinkingOut". This LinkingOut end-to-end model of interactions
+is quite important for many of us (LinkedIn members).
 
-I have put together a python package called "myLinkedIn". It converts your
-LinkedIn data into a collection of vCards. One for each of your connections.
-These vCards can then be optionally augmented by the Contact-Info of your
-connections.
+I have put together a python package called "myLinkedIn" --
+https://github.com/bisos-pip/myLinkedIn. It converts the LinkedIn exported data
+into a collection of vCards. One for each of your connections. These vCards can
+then be optionally augmented by the Contact-Info of your connections. This takes
+us back to the model of "Business Cards Exchange".
 
-The complete sources and instructions for using the myLinkedIn package are at:
-https://github.com/bisos-pip/myLinkedIn.
-
-
-In a previous post (NOTYET), I introduced the myLinkedIn python package
---https://github.com/bisos-pip/myLinkedIn. It converts
-your LinkedIn data into a collection of vCards. Unfortunately, based on the data
-that LinkedIn exports, most of your connections' vCard lack their Contact-Info.
-However, your connection's Contact-Info may actually be available to you. If you
-were to go to your connection's home page and click on "Contact info", you may
-see their Contact-Info including Email, Websites, Phone, Address and IM
-information.
-
-The information that Microsoft-LinkedIn provides in its export data is
-incomplete and not very useful. This is about addressing that problem.
-
-So, in such a situation, the expected thinking of a software developer is
-obvious: I'll write a web scraper to get the Contact-Info of my own
-connections. To the extent that Microsoft-LinkedIn may consider that
-prohibited, most developers would consider Microsoft-LinkedIn's policy
-unreasonable and unfair.
-
-I have done so. Layer-2 of myLinkedIn is myLinkedIn-Plus. You can use
-myLinkedInWeb.cs to web-scrape and add your own connection's Contact-Info
-to your LinkedIn vCards.
- On June 9th, I continued
-and shortly thereafter, Micorsoft-LinkedIn banned me.
-A complete transcript of what happened is at:
-https://github.com/bisos-pip/myLinkedIn/tree/main/linkedIn.com-transcript
-
-I went ahead and fully explained what I am doing. I explained why I consider
-what I am doing reasonable and asked them to clarify the User Agreement and
-their AUP with respect to my specific use. I got no reply and no clarification
-but the restrictions on my account were removed. I was unbanned. In total,
-my login to LinkedIn was banned for less than 10 hours.
-
-The fact that Micorsoft-LinkedIn did not respond to my request for
-clarification, bothers me. So, I have written an Open Letter to
-Micorsoft-LinkedIn requesting clarifications. Here is a link to that
-Open Letter.
-
-You can obtain a snap shot of your current connections data at LinkedIn.
-Click the “Me” icon, then select “Settings & Privacy” from the dropdown menu.
-Then Go to Data Privacy and click “Data privacy” and then "Get a copy of your data".
-
-There it says: "Your LinkedIn data belongs to you, and you can download an
-archive any time ..." and that is kind of true.
+You can obtain a snap shot of your current connections data at LinkedIn. There
+it says: "Your LinkedIn data belongs to you, and you can download an archive any
+time ..." and that is kind of true, but Micorsoft-LinkedIn's intent is something
+else.
 
 LinkedIn provides you a bounch of .csv (comma-separated values) files. These
-.csv files are realy not all that useful. The primary abstraction of LinkedIn
-are "Connections" in a "Business Cards Exchange" model. So, the myLinkedIn
-package combines the information that LinkedIn provides in .csv files.
+.csv files are realy not all that useful by themselves. The primary abstraction
+of LinkedIn are "Connections" in a "Business Cards Exchange" model. So, the
+myLinkedIn package combines the information that LinkedIn provides in .csv
+files.
 
-But unfortunately that information is not complete.
-One of the files that LinkedIn provides is Connections.csv top of that file
+Unfortunately, the information that Microsoft-LinkedIn provides in its export
+data is incomplete. And, this is a request from Micorsoft-LinkedIn for
+addressing that problem.
+
+One of the files that LinkedIn provides is Connections.csv, top of that file
+reads.
 
 "When exporting your connection data, you may notice that some of the email
 addresses are missing. You will only see email addresses for connections who
@@ -82,9 +45,32 @@ have allowed their connections to see or download their email address using this
 setting https://www.linkedin.com/psettings/privacy/email. You can learn more
 here https://www.linkedin.com/help/linkedin/answer/261"
 
-In my case less than one-third of them included an email. We address this
-short-coming with myLinkedIn-Plus -- which involves some web scraping.
+This is where LinkedIn policies start to violate the "Business Cards Exchange"
+model. In the "Setting--Visibility--Who can see or download your email address"
+the defaults are: "Only visible to me" and "Don't Allow connections to export
+emails."
 
+It seems like Micorsoft-LinkedIn wants us to be "locked in" so that people use
+more of "LinkedIn Messaging" and less of external email.
+
+The defaults should be "1st degree connections" and "Allow connections to export
+emails" should be always on.
+
+The export option is silly because if I can see my connection's Contact-Info,
+then I can retrieve it myself, in which case consistent with the "Business Cards
+Exchange" model it is reasonable for me to capture automation of that.
+And this is what myLinkedIn-Plus does. I used
+myLinkedInWeb.cs to web-scrape and add my own connection's Contact-Info
+to my LinkedIn vCards.
+ On June 9th,Micorsoft-LinkedIn banned me for about half a day.
+A complete transcript of what happened is at:
+https://github.com/bisos-pip/myLinkedIn/tree/main/linkedIn.com-transcript
+
+There, I explained all of this and asked for clarifications and got no replies.
+
+So, the crux of the matter is: does Micorsoft-LinkedIn want to honor the
+"Business Cards Exchange" for LinkingOut or does Micorsoft-LinkedIn want to lock
+us in towards becoming another commercial American social network.
 
 
 This post is part of a series. A roadmap is availabled at: NOTYET

@@ -1,0 +1,66 @@
+About the myLinkedIn-Plus Package --- Enriching Your vCards With Your Connections' Contact-Info
+
+June, 16, 2025 --- Mohsen Banan --- linkedin@mohsen.1.banan.byname.net
+
+Dear Fellow LinkedIn Member,
+
+In a previous post (NOTYET), I introduced the myLinkedIn python package
+--https://github.com/bisos-pip/myLinkedIn. It converts
+your LinkedIn data into a collection of vCards. Unfortunately, based on the data
+that LinkedIn exports, most of your connections' vCard lack their Contact-Info.
+However, your connection's Contact-Info may actually be available to you. If you
+were to go to your connection's home page and click on "Contact info", you may
+see their Contact-Info including Email, Websites, Phone, Address and IM
+information.
+
+The information that Microsoft-LinkedIn provides in its export data is
+incomplete and not very useful. This is about addressing that problem.
+
+So, in such a situation, the expected thinking of a software developer is
+obvious: I'll write a web scraper to get the Contact-Info of my own
+connections. To the extent that Microsoft-LinkedIn may consider that
+prohibited, most developers would consider Microsoft-LinkedIn's policy
+unreasonable and unfair.
+
+I have done so. Layer-2 of myLinkedIn is myLinkedIn-Plus. You can use
+myLinkedInWeb.cs to web-scrape and add your own connection's Contact-Info
+to your LinkedIn vCards.
+
+I have 500+ connections. Less than one-third on my own connections' email
+addresses are available through the LinkedIn export. On June 8th, I run
+myLinkedInWeb.cs on my own connections in multiple batches and got the
+Contact-Info of more than 400 of my connections. On June 9th, I continued
+and shortly thereafter, Micorsoft-LinkedIn banned me.
+A complete transcript of what happened is at:
+https://github.com/bisos-pip/myLinkedIn/tree/main/linkedIn.com-transcript
+
+I went ahead and fully explained what I am doing. I explained why I consider
+what I am doing reasonable and asked them to clarify the User Agreement and
+their AUP with respect to my specific use. I got no reply and no clarification
+but the restrictions on my account were removed. I was unbanned. In total,
+my login to LinkedIn was banned for less than 10 hours.
+
+The fact that Micorsoft-LinkedIn did not respond to my request for
+clarification, bothers me. So, I have written an Open Letter to
+Micorsoft-LinkedIn requesting clarifications. Here is a link to that
+Open Letter.
+
+
+*** Warnings About Use of myLinkedInWeb.cs Software ***
+
+myLinkedInWeb.cs software is a web automation tool (a web scraper)
+limited to a very narrow scope of information gathering. Yet, Microsoft-LinkedIn
+may consider such use as in violation of their User Agreement, and your access
+to LinkedIn may be restricted.
+
+myLinkedIn package's myLinkedInWeb.cs software comes AS IS with no warranties of
+any sort. If you use it, you are on your own. If you get banned, it is not my
+fault or the software's fault.
+
+
+This post is part of a series. A roadmap is availabled at: NOTYET
+
+
+If you consider this useful, please distribute this as widely as possible.
+
+At your services,

@@ -44,7 +44,7 @@ instructions for the impatient:
 - Run:  myLinkedIn.cs to see a menu of what is supported.
 - Run: myLinkedIn.cs --myLinkedInBase="~/Downloads"  -i fullUpdate ~/Downloads/Basic_LinkedInDataExport.zip
 - In your ~/Downloads, you will see the following additional dirs: LinkedInDataExport VCards maildir
-- Import the vCards in ~/Downloads/VCards to your usage environment (outlook, google contacts)
+- You can then import the vCards in ~/Downloads/VCards to your usage environment (outlook, google contacts)
 
 This post is part of a series. The others are:
 

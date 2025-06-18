@@ -1,0 +1,96 @@
+Micorsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Contact-Info in Basic_LinkedInDataExport.zip
+
+June, 16, 2025 --- Mohsen Banan --- linkedin@mohsen.1.banan.byname.net
+
+Dear Fellow LinkedIn Member,
+
+Here is the text of an open letter to Micorsoft-LinkedIn requesting inclusion of our connections' contact-info in Basic_LinkedInDataExport.zip.
+
+-------
+
+I, Mohsen Banan, joined LinkedIn on January 19, 2006. My view and use of
+LinkedIn at that time was that of a "Business Cards Exchange" with colleagues,
+friends and family. I would access my Connection's Contact-Info (email-address,
+phone number) and then interact with them *outside* of LinkedIn. Let's call that
+"LinkingOut". This LinkingOut end-to-end model of interactions is
+quite important for many of us (LinkedIn members).
+
+I have put together a python package called "myLinkedIn". It converts your
+LinkedIn data into a collection of vCards. One for each of your connections.
+These vCards can then be optionally augmented by the Contact-Info of your
+connections.
+
+The complete sources and instructions for using the myLinkedIn package are at:
+https://github.com/bisos-pip/myLinkedIn.
+
+
+In a previous post (NOTYET), I introduced the myLinkedIn python package
+--https://github.com/bisos-pip/myLinkedIn. It converts
+your LinkedIn data into a collection of vCards. Unfortunately, based on the data
+that LinkedIn exports, most of your connections' vCard lack their Contact-Info.
+However, your connection's Contact-Info may actually be available to you. If you
+were to go to your connection's home page and click on "Contact info", you may
+see their Contact-Info including Email, Websites, Phone, Address and IM
+information.
+
+The information that Microsoft-LinkedIn provides in its export data is
+incomplete and not very useful. This is about addressing that problem.
+
+So, in such a situation, the expected thinking of a software developer is
+obvious: I'll write a web scraper to get the Contact-Info of my own
+connections. To the extent that Microsoft-LinkedIn may consider that
+prohibited, most developers would consider Microsoft-LinkedIn's policy
+unreasonable and unfair.
+
+I have done so. Layer-2 of myLinkedIn is myLinkedIn-Plus. You can use
+myLinkedInWeb.cs to web-scrape and add your own connection's Contact-Info
+to your LinkedIn vCards.
+ On June 9th, I continued
+and shortly thereafter, Micorsoft-LinkedIn banned me.
+A complete transcript of what happened is at:
+https://github.com/bisos-pip/myLinkedIn/tree/main/linkedIn.com-transcript
+
+I went ahead and fully explained what I am doing. I explained why I consider
+what I am doing reasonable and asked them to clarify the User Agreement and
+their AUP with respect to my specific use. I got no reply and no clarification
+but the restrictions on my account were removed. I was unbanned. In total,
+my login to LinkedIn was banned for less than 10 hours.
+
+The fact that Micorsoft-LinkedIn did not respond to my request for
+clarification, bothers me. So, I have written an Open Letter to
+Micorsoft-LinkedIn requesting clarifications. Here is a link to that
+Open Letter.
+
+You can obtain a snap shot of your current connections data at LinkedIn.
+Click the “Me” icon, then select “Settings & Privacy” from the dropdown menu.
+Then Go to Data Privacy and click “Data privacy” and then "Get a copy of your data".
+
+There it says: "Your LinkedIn data belongs to you, and you can download an
+archive any time ..." and that is kind of true.
+
+LinkedIn provides you a bounch of .csv (comma-separated values) files. These
+.csv files are realy not all that useful. The primary abstraction of LinkedIn
+are "Connections" in a "Business Cards Exchange" model. So, the myLinkedIn
+package combines the information that LinkedIn provides in .csv files.
+
+But unfortunately that information is not complete.
+One of the files that LinkedIn provides is Connections.csv top of that file
+
+"When exporting your connection data, you may notice that some of the email
+addresses are missing. You will only see email addresses for connections who
+have allowed their connections to see or download their email address using this
+setting https://www.linkedin.com/psettings/privacy/email. You can learn more
+here https://www.linkedin.com/help/linkedin/answer/261"
+
+In my case less than one-third of them included an email. We address this
+short-coming with myLinkedIn-Plus -- which involves some web scraping.
+
+
+
+This post is part of a series. A roadmap is availabled at: NOTYET
+
+--------
+
+If you see merit in what I am proposing, please distribute this as widely as possible.
+
+At your services,

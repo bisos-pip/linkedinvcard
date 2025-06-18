@@ -91,14 +91,15 @@ Scraping.
   - [[#installation-with-pip][Installation With pip]]
 - [[#layer-1-usage][Layer-1 Usage]]
   - [[#obtaining-your-basic_linkedindataexportzip][Obtaining Your Basic_LinkedInDataExport.zip]]
+  - [[#fullupdate-in-the-downloads-directory][FullUpdate in the ~/Downloads Directory]]
   - [[#move-basic_linkedindataexportzip-next-to-vcards-base][Move Basic_LinkedInDataExport.zip next to VCards Base]]
-  - [[#prepare-the-vcards-base][Prepare the VCards Base]]
-  - [[#generate-initial-vcards][Generate Initial VCards]]
+  - [[#prepare-the-vcards-base][Prepare the vCards Base]]
+  - [[#generate-initial-vcards][Generate Initial vCards]]
   - [[#augment-vcards-with-invitation][Augment vCards With Invitation]]
   - [[#create-maildir-from-messagescsv][Create Maildir from messages.csv]]
 - [[#layer-2-usage][Layer-2 Usage]]
   -  [[#short-comings-of-layer-1][Short Comings of Layer-1]]
-  - [[#warnings-about-use-of-layer-2-software][Warnings About Use of Layer-2 Software]]
+  - [[#warnings-about-use-of-mylinkedinwebcs-layer-2-software][Warnings About Use of myLinkedInWeb.cs (Layer-2) Software]]
   - [[#running-layer-2-mylinkedinwebcs-on-a-handfull-of-connections-linkedinids][Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds]]
   - [[#running-layer-2-mylinkedinwebcs-on-many-or-all-of-your-connections-linkedinids][Running Layer-2 (myLinkedInWeb.cs) on Many or All of Your Connections LinkedInIds]]
   - [[#our-connections-contact-info-are-for-us][Our Connections Contact Info Are For Us]]
@@ -328,12 +329,22 @@ connections data by following these steps:
     + You'll have a limited time to download the file (typically 72 hours).
     + Click the download link in the email or return to the "Download your data" section in your Settings & Privacy to download the .zip file. ￼
 
+** FullUpdate in the ~/Downloads Directory
+
+Run:
+
+#+begin_src bash
+myLinkedIn.cs --myLinkedInBase="~/Downloads"  -i fullUpdate ~/Downloads/Basic_LinkedInDataExport.zip
+#+end_src
+
+You can then import the vCards in ~/Downloads/VCards to your usage environment (outlook, google contacts).
+
 ** Move Basic_LinkedInDataExport.zip next to VCards Base
 
 In BISOS, it is typically at: *~/bpos/usageEnvs/selected/myLinkedIn/selected*. You can choose any
 location for the base.
 
-** Prepare the VCards Base
+** Prepare the vCards Base
 
 Run:
 
@@ -341,7 +352,7 @@ Run:
 myLinkedIn.cs  -i exportedPrep ~/bpos/usageEnvs/selected/myLinkedIn/selected/Basic_LinkedInDataExport.zip
 #+end_src
 
-** Generate Initial VCards
+** Generate Initial vCards
 
 Run:
 
@@ -408,7 +419,7 @@ of my connections contact info and I am back on LinkedIn. A complete record of
 all my communications with Microsoft-LinkedIn with regard to Layer-2 usage is in
 [[file:./linkedIn.com-transcript/README.org]]
 
-** Warnings About Use of Layer-2 Software
+** Warnings About Use of myLinkedInWeb.cs (Layer-2) Software
 
 myLinkedIn package's Layer-2 software is a web automation tool (a web scraper)
 limited to a very narrow scope of information gathering. Yet, Microsoft-LinkedIn
@@ -440,10 +451,10 @@ logged-in at LinkedIn, account and password are not needed and are not used.
 
 Once you have successfuly run it on a handfull, run it batches of say 50, or all at once.
 
-To run contactInfoToVCard on all of the LinkedInIds, try:
+To run contactInfoToVCard on say 50 of (head -50) the LinkedInIds, try:
 
 #+begin_src bash
-ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | sed 's/\.[^.]*$//' | myLinkedInWeb.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards" --account="someUser" --password="somePasswd"  -i contactInfoToVCard
+ls ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards/* | myLinkedInWeb.cs -i vcardNeedsUpdate | head -50 |  myLinkedInWeb.cs --account="someUser" --password="somePasswd"  -i contactInfoToVCard
 #+end_src
 
 ** Our Connections Contact Info Are For Us

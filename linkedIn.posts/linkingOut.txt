@@ -1,0 +1,58 @@
+LinkingOut: Healthy Edge-to-Edge Social Media Interactions Outside of LinkedIn
+
+June, 16, 2025 --- Mohsen Banan --- linkedin@mohsen.1.banan.byname.net
+
+Dear Fellow LinkedIn Member,
+
+Being human involves social interactions and the digital era is here.
+But, that does not mean that we should buy into the commercial model of American social media.
+
+As a whole, the model of American digital ecosystem is corrupt. It is based on
+the flawed Western Intellectual Property Rights regime. It leads to exploitation
+of individuals by corporations. It takes us to surveailance capitalism. These
+can't be fixed by bandaids and these can't realistically be evolved. We need and
+an alternative.
+
+There is a blueprint for an alternative. We call it ByStar (By*).
+ByStar challenges the existing proprietary American digital ecosystem while
+operating concurrently alongside it. ByStar's primary offerings are tangible
+autonomy and genuine privacy on a very large scale. ByStar represents a moral
+inversion of the proprietary American internet services model. By* is about
+redecentralization of internet application services. By* is inherently edge
+oriented. Recently, I authored a book outlining an interdisciplinary blueprint
+for the realization of ByStar.
+
+Nature of Polyexistentials:
+Basis for Abolishment of the Western Intellectual Property Rights Regime
+And Introduction of the Libre-Halaal ByStar Digital Ecosystem
+
+Book Access Page: https://github.com/bxplpc/120033
+Book Download: https://raw.github.com/bxplpc/120033/main/pdf/c-120033-1_05-book-8.5x11-col-emb-pub.pdf
+ByStar at Github: https://github.com/mohsenBanan
+
+ByStar focuses on the abstraction of the individual on the autonomous edge -- as
+opposed to the controlled American center.
+
+The "Business Cards Exchange" model of LinkedIn let's us create networks of
+connections. Using the myLinkedIn package --
+https://github.com/bisos-pip/myLinkedIn -- we can then extract the abstraction
+of our LinkedIn connections as vCards.
+
+In ByStar we can then import these vCards to the ByStar usage environemnt
+(Blee-Contacts). We can then privately tag/categorize our LinkedIn connections.
+For the equivalent of a "LinkedIn Post", we can then use the MTDT (Mail Templating
+and Distribution and Tracking) package -- https://github.com/bx-blee/mtdt -- to
+engage in social network like (mass communications) interactions with our
+LinkedIn connections through email (outside of LinkedIn). This way my "posts"
+are not at the mercy of LinkedIn algorithem. This is what we call "LinkingOut".
+
+There you have it. A practical blueprint for healthy social networking.
+Furthermore note that LinkingOut is not instead of LinkedIn, it is in addition
+to LinkedIn.
+
+This post is part of a series. A roadmap of these related posts is availabled at: NOTYET
+
+
+If you consider this useful, please distribute this as widely as possible.
+
+At your services,

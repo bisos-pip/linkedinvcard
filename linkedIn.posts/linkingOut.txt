@@ -45,7 +45,7 @@ LinkedIn connections through email (outside of LinkedIn). This way, my posts
 are not at the mercy of LinkedIn's algorithm. This is what we call "LinkingOut."
 For LinkingOut, my outgoing ByName email address is
 linkedout@mohsen.1.banan.byname.net, and my incoming ByName email address is
-linkedin@mohsen.1.banan.byname.net.
+linkedin@mohsen.1.banan.byname.net. My ByName autonomous edge is: http://mohsen.1.banan.byname.net
 
 There you have it: a practical blueprint for healthy social networking.
 Furthermore, note that LinkingOut is not instead of LinkedIn; it is in addition

@@ -1,4 +1,7 @@
-About the myLinkedIn-Basic Package --- vCards for ALL of Your LinkedIn Connections
+#+title: About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn Connections
+#+DATE: <2025-06-19 Thu 09:14>
+#+AUTHOR: Mohsen BANAN
+#+OPTIONS: toc:4
 
 Dear Fellow LinkedIn Member,
 
@@ -48,4 +51,10 @@ If you find this useful, please distribute it widely.
 
 At your service,
 
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June, 16, 2025
+Mohsen Banan ---  [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June 19, 2025
+
+
+#+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
+#+NAME:   fig:py3/images/exportedFileInfo
+#+ATTR_HTML: :width 1100px
+[[../py3/images/exportedFileInfo.png]]

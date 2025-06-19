@@ -1,4 +1,9 @@
-Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Contact Info in Basic_LinkedInDataExport.zip
+#+title: Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Complete Connections' Contact Info in Basic_LinkedInDataExport.zip
+#+DATE: <2025-06-19 Thu 09:14>
+#+AUTHOR: Mohsen BANAN
+#+OPTIONS: toc:4
+
+Dear Microsoft-LinkedIn Acceptable-Use Policy Maker,
 
 I, Mohsen Banan, joined LinkedIn on January 19, 2006, viewing it as a "Business
 Cards Exchange" model. I would access my connections' contact info (email,
@@ -46,8 +51,9 @@ So, the crux of the matter is: does Microsoft-LinkedIn want to honor the
 "Business Cards Exchange" for LinkingOut, or does it want to lock us in towards
 LinkedIn becoming another exploitation-oriented American social network?
 
-Additional information is available at: NOTYET
+Additional information is available at:\\
+  [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedInPostsOverview.org]]
 
 Sincerely,
 
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June, 16, 2025
+Mohsen Banan ---  [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June 19, 2025

@@ -1,5 +1,5 @@
 #+title: bisos.myLinkedIn: Your Connections as vCards for Outside of LinkedIn
-#+DATE: <2024-02-19 Mon 16:27>
+#+DATE: <2025-06-19 Thu 09:50>
 #+AUTHOR: Mohsen BANAN
 #+OPTIONS: toc:4
 
@@ -21,7 +21,7 @@ of your first-level connections. The purpose of /bisos.myLinkedIn/ is to facilit
 convenient communication with your first-level connections *outside LinkedIn*.
 /bisos.myLinkedIn/ is structured as two layers.
 
-- /Layer 1/ -- *myLinkedIn.cs* -- Operates purely on the content of
+- /Layer 1/ -- myLinkedIn-Basic -- *myLinkedIn.cs* -- Operates purely on the content of
   Basic_LinkedInDataExport.zip. Connections.csv is used to create vCards for
   each of your connections. Invitations.csv is then used to augment the vCards.
   Messages.csv is converted to Maildir format for reading using your own MUA
@@ -29,7 +29,7 @@ convenient communication with your first-level connections *outside LinkedIn*.
   one-fourth of your first-level connections is in Connections.csv. The use of
   Layer 1 does not violate LinkedIn policies in any way.
 
-- /Layer 2/ -- *myLinkedinWeb.cs* -- Uses /layer 1/ and enriches it with the /Contact
+- /Layer 2/ -- myLinkedIn-Plus -- *myLinkedinWeb.cs* -- Uses /layer 1/ and enriches it with the /Contact
   info/ for each of the vCards. The email address (and other contact info) of most
   of your first-level connections is not available in /layer 1/. *myLinkedInWeb.cs*
   goes to your first-level connections' home page, clicks on the /Contact info/,
@@ -75,14 +75,14 @@ scraping.
 - [[#overview][Overview]]
 -  [[#a-standalone-command-services-pycs-facility-of-bisos][A Standalone Command-Services PyCS Facility of BISOS]]
 - [[#inputs][Inputs]]
-  - [[#layer-1----mylinkedin-basic----basic_linkedindataexportzip][Layer-1 -- myLinkedin-Basic -- Basic_LinkedInDataExport.zip]]
-  - [[#layer-2----mylinkedin-plus----web-connect-info][Layer-2 -- myLinkedin-Plus -- Web Connect Info]]
+  - [[#layer-1----mylinkedin-basic----basic_linkedindataexportzip][Layer-1 -- myLinkedIn-Basic -- Basic_LinkedInDataExport.zip]]
+  - [[#layer-2----mylinkedin-plus----web-connect-info][Layer-2 -- myLinkedIn-Plus -- Web Connect Info]]
 - [[#outpts][Outpts]]
   - [[#vcards][VCards]]
   - [[#maildirs][Maildirs]]
--  [[#layer-1----basic----mylinkedincs----diagram-and-softwarediagram-mapping][Layer-1 -- Basic -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
+-  [[#layer-1----mylinkedin-basic----mylinkedincs----diagram-and-softwarediagram-mapping][Layer-1 -- myLinkedIn-Basic -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping]]
   -  [[#key-features-of-layer-1----mylinkedincs][Key Features of Layer-1 -- myLinkedIn.cs]]
--  [[#layer-2----plus----mylinkedinwebcs----diagram-and-softwarediagram-mapping][Layer-2 -- Plus -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
+-  [[#layer-2----mylinkedin-plus----mylinkedinwebcs----diagram-and-softwarediagram-mapping][Layer-2 -- myLinkedIn-Plus -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping]]
   -  [[#key-features-of-layer-2----mylinkedinwebcs][Key Features of Layer-2 -- myLinkedInWeb.cs]]
 -  [[#broader-common-uses----overview-and-diagram][Broader Common Uses -- Overview and Diagram]]
 - [[#benefits----distinct-and-different][Benefits -- Distinct and Different]]
@@ -122,19 +122,24 @@ self-contained Python package separate from BISOS.
 
 * Inputs
 
-** Layer-1 -- myLinkedin-Basic -- Basic_LinkedInDataExport.zip
+Inputs of myLinkedin-Basic are the .csv files that LinkedIn exports.
+Inputs of myLinkedin-Plus are the contact info of your connections which are web scraped.
+
+** Layer-1 -- myLinkedIn-Basic -- Basic_LinkedInDataExport.zip
 
   - *Connections.csv*: The basic connection data, including LinkedIn ID, profile URL, name, etc.
   - *Invitations.csv*: Captures whether you invited the connection or were invited, along with the invitation text.
   - *Messages.csv*: Adds LinkedIn message history between you and your connections, showing the conversation details and direction.
 
-** Layer-2 -- myLinkedin-Plus -- Web Connect Info
+** Layer-2 -- myLinkedIn-Plus -- Web Connect Info
 
 - email
 - websites
 - phones
 
 * Outpts
+
+Outputs of the myLinkedIn package are a set of vCards and Maildirs.
 
 ** VCards
 
@@ -145,7 +150,7 @@ vCards (.vcf) -- one for each connection.
 
 *Messages.csv* is converted into Maildir format.
 
-*  Layer-1 -- Basic -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
+*  Layer-1 -- myLinkedIn-Basic -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/exportedFileInfo
@@ -194,7 +199,7 @@ network in vCard (.vcf) format.
    added from *Messages.csv*, organizing the messages in chronological order with
    sender information.
 
-*  Layer-2 -- Plus -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping
+*  Layer-2 -- myLinkedIn-Plus -- *myLinkedInWeb.cs* -- Diagram and Software–Diagram Mapping
 
 #+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/exportedPlusWebCons

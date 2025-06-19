@@ -1,4 +1,7 @@
-LinkingOut: Healthy Edge-to-Edge Social Media Like Interactions Outside of LinkedIn
+#+title: LinkingOut: Healthy Edge-to-Edge Social Media Like Interactions Outside of LinkedIn
+#+DATE: <2025-06-19 Thu 09:14>
+#+AUTHOR: Mohsen BANAN
+#+OPTIONS: toc:4
 
 Dear Fellow LinkedIn Member,
 
@@ -45,7 +48,7 @@ LinkedIn connections through email (outside of LinkedIn). This way, my posts
 are not at the mercy of LinkedIn's algorithm. This is what we call "LinkingOut."
 For LinkingOut, my outgoing ByName email address is
 linkedout@mohsen.1.banan.byname.net, and my incoming ByName email address is
-linkedin@mohsen.1.banan.byname.net.
+linkedin@mohsen.1.banan.byname.net. My ByName autonomous edge is: http://mohsen.1.banan.byname.net
 
 There you have it: a practical blueprint for healthy social networking.
 Furthermore, note that LinkingOut is not instead of LinkedIn; it is in addition
@@ -57,4 +60,10 @@ If you find this useful, please distribute it widely.
 
 At your service,
 
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June, 16, 2025
+
+Mohsen BANAN --- [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June 19, 2025
+
++CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
+#+NAME:   fig:py3/images/ebdbMtdt
+#+ATTR_HTML: :width 1100px
+.[[./py3/images/ebdbMtdt.png]]

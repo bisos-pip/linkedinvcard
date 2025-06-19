@@ -1,4 +1,8 @@
-About the myLinkedIn-Plus Package --- Enriching Your vCards with Your Connections' Contact Info
+#+title: About the myLinkedIn-Plus Package --- Enriching Your vCards with Your Connections' Contact Info
+#+DATE: <2025-06-19 Thu 09:14>
+#+AUTHOR: Mohsen BANAN
+#+OPTIONS: toc:4
+
 
 Dear Fellow LinkedIn Member,
 
@@ -24,7 +28,7 @@ hours.
 Microsoft-LinkedIn's lack of response prompted me to write an Open Letter
 requesting clarification. Here is a link to that Open Letter: NOTYET
 
-*** Warnings About Use of myLinkedInWeb.cs Software ***
+/Warnings About Use of myLinkedInWeb.cs Software/
 
 myLinkedInWeb.cs is a web scraper limited to a narrow scope. Microsoft-LinkedIn
 may consider its use a violation of their User Agreement, risking account
@@ -40,4 +44,11 @@ find it useful.
 
 At your service,
 
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June, 16, 2025
+
+Mohsen BANAN --- [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June 19, 2025
+
+
+#+CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
+#+NAME:   fig:py3/images/exportedPlusWebCons
+#+ATTR_HTML: :width 1100px
+[[../py3/images/exportedPlusWebCons.png]]

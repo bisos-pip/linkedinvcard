@@ -6,7 +6,7 @@
 #+BEGIN: b:org:pypi:readme/topControls :pkgName "linkedinVcard" :comment "basic"
 
 |----------------------+------------------------------------------------------------------|
-| ~Blee Panel Controls~: | [[elisp:(show-all)][Show-All]] : [[elisp:(org-shifttab)][Overview]] : [[elisp:(progn (org-shifttab) (org-content))][Content]] : [[elisp:(delete-other-windows)][(1)]] : [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]] : [[elisp:(save-buffer)][Save]]  : [[elisp:(kill-buffer)][Quit]]  : [[elisp:(bury-buffer)][Bury]] |
+| ~Blee Panel Controls~: | [[elisp:(show-all)][Show-All]] : [[elisp:(org-shifttab)][Overview]] : [[elisp:(progn (org-shifttab) (org-content))][Content]] : [[elisp:(delete-other-windows)][(1)]] : [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]] : [[elisp:(save-buffer)][Save]] : [[elisp:(kill-buffer)][Quit]] : [[elisp:(bury-buffer)][Bury]] |
 | ~Panel Links~:         | [[file:./py3/panels/bisos.linkedinVcard/_nodeBase_/fullUsagePanel-en.org][Repo Blee Panel]] --  [[file:/bisos/git/bxRepos/bisos-pip/myLinkedIn/py3/panels/bisos.linkedinVcard/_nodeBase_/fullUsagePanel-en.org][Blee Panel]]                                                |
 | ~See Also~:            | [[https://pypi.org/project/bisos.linkedinVcard][At PYPI]] : [[https://github.com/bisos-pip/pycs][bisos.PyCS]]                                             |
 |----------------------+------------------------------------------------------------------|
@@ -18,27 +18,27 @@
 /bisos.myLinkedIn/ takes contents of Basic_LinkedInDataExport.zip and converts
 them to vCards for your connections and then augments them with the /Contact info/
 of your first-level connections. The purpose of /bisos.myLinkedIn/ is to facilitate
-convenient communication with your first-level connections *outside of LinkedIn*.
+convenient communication with your first-level connections *outside LinkedIn*.
 /bisos.myLinkedIn/ is structured as two layers.
 
 - /Layer 1/ -- *myLinkedIn.cs* -- Operates purely on the content of
-  Basic_LinkedInDataExport.zip. Connections.csv is used to create VCards for
-  each of your connections. Invitations.csv is then used to augment the VCards.
-  Messages.csv is converted to maildir format for reading using your own MUA
+  Basic_LinkedInDataExport.zip. Connections.csv is used to create vCards for
+  each of your connections. Invitations.csv is then used to augment the vCards.
+  Messages.csv is converted to Maildir format for reading using your own MUA
   (Mail User Agent). The email address (and other contact info) of only about
-  one-fourth of your first-level connections is in Connections.csv. Uses of
-  Layer 1 do not violate LinkedIn policies in any way.
+  one-fourth of your first-level connections is in Connections.csv. The use of
+  Layer 1 does not violate LinkedIn policies in any way.
 
 - /Layer 2/ -- *myLinkedinWeb.cs* -- Uses /layer 1/ and enriches it with the /Contact
   info/ for each of the vCards. The email address (and other contact info) of most
-  of your first-level connections is not available in /layer 1/. *myLinkedinWeb.cs*
+  of your first-level connections is not available in /layer 1/. *myLinkedInWeb.cs*
   goes to your first-level connections' home page, clicks on the /Contact info/,
   obtains email and other contact info from the web, and adds it to the vCards.
-  Some may say that uses of Layer 2 do violate LinkedIn policies. I don't think
-  so. In my view, what *myLinkedinWeb.cs* does falls in the category of fair and
-  reasonable use. I have been on LinkedIn for more than 20 years and I expect to
+  Some may say that the use of Layer 2 does violate LinkedIn policies. I don't think
+  so. In my view, what *myLinkedInWeb.cs* does falls in the category of fair and
+  reasonable use. I have been on LinkedIn for more than 20 years, and I expect to
   have convenient access to the /Contact info/ of my connections. If LinkedIn
-  considers this use not acceptable, then it should include the /Contact info/ of
+  considers this use unacceptable, then it should include the /Contact info/ of
   *ALL* of my connections in Basic_LinkedInDataExport.zip. Does LinkedIn really
   expect me to keep my vCards current manually?
 
@@ -60,9 +60,9 @@ repeatable and scalable, making it easier to maintain an up-to-date contact
 database, effectively integrating LinkedIn connection data into your daily
 workflow.
 
-Other than adding the /Contact info/ information of your first-level connections
-to the vCards, the /bisos.myLinkedIn/ package does not support any form of Web
-Scraping.
+Other than adding the /Contact info/ of your first-level connections
+to the vCards, the /bisos.myLinkedIn/ package does not support any form of web
+scraping.
 
 
 #+BEGIN: b:org:pypi:readme/pkgDocumentation :pkgName "capability-cs" :comment "basic"
@@ -139,11 +139,11 @@ self-contained Python package separate from BISOS.
 ** VCards
 
 *Connections.csv* and *Invitations.csv* inputs and Web Connect Info are transformed into a series of
-VCards (.vcf) -- one for each connection.
+vCards (.vcf) -- one for each connection.
 
 ** Maildirs
 
-*Messages.csv* is converted into maildir format.
+*Messages.csv* is converted into Maildir format.
 
 *  Layer-1 -- Basic -- *myLinkedIn.cs* -- Diagram and Software–Diagram Mapping
 
@@ -152,7 +152,7 @@ VCards (.vcf) -- one for each connection.
 #+ATTR_HTML: :width 1100px
 [[./py3/images/exportedFileInfo.png]]
 
-The figure above, provides an overview of Layer-1.
+The figure above provides an overview of Layer-1.
 
 A brief description of the nodes is provided below.
 
@@ -180,7 +180,7 @@ network in vCard (.vcf) format.
 
 - VCard Creation:
 
-   Based on  data from `Connections.csv` a VCard is created for each contact. This VCard will then be augmented and enriched.
+   Based on data from `Connections.csv`, a vCard is created for each contact. This vCard will then be augmented and enriched.
 
 - VCard Local Augmentation:
 
@@ -190,7 +190,7 @@ network in vCard (.vcf) format.
 
 - Maildir Conversion:
 
-   With data from `Messages.csv`, maildirs are created. Conversation details are
+   With data from `Messages.csv`, Maildirs are created. Conversation details are
    added from *Messages.csv*, organizing the messages in chronological order with
    sender information.
 
@@ -201,9 +201,9 @@ network in vCard (.vcf) format.
 #+ATTR_HTML: :width 1100px
 [[./py3/images/exportedPlusWebCons.png]]
 
-The figure above, provides an overview of Layer-2.
+The figure above provides an overview of Layer-2.
 Layer-2 builds on Layer-1 by enriching the vCards with the information
-obtained from the /Contact Info/ for each VCard.
+obtained from the /Contact Info/ for each vCard.
 
 A brief description of the relevant nodes is provided below.
 
@@ -216,7 +216,7 @@ A brief description of the relevant nodes is provided below.
 
 **  Key Features of Layer-2 -- myLinkedInWeb.cs
 
-Layer-2 (myLinkedIn-Plus) is about Remote enrichment of Layer-1 (myLinkedIn-Basic) vCard.
+Layer-2 (myLinkedIn-Plus) is about remote enrichment of Layer-1 (myLinkedIn-Basic) vCard.
 
 
 - Web Contact Info Retrieval:
@@ -232,7 +232,7 @@ Extracts additional details from LinkedIn's Contact Info page via automated scra
 #+ATTR_HTML: :width 1100px
 [[./py3/images/ebdbMtdt.png]]
 
-The figure above, provides an overview of how MyLinkedIn (Layers-1 and Layer-2) are commonly used.
+The figure above provides an overview of how MyLinkedIn (Layers-1 and Layer-2) are commonly used.
 
 A brief description of the relevant nodes is provided below.
 
@@ -307,7 +307,7 @@ bin/myLinkedIn.cs
 
 ** Obtaining Your Basic_LinkedInDataExport.zip
 
-As of, 2025-06-10 Tue 11:35, you can obtain a snap shot of your current
+As of 2025-06-10 Tue 11:35, you can obtain a snapshot of your current
 connections data by following these steps:
 
 - 1) Access Settings & Privacy: Click the "Me" icon (usually your profile picture)
@@ -337,7 +337,7 @@ Run:
 myLinkedIn.cs --myLinkedInBase="~/Downloads"  -i fullUpdate ~/Downloads/Basic_LinkedInDataExport.zip
 #+end_src
 
-You can then import the vCards in ~/Downloads/VCards to your usage environment (outlook, google contacts).
+You can then import the vCards in ~/Downloads/VCards to your usage environment (Outlook, Google Contacts).
 
 ** Move Basic_LinkedInDataExport.zip next to VCards Base
 
@@ -387,35 +387,35 @@ bin/myLinkedInWeb.cs
 
 Most of the vCards generated in Layer-1 do not include contact information of
 your connections. You can go to the home page of each of your connections, click
-on their /Contact info/ botton and see their email address and their other contact info.
+on their /Contact info/ button and see their email address and their other contact info.
 
 So, this information (contact info of ALL of your connections is available to you),
-But Microsoft-LinkedIn has chosen not to supply that information to you.
+but Microsoft-LinkedIn has chosen not to supply that information to you.
 
-Furthermore, Microsoft-LinkedIn prohibits use of automated tools to extract your
-own connection's non-linkedin related contact info. Microsoft-LinkedIn says: "To
+Furthermore, Microsoft-LinkedIn prohibits the use of automated tools to extract your
+own connection's non-LinkedIn related contact info. Microsoft-LinkedIn says: "To
 protect our members’ privacy and help foster authentic interactions on LinkedIn,
 our User Agreement prohibits the use of these tools." But look, my connection's
 contact info includes his/her email address which is for outside of LinkedIn
 interactions. My connection's contact info includes his/her phone number which
 is for outside of LinkedIn interactions. Accessing this complete information in
-no way shape or form impacts "authentic interactions on LinkedIn". So, the
+no way, shape, or form impacts "authentic interactions on LinkedIn". So, the
 Microsoft-LinkedIn policy of not allowing me to automate access to my own
 connections' contact info is bogus. Microsoft-LinkedIn wants to lock me inside
 of LinkedIn and use Microsoft-LinkedIn's messaging service instead of email
 outside of LinkedIn.
 
-I consider using automated tools to obtain ALL of my own connections contact
+I consider using automated tools to obtain ALL of my own connections' contact
 info as fair and reasonable use. It is the Microsoft-LinkedIn User Agreement
 that is unreasonable.
 
-Layer-2 over comes this short comming of Layer-1. It automates addition of
-ALL of your connections contact info to theirs vCards of Layer-1.
+Layer-2 overcomes this shortcoming of Layer-1. It automates the addition of
+ALL of your connections' contact info to their vCards of Layer-1.
 
 After being temporarily restricted for having used Layer-2, I presented the
 above logic to Microsoft-LinkedIn and requested clarification. They have not
 responded to me. But, they removed the temporary restriction. I have almost ALL
-of my connections contact info and I am back on LinkedIn. A complete record of
+of my connections' contact info and I am back on LinkedIn. A complete record of
 all my communications with Microsoft-LinkedIn with regard to Layer-2 usage is in
 [[file:./linkedIn.com-transcript/README.org]]
 
@@ -433,7 +433,7 @@ or the software's fault.
 ** Running Layer-2 (myLinkedInWeb.cs) on a Handfull of Connections LinkedInIds
 
 *myLinkedInWeb.cs -i contactInfoToVCard* takes its input as a list of inputs as
-arguments or on stdin. The inputs can be LinkInIds or path to a LinkedIn vCard.
+arguments or on stdin. The inputs can be LinkedInIds or path to a LinkedIn vCard.
 
 At this time, only Chrome is supported. Make sure that Chrome is not running
 when you run *myLinkedInWeb.cs -i contactInfoToVCard*.
@@ -441,15 +441,15 @@ when you run *myLinkedInWeb.cs -i contactInfoToVCard*.
 To run contactInfoToVCard on just a couple of LinkedInIds, try:
 
 #+begin_src bash
-ls -1 ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards | egrep '.vcf$' | head -2 | sed 's/\.[^.]*$//' | myLinkedInWeb.cs --vcardsDir="~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards" --account="someUser" --password="somePasswd"  -i contactInfoToVCard
+ls ~/bpos/usageEnvs/selected/myLinkedIn/selected/VCards/* | myLinkedInWeb.cs -i vcardNeedsUpdate | head -2 |  myLinkedInWeb.cs --account="someUser" --password="somePasswd"  -i contactInfoToVCard
 #+end_src
 
-The account and password are your linkedin credentials. If you are already
+The account and password are your LinkedIn credentials. If you are already
 logged-in at LinkedIn, account and password are not needed and are not used.
 
 ** Running Layer-2 (myLinkedInWeb.cs) on Many or All of Your Connections LinkedInIds
 
-Once you have successfuly run it on a handfull, run it batches of say 50, or all at once.
+Once you have successfully run it on a handful, run it in batches of say 50, or all at once.
 
 To run contactInfoToVCard on say 50 of (head -50) the LinkedInIds, try:
 

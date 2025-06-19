@@ -3,8 +3,31 @@
 #+AUTHOR: Mohsen BANAN
 #+OPTIONS: toc:4
 
+I oppose the commercial American model of social media, which is why I steer
+clear of platforms like Facebook, Instagram, and TikTok. I've been using
+LinkedIn since January 19, 2006, viewing it primarily as a "Business Cards
+Exchange" with colleagues, friends, and family. My approach involves accessing
+my connections' contact information (email, phone) to interact with them *outside*
+of LinkedIn, a method I refer to as "LinkingOut." This end-to-end model offers
+more privacy than LinkedIn's native messaging  model.
 
-I, Mohsen Banan, joined LinkedIn on January 19, 2006. Almost 20 years ago.
+Over the years, LinkedIn, now owned by Microsoft, has increasingly aligned with
+the traditional exploitative model of American social media. I am committed to
+maintaining the "Business Cards Exchange" model through LinkingOut. To support
+this, I developed a Python package called "myLinkedIn," which transforms
+LinkedIn data into vCards for each connection. These vCards can be enriched with
+additional contact information and imported into environments like Emacs EBDB,
+MS Outlook, or Google Contacts, enabling private tagging and categorization. For
+"LinkedIn Posts," I employ the MTDT package (Mail Templating, Distribution, and
+Tracking) to communicate with connections via email, thus bypassing LinkedIn's
+algorithm. This is the essence of "LinkingOut."
+
+On June 8th, I ran myLinkedInWeb.cs on my own connections in multiple batches
+and obtained the contact information of more than 400 of my connections. On June
+9th, I continued this process but was shortly thereafter banned by
+Microsoft-LinkedIn for half a day. A complete transcript of what occurred
+follows:
+
 
 * Table of Contents     :TOC:
 - [[#june-8-2025----run-of-mylinkedinwebcs-on--400-connections][June 8, 2025 -- Run of myLinkedInWeb.cs on  400 Connections]]

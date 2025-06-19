@@ -1,4 +1,4 @@
-An Overview of myLinkedIn and LinkingOut --- Facilitating a vCards Based Edge-to-Edge Interactions Model
+/An Overview of myLinkedIn and LinkingOut ---Facilitating a vCards Based Edge-to-Edge Interactions Model/
 
 Dear Fellow LinkedIn Member,
 
@@ -14,36 +14,32 @@ Over the years, Microsoft's LinkedIn has shifted towards a commercial
 exploitative model. I aim to preserve the "Business Cards Exchange" model of
 LinkingOut. To achieve this, I developed a Python package called "myLinkedIn,"
 which converts LinkedIn data into vCards for each connection. These vCards can
-be augmented with contact info and imported into environments like Emacs ebdb,
+be augmented with contact info and imported into environments like Emacs EBDB,
 MS Outlook, or Google Contacts, allowing private tagging and categorization.
 
 Complete sources and instructions for the myLinkedIn package are at:
-https://github.com/bisos-pip/myLinkedIn.
+[[https://github.com/bisos-pip/myLinkedIn]].
 
 For "LinkedIn Posts," I use the MTDT package (Mail Templating and Distribution
-and Tracking) -- https://github.com/bx-blee/mtdt -- to communicate with
-connections via email. This way my posts and interactions are not at the mercy
-of LinkedIn algorithem. This is what I call "LinkingOut." LinkingOut is not
-instead of LinkedIn, it is in addition to it.
+and Tracking) [[https://github.com/bx-blee/mtdt]] to communicate with connections
+via email. This way my posts and interactions are not at the mercy of LinkedIn
+algorithms. This is what I call "LinkingOut." LinkingOut is not instead of
+LinkedIn, it is in addition to it.
 
 Following this overview, I'll post a series of related articles, concluding with
 an Open Letter to Microsoft-LinkedIn, urging them not to hinder our "Business
 Cards Exchange" model. Here's a summary of those posts:
 
-- About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn Connections
-
+- About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn   Connections
 
 - About the myLinkedIn-Plus Package --- Enriching Your vCards with Web-Scraped Contact Info
 
 - LinkingOut: Healthy Edge-to-Edge Social Media Like Interactions Outside of LinkedIn
 
-
 - Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Contact Info in Basic_LinkedInDataExport.zip
-
 
 If you find this approach valuable, please share this post widely.
 
 At your service,
 
-
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June, 16, 2025
+Mohsen Banan --- [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June, 16, 2025

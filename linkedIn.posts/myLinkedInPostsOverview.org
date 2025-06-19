@@ -34,16 +34,16 @@ Following this overview, I'll post a series of related articles, concluding with
 an Open Letter to Microsoft-LinkedIn, urging them not to hinder our "Business
 Cards Exchange" model. Here's a summary of those posts:
 
-- About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn Connections
+- About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn Connections\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedIn-Basic.org]]
 
-- About the myLinkedIn-Plus Package --- Enriching Your vCards with Web-Scraped Contact Info
+- About the myLinkedIn-Plus Package --- Enriching Your vCards with Web-Scraped Contact Info\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedIn-Plus.org]]
 
-- LinkingOut: Healthy Edge-to-Edge Social Media Like Interactions Outside of LinkedIn
+- LinkingOut: Healthy Edge-to-Edge Social Media Like Interactions Outside of LinkedIn\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/linkingOut.org]]
 
-- Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Complete Contact Info in Basic_LinkedInDataExport.zip
+- Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Complete Contact Info in Basic_LinkedInDataExport.zip\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/Microsoft-LinkedIn-letter.org]]
 
 If you find this approach valuable, please share this post widely.

@@ -66,4 +66,4 @@ Mohsen BANAN --- [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June 19, 2025
 +CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/ebdbMtdt
 #+ATTR_HTML: :width 1100px
-.[[./py3/images/ebdbMtdt.png]]
+[[../py3/images/ebdbMtdt.png]]

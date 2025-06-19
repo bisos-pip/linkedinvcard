@@ -2,20 +2,21 @@ An Overview of myLinkedIn and LinkingOut --- Facilitating a vCards Based Edge-to
 
 Dear Fellow LinkedIn Member,
 
-I oppose the commercial American model of social media, which is why I avoid
-platforms like Facebook, Instagram, and TikTok. I've used LinkedIn for about 20
-years, joining on January 19, 2006, viewing it as a tool for "Business Cards
-Exchange" with colleagues, friends, and family. I accessed my connections'
-contact info (email, phone) to interact with them *outside* LinkedIn, a process
-I call "LinkingOut." This end-to-end model is more private than LinkedIn's
-native model, where I only share public professional info.
+I oppose the commercial exploitation-oriented American model of social media,
+which is why I avoid platforms like Facebook, Instagram, and TikTok. I've used
+LinkedIn for about 20 years, joining on January 19, 2006, viewing it as a tool
+for "Business Cards Exchange" with colleagues, friends, and family. I would
+access my connections' contact info (email, phone) to interact with them
+*outside* LinkedIn, a process I call "LinkingOut." This end-to-end model is more
+private than LinkedIn's native "Messaging" model.
 
 Over the years, Microsoft's LinkedIn has shifted towards a commercial
-exploitative model. I aim to preserve the "Business Cards Exchange" model of
-LinkingOut. To achieve this, I developed a Python package called "myLinkedIn,"
-which converts LinkedIn data into vCards for each connection. These vCards can
-be augmented with contact info and imported into environments like Emacs ebdb,
-MS Outlook, or Google Contacts, allowing private tagging and categorization.
+exploitation-oriented model. I aim to preserve the "Business Cards Exchange"
+model of LinkingOut. To achieve this, I developed a Python package called
+"myLinkedIn," which converts LinkedIn data into vCards for each connection.
+These vCards can be augmented with contact info and imported into environments
+like Emacs ebdb, MS Outlook, or Google Contacts, allowing private tagging and
+categorization.
 
 Complete sources and instructions for the myLinkedIn package are at:
 https://github.com/bisos-pip/myLinkedIn.
@@ -23,27 +24,28 @@ https://github.com/bisos-pip/myLinkedIn.
 For "LinkedIn Posts," I use the MTDT package (Mail Templating and Distribution
 and Tracking) -- https://github.com/bx-blee/mtdt -- to communicate with
 connections via email. This way my posts and interactions are not at the mercy
-of LinkedIn algorithem. This is what I call "LinkingOut." LinkingOut is not
-instead of LinkedIn, it is in addition to it.
+of LinkedIn algorithem. LinkingOut is not instead of LinkedIn, it is in addition
+to LinkedIn.
 
 Following this overview, I'll post a series of related articles, concluding with
 an Open Letter to Microsoft-LinkedIn, urging them not to hinder our "Business
 Cards Exchange" model. Here's a summary of those posts:
 
 - About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn Connections
-
+  https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedIn-Basic.org
 
 - About the myLinkedIn-Plus Package --- Enriching Your vCards with Web-Scraped Contact Info
+  https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedIn-Plus.org
 
 - LinkingOut: Healthy Edge-to-Edge Social Media Like Interactions Outside of LinkedIn
+  https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/linkingOut.org
 
-
-- Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Contact Info in Basic_LinkedInDataExport.zip
-
+- Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Complete Contact Info in Basic_LinkedInDataExport.zip
+  https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/Microsoft-LinkedIn-letter.org
 
 If you find this approach valuable, please share this post widely.
 
 At your service,
 
 
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June, 16, 2025
+Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June 19, 2025

@@ -54,7 +54,8 @@ There you have it: a practical blueprint for healthy social networking.
 Furthermore, note that LinkingOut is not instead of LinkedIn; it is in addition
 to LinkedIn.
 
-This post is part of a series. A roadmap of these related posts is available at: NOTYET
+This post is part of a series. A roadmap is availabled at:\\
+https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedInPostsOverview.org
 
 If you find this useful, please distribute it widely.
 

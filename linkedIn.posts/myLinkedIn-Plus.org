@@ -36,7 +36,9 @@ restrictions.
 
 The software comes AS IS with no warranties. Use it at your own risk.
 
-This post is part of a series. A roadmap is available at: NOTYET
+This post is part of a series. A roadmap is availabled at:\\
+https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedInPostsOverview.org
+
 
 By adopting myLinkedIn, you can enjoy an autonomous interaction model that
 respects your privacy outside LinkedIn. Please share this tool widely if you

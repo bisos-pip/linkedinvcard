@@ -1,4 +1,4 @@
-About the myLinkedIn-Basic Package --- vCards for ALL of Your LinkedIn Connections
+About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn Connections
 
 Dear Fellow LinkedIn Member,
 
@@ -42,10 +42,11 @@ https://github.com/bisos-pip/myLinkedIn. Here’s a quick guide for the impatien
 
 The use of myLinkedIn-Basic (myLinkedIn.cs) does not violate LinkedIn policies in any way.
 
-This post is part of a series. A roadmap is availabled at: NOTYET
+This post is part of a series. A roadmap is availabled at:
+https://www.linkedin.com/posts/mohsenbanan_github-bisos-pipmylinkedin-takes-contents-activity-7341553817236185088-YKbA?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
 
 If you find this useful, please distribute it widely.
 
 At your service,
 
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June, 16, 2025
+Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June 19, 2025

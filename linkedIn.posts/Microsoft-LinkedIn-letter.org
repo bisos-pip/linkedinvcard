@@ -7,7 +7,7 @@ Dear Microsoft-LinkedIn Acceptable-Use Policy Maker,
 
 I, Mohsen Banan, joined LinkedIn on January 19, 2006, viewing it as a "Business
 Cards Exchange" model. I would access my connections' contact info (email,
-phone) to interact with them *outside* of LinkedIn, a process I call
+phone) to interact with them *outside* of LinkedIn, a process I callx
 "LinkingOut." This model is crucial for many LinkedIn members.
 
 I developed a Python package called "myLinkedIn" --

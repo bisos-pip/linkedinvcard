@@ -45,7 +45,8 @@ https://github.com/bisos-pip/myLinkedIn. Here’s a quick guide for the impatien
 
 The use of myLinkedIn-Basic (myLinkedIn.cs) does not violate LinkedIn policies in any way.
 
-This post is part of a series. A roadmap is availabled at: NOTYET
+This post is part of a series. A roadmap is availabled at:
+https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/ myLinkedInPostsOverview.org
 
 If you find this useful, please distribute it widely.
 

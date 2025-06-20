@@ -44,22 +44,23 @@
 ####+END
 ** +
 ** ------ Layer-1 ----------
-** TODO Test and complete maildir Creation
+** WAITING Test and complete maildir Creation
 ** DONE One step full processing based on .zip file
 ** -------  Layer-2 ----------
 ** DONE make input to contactInfoToVCard be either of linkedinId or path VCard
-** TODO unconnectedVCard Creation from ContactInfo
-** TODO Absorb all fields during scraping
-** TODO DateTag Entries at the time of augmentation
-** TODO Add forcemode for existing records augment
-** TODO Add comments to Menus about not running chrome browser
+** DONE unconnectedVCard Creation from ContactInfo
+** WAITING Absorb all fields during scraping  --- NEEDS WORK
+** DONE DateTag Entries at the time of augmentation
+** DONE Add forcemode for existing records augment
+** DONE Add comments to Menus about not running chrome browser
 ** DONE Convert prints to logs
-** WAITING Have a counter for scraped, counter for existing -- Print with waiting for interval
+** DONE Have a counter for scraped, counter for existing -- Print with waiting for interval
 ** ------ Final Steps ---
-** WAITING Revisit/Improve README.org and Panel
+** DONE Revisit/Improve README.org and Panel
 ** TODO Test with pipx on fresh debian
 ** TODO Build a video based on readme.org
-** TODO Announce availability of MyLinkedIn
+** WAITING Announce availability of MyLinkedIn
+** TODO Send out one per day
 ** -B|
 ####+BEGIN: blee:bxPanel:separator :outLevel 1
 * /[[elisp:(beginning-of-buffer)][|^]] [[elisp:(blee:menu-sel:navigation:popupMenu)][==]] [[elisp:(delete-other-windows)][|1]]/

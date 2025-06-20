@@ -22,7 +22,8 @@ policies. I received no reply, but my account was unbanned after less than 10
 hours.
 
 Microsoft-LinkedIn's lack of response prompted me to write an Open Letter
-requesting clarification. Here is a link to that Open Letter: NOTYET
+requesting clarification. Here is a link to that Open Letter:
+https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/Microsoft-LinkedIn-letter.org
 
 *** Warnings About Use of myLinkedInWeb.cs Software ***
 
@@ -33,7 +34,7 @@ restrictions.
 The software comes AS IS with no warranties. Use it at your own risk.
 
 This post is part of a series. A roadmap is available at:
-ttps://www.linkedin.com/posts/mohsenbanan_github-bisos-pipmylinkedin-takes-contents-activity-7341553817236185088-YKbA?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
+https://www.linkedin.com/posts/mohsenbanan_github-bisos-pipmylinkedin-takes-contents-activity-7341553817236185088-YKbA?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
 
 By adopting myLinkedIn, you can enjoy an autonomous interaction model that
 respects your privacy outside LinkedIn. Please share this tool widely if you
@@ -41,4 +42,4 @@ find it useful.
 
 At your service,
 
-Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June 19, 2025
+Mohsen Banan --- linkedin@mohsen.1.banan.byname.net --- June 20, 2025

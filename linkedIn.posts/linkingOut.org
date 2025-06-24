@@ -6,12 +6,12 @@
 Dear Fellow LinkedIn Member,
 
 Being human involves social interactions, and the digital era is here. However,
-that doesn't mean we should buy into the commercial model of American social
-media.
+that doesn't mean we should buy into the commercial exploitation-oriented model
+of American social media.
 
 The American digital ecosystem is fundamentally flawed, based on the Western
 Intellectual Property Rights regime, leading to corporate exploitation and
-surveillance capitalism. These issues can't be fixed with band-aids or evolved
+surveillance capitalism. These problems can't be fixed with band-aids or evolved
 realistically. We need an alternative.
 
 There is a blueprint for an alternative: ByStar (By*). ByStar challenges the
@@ -62,7 +62,7 @@ If you find this useful, please distribute it widely.
 At your service,
 
 
-Mohsen BANAN --- [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June 19, 2025
+Mohsen BANAN --- [[mailto:linkedin@mohsen.1.banan.byname.net]] --- June 23, 2025
 
 +CAPTION: LinkedinVcard Concepts Graphviz C-c C-x C-v (org-toggle-inline-images)
 #+NAME:   fig:py3/images/ebdbMtdt

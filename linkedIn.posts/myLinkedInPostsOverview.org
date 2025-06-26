@@ -36,15 +36,22 @@ Cards Exchange" model. Here's a summary of those posts:
 
 - About the myLinkedIn-Basic Python Package --- vCards for ALL of Your LinkedIn Connections\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedIn-Basic.org]]
+  https://www.linkedin.com/posts/mohsenbanan_about-the-mylinkedin-basic-python-package-activity-7341558172542713858-7LWn?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
 
 - About the myLinkedIn-Plus Package --- Enriching Your vCards with Web-Scraped Contact Info\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/myLinkedIn-Plus.org]]
+  https://www.linkedin.com/posts/mohsenbanan_about-the-mylinkedin-plus-python-package-activity-7341894704998817792-Fars?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
 
 - LinkingOut: Healthy Edge-to-Edge Social Media Like Interactions Outside of LinkedIn\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/linkingOut.org]]
+  https://www.linkedin.com/posts/mohsenbanan_linkingout-healthy-edge-to-edge-social-media-activity-7343057543545425921-92vI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
 
 - Microsoft-LinkedIn Open Letter: Requesting Inclusion of Our Connections' Complete Contact Info in Basic_LinkedInDataExport.zip\\
   [[https://github.com/bisos-pip/myLinkedIn/blob/main/linkedIn.posts/Microsoft-LinkedIn-letter.org]]
+  https://www.linkedin.com/posts/mohsenbanan_github-bisos-pipmylinkedin-takes-contents-activity-7344126864879230976-W2u0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
+
+- This Overview of myLinkedIn and LinkingOut --- Facilitating a vCards Based Edge-to-Edge Interactions Model\\
+  https://www.linkedin.com/posts/mohsenbanan_github-bisos-pipmylinkedin-takes-contents-activity-7341553817236185088-YKbA?utm_source=share&utm_medium=member_desktop&rcm=ACoAAABIAqUBDTtbndkAf8JmMhQNmpb566cZ9XU
 
 If you find this approach valuable, please share this post widely.
 
